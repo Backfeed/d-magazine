@@ -9,8 +9,11 @@ Author URI:  http://backfeed.cc/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
-add_action('wp_footer', 'bf_footer');
+add_action('wp_footer', function() {
+	require 'templates/collabar.html';
+});
 
-function bf_footer() {
-	require 'collabar/collabar.html';
-}
+add_action('wp_enqueue_scripts', function() {
+	wp_enqueue_script('collabar', plugin_dir_url(__FILE__).'dist/js/collabar.js');
+	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/collabar.css');
+});
