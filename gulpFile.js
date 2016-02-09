@@ -36,9 +36,7 @@ gulp.task('js', ['clean'], () => {
 
 gulp.task('sass', ['clean'], () => {
     return gulp.src(sassInput)
-        .pipe(sourcemaps.init())
         .pipe(sass(sassOptions).on('error', sass.logError))
-        .pipe(sourcemaps.write())
         .pipe(autoprefixer(autoprefixerOptions))
         .pipe(gulp.dest(output+'/css'));
 });

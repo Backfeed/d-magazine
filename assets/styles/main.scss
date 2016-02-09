@@ -1,7 +1,11 @@
+@import 'variables';
+@import '../../vendor/font-awesome/font-awesome';
+
 #backfeed-collabar {
     position: fixed;
     bottom: 0;
     z-index: 1;
     background-color: pink;
     width: 100%;
+    text-align: center;
 }
