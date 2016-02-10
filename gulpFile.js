@@ -22,11 +22,16 @@ var gulp = require('gulp'),
     };
 
 
-gulp.task('clean', () => {
-    return del([output]);
+gulp.task('clean:css', () => {
+    return del([output+'/css']);
 });
 
-gulp.task('js', ['clean'], () => {
+gulp.task('clean:js', () => {
+    return del([output+'/js']);
+});
+
+
+gulp.task('js', ['clean:js'], () => {
     return gulp.src(jsInput)
         .pipe(sourcemaps.init())
         .pipe(babel(babelOptions))
@@ -34,14 +39,17 @@ gulp.task('js', ['clean'], () => {
         .pipe(gulp.dest(output+'/js'));
 });
 
-gulp.task('sass', ['clean'], () => {
+gulp.task('sass', ['clean:css'], () => {
     return gulp.src(sassInput)
         .pipe(sass(sassOptions).on('error', sass.logError))
         .pipe(autoprefixer(autoprefixerOptions))
         .pipe(gulp.dest(output+'/css'));
 });
 
+
+gulp.task('clean', ['clean:css', 'clean:js']);
 gulp.task('default', ['clean', 'js', 'sass']);
+
 
 gulp.task('watch', () => {
     gulp.watch(sassInput, ['sass'])
@@ -52,13 +60,12 @@ gulp.task('watch', () => {
 });
 
 gulp.task('prod', () => {
-    return gulp
-        .src(sassInput)
+    return gulp.src(sassInput)
         .pipe(sass({ outputStyle: 'compressed' }))
         .pipe(autoprefixer(autoprefixerOptions))
         .pipe(gulp.dest(output));
 });
 
-function onWatch(event) {
+var onWatch = event => {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-}
+};
