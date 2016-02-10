@@ -8,7 +8,15 @@
     background-color: pink;
     width: 100%;
     text-align: center;
-    min-height: 36px;
+    height: 45px;
+    transition: height 1s linear;
+
+    &>section {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 }
 
 #resizer {
