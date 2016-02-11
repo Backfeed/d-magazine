@@ -1,5 +1,5 @@
-<?php if (is_single()): ?>
 <aside id="backfeed-collabar">
+    <?php if (is_single()): ?>
 
     <section>
         <button id="backfeed-collabar-more">More</button>
@@ -30,11 +30,29 @@
         </div>
 
         <?php wp_loginout($_SERVER['REQUEST_URI']); ?>
-
-        <?php if (!is_user_logged_in()): ?>
-            <a href="<?=esc_url(wp_registration_url())?>">Register</a>
-        <?php endif; ?>
     </section>
 
+    <?php else: ?>
+
+        <section>
+            <button id="backfeed-collabar-more">More</button>
+            <div class="backfeed-collabar-stats">
+                <div class="backfeed-collabar-stat">
+                    <label>Tokens</label>  <span>25</span>
+                </div>
+                <div class="backfeed-collabar-stat">
+                    <label>Reputation</label>  <span>72</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <p>
+                Reputation represents your influence on the editing process
+                <br />Tokens are your share of the value we’ve created together
+            </p>
+            <a class="button button-primary" href="#">Learn More</a>
+        </section>
+
+    <?php endif; ?>
 </aside>
-<?php endif; ?>

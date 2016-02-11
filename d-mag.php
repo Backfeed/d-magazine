@@ -10,7 +10,10 @@ License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 add_action('wp_footer', function() {
-	require 'templates/collabar.php';
+	if (is_user_logged_in())
+		require 'templates/collabar-user.php';
+	else
+		require 'templates/collabar-guest.php';
 });
 
 add_action('wp_enqueue_scripts', function() {
