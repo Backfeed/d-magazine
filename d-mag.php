@@ -17,7 +17,8 @@ add_action('wp_footer', function() {
 });
 
 add_action('wp_enqueue_scripts', function() {
-	wp_enqueue_script('collabar', plugin_dir_url(__FILE__).'dist/js/main.js');
+	wp_enqueue_script('fetch', plugin_dir_url(__FILE__).'bower_components/fetch/fetch.js', [], false, true);
+	wp_enqueue_script('collabar', plugin_dir_url(__FILE__).'dist/js/main.js', [], false, true);
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 });
 

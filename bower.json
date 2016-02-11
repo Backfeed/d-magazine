@@ -1,0 +1,22 @@
+{
+  "name": "d-mag",
+  "description": "",
+  "main": "d-mag.php",
+  "authors": [
+    "Backfeed"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Backfeed/magazine.backfeed.cc",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fetch": "^0.11.0"
+  }
+}
