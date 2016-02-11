@@ -12,11 +12,11 @@ if (getParameterByName('referrer')) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    let resizable = document.getElementById('backfeed-collabar'),
-        resizer = document.getElementById('backfeed-collabar-more');
+    let expandable = document.getElementById('backfeed-collabar'),
+        expander = document.getElementById('backfeed-collabar-more');
 
-    resizer.addEventListener('click', () => {
-        let startHeight = parseInt(getComputedStyle(resizable, null).height, 10);
-        resizable.style.height = (startHeight + 100) + 'px';
+    expander.addEventListener('click', () => {
+        expandable.classList.toggle('expanded');
+        expander.innerText = expandable.classList.contains('expanded') ? 'Close' : 'More';
     }, false);
 });

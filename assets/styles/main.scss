@@ -9,21 +9,26 @@
     width: 100%;
     text-align: center;
     height: 45px;
-    transition: height 1s linear;
+    transition: height 0.5s linear;
+
+    &.expanded {
+        height: 160px;
+    }
 
     &>section {
         display: flex;
         justify-content: space-around;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-}
+        align-items: center;
+        margin: 10px auto;
+        max-width: 550px;
 
-#resizer {
-    width: 100%;
-    height: 10px;
-    background: grey;
-    position: absolute;
-    top: -10px;
-    cursor: row-resize;
+        & p {
+            margin-bottom: 0;
+        }
+    }
+
+    .backfeed-collabar-stat {
+        display: flex;
+        justify-content: space-between;
+    }
 }
