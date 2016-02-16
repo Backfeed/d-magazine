@@ -43,13 +43,14 @@ register_activation_hook(__FILE__, function() {
 	}
 
 	// transform all magazine articles into contributions
-	foreach (get_posts(["posts_per_page" => -1, "post_status" => "publish"]) as $post) {
-		make_backfeed_contribution($post->ID, $post);
+	foreach (get_posts(["posts_per_page" => -1]) as $post) {
+		make_backfeed_contribution($post->ID);
 	}
 });
 
-function make_backfeed_contribution($ID, $post) {
-	if (!get_post_meta($ID, 'backfeed_contribution_id')) {
+function make_backfeed_contribution($post_id) {
+	$post = get_post($post_id);
+	if (!get_post_meta($post_id, 'backfeed_contribution_id', true)) {
 		$backfeed_user_id = get_user_meta($post->post_author, 'backfeed_user_id', true);
 		$bidding_id = get_option('backfeed_bidding_id');
 
@@ -58,18 +59,18 @@ function make_backfeed_contribution($ID, $post) {
 			"biddingId" => $bidding_id
 		]);
 
-		if ($contribution)
-			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
+		if ($contribution && $contribution->id)
+			add_post_meta($post_id, 'backfeed_contribution_id', $contribution->id);
 	}
 }
 
 function make_backfeed_user($user_id) {
-	if (!get_user_meta($user_id, 'backfeed_user_id')) {
+	if (!get_user_meta($user_id, 'backfeed_user_id', true)) {
 		$backfeed_user = call_protocol_api('post', 'users');
-		if ($backfeed_user)
+		if ($backfeed_user && $backfeed_user->id)
 			add_user_meta($user_id, 'backfeed_user_id', $backfeed_user->id);
 	}
 }
 
 add_action('publish_post', 'make_backfeed_contribution');
-add_action('register_user', 'make_backfeed_user');
+add_action('user_register', 'make_backfeed_user');
