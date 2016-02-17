@@ -75,7 +75,7 @@ gulp.task('sass', ['clean:css'], () => {
 
 
 gulp.task('clean', ['clean:css', 'clean:js']);
-gulp.task('js', ['babel:js', 'bundle:js']);
+gulp.task('js', ['bundle:js']);
 gulp.task('default', ['clean', 'js', 'sass']);
 
 

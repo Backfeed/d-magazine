@@ -26,14 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (votingWidget) {
         votingWidget.addEventListener('click', e => {
             if (e.target.classList.contains('bf-fa-arrow-down')) {
-                api.createUser().then(json => {
-                    debugger;
-                    api.getUserById(json.id).then(json2 => {
-                        debugger;
-                    });
-                });
+                api.evaluate(0);
             } else if (e.target.classList.contains('bf-fa-arrow-up')) {
-
+                api.evaluate(1);
             }
         }, true)
     }
