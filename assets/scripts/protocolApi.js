@@ -8,7 +8,8 @@ let protocolApi = {
             };
 
         return fetch(Backfeed.apiUrl + endpoint, _.extend(defaultOptions, options))
-            .then(res => res.json());
+            .then(res => res.json())
+            .catch(console.log.bind(console));
     },
     createUser: () => {
         return protocolApi.request('users', {method: 'POST'});

@@ -1,16 +1,8 @@
 import api from './protocolApi.js';
+import helpers from './helpers.js';
 
-let getParameterByName = (name, url = window.location.href) => {
-    name = name.replace(/[\[\]]/g, "\\$&");
-    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-};
-
-if (getParameterByName('referrer')) {
-    localStorage['referrer'] = getParameterByName('referrer');
+if (helpers.getQueryParameterByName('referrer')) {
+    localStorage['referrer'] = helpers.getQueryParameterByName('referrer');
 }
 
 document.addEventListener("DOMContentLoaded", () => {
