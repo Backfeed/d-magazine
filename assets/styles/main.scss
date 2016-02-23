@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'responsive-utilities';
 @import '../../vendor/frontend/font-awesome/font-awesome';
 
 #backfeed-collabar {
@@ -8,24 +9,21 @@
     color: white;
     background-color: #3e3e3e;
     width: 100%;
-    max-height: 45px;
-    transition: max-height 1.5s linear;
 
-    &.expanded {
-        max-height: 2000px;
+    @include media-breakpoint-up(sm) {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     &>section {
         display: flex;
         justify-content: space-around;
-        align-items: center;
-        margin: 10px auto;
-        max-width: 550px;
-        padding-right: 10px;
-        padding-left: 10px;
-        
-        &:nth-child(2) {
-            background-color: #5f5e5e;
+
+        @include media-breakpoint-up(lg) {
+            max-width: 1140px;
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: space-between;
         }
 
         p {
@@ -46,6 +44,33 @@
         }
     }
 
+    .backfeed-collabar-register {
+        display: flex;
+        align-items: center;
+        background-color: #b80443;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .backfeed-collabar-learn {
+        flex: 1;
+        text-align: center;
+        padding: 8px;
+        font-size: 12px;
+
+        @include media-breakpoint-up(sm) {
+            flex: 0 1 230px;
+        }
+
+        @include media-breakpoint-up(lg) {
+            flex: initial;
+        }
+    }
+
+    .backfeed-collabar-learn-button {
+        text-decoration: underline;
+    }
+
     .backfeed-collabar-stats {
         display: flex;
     }
@@ -59,9 +84,17 @@
         }
     }
 
-    .button {
+    .backfeed-collabar-tagline {
+        font-size: 12px;
+        text-align: center;
         text-transform: uppercase;
 
+        span {
+            font-size: 22px;
+        }
+    }
+
+    .button {
         &.button-primary {
             border: 1px solid white;
             padding: 3px;

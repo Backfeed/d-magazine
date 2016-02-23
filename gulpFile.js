@@ -95,6 +95,5 @@ gulp.task('prod', () => {
 });
 
 var onWatch = event => {
-    console.log(event.keys());
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
 };

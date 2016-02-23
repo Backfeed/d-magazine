@@ -1,7 +1,7 @@
 <?php
 class Backfeed_Api {
-    const API_KEY = 'cU1pjBJDBP1KsHgbVBwO99F02DvWWR9S62kkFGzQ',
-        API_URL = 'https://api.backfeed.cc/dev/';
+    const API_KEY = 'mJJEYE6DlC5BAJ4hOAuwG9pUNwuBZAb8aLsik7K8',
+        API_URL = 'https://api.backfeed.cc/dmag';
 
     private static function request($method = 'get', $endpoint, $data = [], $headers = []) {
         $default_headers = [

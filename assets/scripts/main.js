@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     expander.addEventListener('click', () => {
         expandable.classList.toggle('expanded');
-        expander.innerText = expandable.classList.contains('expanded') ? 'Close' : 'More';
+        expander.innerText = expandable.classList.contains('expanded') ? 'Close' : 'Learn More';
     }, false);
 
     if (votingWidget) {

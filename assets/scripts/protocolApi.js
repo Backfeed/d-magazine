@@ -30,7 +30,6 @@ let protocolApi = {
             })
         });
     }
-
 };
 
 export default protocolApi;
