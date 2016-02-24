@@ -18,6 +18,7 @@
     &>section {
         display: flex;
         justify-content: space-around;
+        align-items: center;
 
         @include media-breakpoint-up(lg) {
             max-width: 1140px;
@@ -48,8 +49,7 @@
         display: flex;
         align-items: center;
         background-color: #b80443;
-        padding-right: 20px;
-        padding-left: 20px;
+        padding: 10px 20px;
     }
 
     .backfeed-collabar-learn {
@@ -59,6 +59,7 @@
         font-size: 12px;
 
         @include media-breakpoint-up(sm) {
+            padding: 0;
             flex: 0 1 230px;
         }
 
@@ -91,6 +92,8 @@
 
         span {
             font-size: 22px;
+            text-transform: uppercase;
+            line-height: 1;
         }
     }
 
