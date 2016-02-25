@@ -17,10 +17,12 @@ require_once('lib/template-tags.php');
 require_once('lib/protocol-api.php');
 
 add_action('wp_footer', function() {
-	if (is_user_logged_in())
-		require 'templates/collabar-user.php';
-	else
-		require 'templates/collabar-guest.php';
+	if (current_user_can('manage_options')) {
+		if (is_user_logged_in())
+			require 'templates/collabar-user.php';
+		else
+			require 'templates/collabar-guest.php';
+	}
 });
 
 add_action('wp_enqueue_scripts', function() {
@@ -29,7 +31,6 @@ add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 
 	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', [], false, true);
-
 	$localized_data = [
 		'apiKey' => Backfeed_Api::API_KEY,
 		'apiUrl' => Backfeed_Api::API_URL,
@@ -47,7 +48,7 @@ add_action('wp_enqueue_scripts', function() {
 register_activation_hook(__FILE__, function() {
 	// single bidding for the magazine
 	if (!get_option('backfeed_bidding_id')) {
-		$bidding = Backfeed_Api::create_bidding('post', 'biddings');
+		$bidding = Backfeed_Api::create_bidding();
 		add_option('backfeed_bidding_id', $bidding->id);
 	}
 

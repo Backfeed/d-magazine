@@ -1,29 +1,42 @@
 <aside id="backfeed-collabar">
 
     <section>
-        <?php if (is_single()): ?>
-            <div id="backfeed-voting">
-                <i class="bf-fa bf-fa-arrow-up"></i>
-                <span>87</span>
-                <i class="bf-fa bf-fa-arrow-down"></i>
-            </div>
+        <?php if (is_singular('post')): ?>
             <div class="backfeed-sharing">
-                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook"></span></a>
-                <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter"></span></a>
+                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
+                <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
             </div>
         <?php endif; ?>
 
-        <p class="backfeed-teaser">
-            <span class="hidden-sm-up">Be part of the collective intelligence and earn tokens!</span>
-            <span class="hidden-xs-down">Explore our magazine, be part of the collective intelligence and earn tokens!</span>
-            &nbsp;&nbsp;<button class="button backfeed-learn-button">Learn more</button>
-        </p>
+        <div class="backfeed-teaser<?php if (is_singular('post')): ?> hidden-xs-down<?php endif; ?>">
+            <p class="backfeed-teaser-content">
+                <?php if (is_singular('post')): ?>
+                    <span class="hidden-md-up">Rate, Share or Comment to get tokens</span>
+                    <span class="hidden-sm-down">Rate, Share or Comment on this article in order to get tokens</span>
+                <?php else: ?>
+                    <span class="hidden-sm-up">Be part of the collective intelligence and earn tokens!</span>
+                    <span class="hidden-xs-down">Explore our magazine, be part of the collective intelligence and earn tokens!</span>
+                <?php endif; ?>
+                &nbsp;<button class="button backfeed-learn-button">Learn more</button>
+            </p>
+        </div>
+
+        <?php if (is_singular('post')): ?>
+            <div id="backfeed-voting" class="backfeed-voting">
+                <img src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-down.png" />
+                <div class="backfeed-meter">
+                    <p>Article Quality</p>
+                    <meter value="87" min="0" max="100">87%</meter>
+                </div>
+                <img src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-up.png" />
+            </div>
+        <?php endif; ?>
 
         <div class="backfeed-user-info">
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
-                <div class="backfeed-stat"><label>My Tokens:</label> 41</div>
-                <div class="backfeed-stat"><label>Rank:</label> NOVICE (0.12%)</div>
+                <div><label>My Tokens:</label> 41</div>
+                <div><label>Rank:</label> NOVICE (0.12%)</div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -38,9 +51,8 @@
         </div>
 
     </section>
-
-
-    <section class="hidden-md-up">
+    
+    <section class="stats-strip hidden-md-up">
         <div><label>Rank:</label> NOVICE (0.12%)</div>
         <div><label>My Tokens:</label> 41</div>
     </section>

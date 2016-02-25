@@ -1,5 +1,6 @@
 import api from './protocolApi.js';
 import helpers from './helpers.js';
+import './polyfills.js';
 
 if (helpers.getQueryParameterByName('referrer')) {
     localStorage['referrer'] = helpers.getQueryParameterByName('referrer');
@@ -29,10 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (votingWidget) {
         votingWidget.addEventListener('click', e => {
-            if (e.target.classList.contains('bf-fa-arrow-down')) {
+            if (e.target.src.endsWith('thumb-down.png')) {
                 api.evaluate(0);
-            } else if (e.target.classList.contains('bf-fa-arrow-up')) {
+                e.target.src = e.target.src.replace(/thumb-down\.png$/, 'check.png');
+            } else if (e.target.src.endsWith('thumb-up.png')) {
                 api.evaluate(1);
+                e.target.src = e.target.src.replace(/thumb-up\.png$/, 'check.png');
             }
         }, true)
     }
