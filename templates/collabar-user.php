@@ -1,18 +1,18 @@
-<aside id="backfeed-collabar">
+<aside id="backfeed-collabar" class="<?=backfeed_collabar_class()?>">
 
     <section>
         <?php if (is_singular('post')): ?>
             <div class="backfeed-sharing">
-                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
-                <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
+                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(backfeed_get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
+                <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. backfeed_get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
             </div>
         <?php endif; ?>
 
         <div class="backfeed-teaser<?php if (is_singular('post')): ?> hidden-xs-down<?php endif; ?>">
             <p class="backfeed-teaser-content">
                 <?php if (is_singular('post')): ?>
-                    <span class="hidden-md-up">Rate, Share or Comment to get tokens</span>
-                    <span class="hidden-sm-down">Rate, Share or Comment on this article in order to get tokens</span>
+                    <span class="hidden-lg-up">Rate, Share or Comment to get tokens</span>
+                    <span class="hidden-md-down">Rate, Share or Comment on this article in order to get tokens</span>
                 <?php else: ?>
                     <span class="hidden-sm-up">Be part of the collective intelligence and earn tokens!</span>
                     <span class="hidden-xs-down">Explore our magazine, be part of the collective intelligence and earn tokens!</span>

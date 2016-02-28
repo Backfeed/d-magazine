@@ -16,10 +16,22 @@
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, rgba(96, 96, 96, 0.25) 100%), #242424;
     }
 
+    &.single-post {
+        .backfeed-teaser {
+            flex-basis: 230px;
+
+            @include media-breakpoint-up(lg) {
+                flex-basis: 300px;
+            }
+        }
+    }
+
     &>section {
         display: flex;
         justify-content: space-between;
         align-items: stretch;
+        padding-left: 10px;
+        padding-right: 10px;
 
         @include media-breakpoint-up(md) {
             width: 750px;
@@ -143,11 +155,9 @@
     .backfeed-teaser {
         @extend .backfeed-subsection;
 
-        flex: 0 1 250px;
-
-        /*@include media-breakpoint-up(sm) {
-            flex-basis: 330px;
-        }*/
+        flex: 0 1 350px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .backfeed-voting {
@@ -184,7 +194,7 @@
         cursor: pointer;
         padding-top: 10px;
         padding-bottom: 10px;
-        padding-right: 10px;
+        //padding-right: 10px;
 
         @include media-breakpoint-up(md) {
             margin-left: 22px;
