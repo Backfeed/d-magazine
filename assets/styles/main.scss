@@ -166,6 +166,10 @@
         background: linear-gradient(to bottom, rgba(black, .17) 0%, rgba(#606060, .17) 100%) ,#484848;
     }
 
+    .backfeed-voting-handle {
+        cursor: pointer;
+    }
+
     .backfeed-meter {
         display: flex;
         flex-direction: column;

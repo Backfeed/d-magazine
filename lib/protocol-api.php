@@ -34,14 +34,18 @@ class Api {
         return self::request('get', 'users/'.$agent_id);
     }
 
-    public static function create_contribution($backfeed_user_id) {
+    public static function create_contribution($agent_id) {
         return self::request('post', 'contributions', [
-            "userId" => $backfeed_user_id,
+            "userId" => $agent_id,
             "biddingId" => get_option('backfeed_bidding_id')
         ]);
     }
 
     public static function get_contribution($post_id) {
         return self::request('get', 'contributions/'.$post_id);
+    }
+
+    public static function get_evaluations($contribution_id) {
+        return self::request('get', 'contributions/'.$contribution_id.'/evaluations');
     }
 }

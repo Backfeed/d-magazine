@@ -25,12 +25,12 @@
 
         <?php if (is_singular('post')): ?>
             <div id="backfeed-voting" class="backfeed-voting">
-                <img src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-down.png" />
+                <img id="backfeed-voting-down" class="backfeed-voting-handle" src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-down.png" />
                 <div class="backfeed-meter">
                     <p>Article Quality</p>
                     <meter value="87" min="0" max="100">87%</meter>
                 </div>
-                <img src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-up.png" />
+                <img id="backfeed-voting-up" class="backfeed-voting-handle" src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-up.png" />
             </div>
         <?php endif; ?>
 

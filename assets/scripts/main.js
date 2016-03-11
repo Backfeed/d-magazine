@@ -29,13 +29,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     if (votingWidget) {
+        let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
+
+        if (currentAgentVote || currentAgentVote === 0) {
+            if (currentAgentVote == 1) {
+                let handle = document.getElementById('backfeed-voting-up');
+                handle.src = handle.src.replace(/thumb-up\.png$/, 'check.png');
+                handle.style.cursor = 'not-allowed';
+                document.getElementById('backfeed-voting-down').style.cursor = 'not-allowed';
+            } else if (currentAgentVote == 0) {
+                let handle = document.getElementById('backfeed-voting-down');
+                handle.src = handle.src.replace(/thumb-down\.png$/, 'check.png');
+                handle.style.cursor = 'not-allowed';
+                document.getElementById('backfeed-voting-up').style.cursor = 'not-allowed';
+            }
+        }
+
         votingWidget.addEventListener('click', e => {
             if (e.target.src.endsWith('thumb-down.png')) {
                 api.evaluate(0);
                 e.target.src = e.target.src.replace(/thumb-down\.png$/, 'check.png');
+                document.getElementById('backfeed-voting-up')
+                votingWidget.classList.add('disabled');
             } else if (e.target.src.endsWith('thumb-up.png')) {
                 api.evaluate(1);
                 e.target.src = e.target.src.replace(/thumb-up\.png$/, 'check.png');
+                votingWidget.classList.add('disabled');
             }
         }, true)
     }

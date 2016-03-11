@@ -19,10 +19,11 @@ require_once('lib/template-tags.php');
 require_once('lib/protocol-api.php');
 require_once('lib/comments.php');
 
-$backfeed_config = [];
+//$backfeed_config = [];
 
 add_action('wp', function() {
 	global $backfeed_config;
+	$backfeed_config = [];
 
 	$currentAgentId = get_user_meta(get_current_user_id(), 'backfeed_agent_id', true);
 
@@ -34,11 +35,18 @@ add_action('wp', function() {
 	if (is_singular('post')) {
 		$currentContributionId = get_post_meta(get_queried_object_id(), 'backfeed_contribution_id', true);
 		$backfeed_config['currentContribution'] = Api::get_contribution($currentContributionId);
+		$backfeed_config['currentContribution']->evaluations = Api::get_evaluations($currentContributionId);
+
+		$agentIdsThatEvaluated = array_column($backfeed_config['currentContribution']->evaluations, 'userId');
+		$currentAgentEvaluationIndex = array_search($currentAgentId, $agentIdsThatEvaluated);
+		if ($currentAgentEvaluationIndex !== false) {
+			$currentAgentEvaluationValue = $backfeed_config['currentContribution']->evaluations[$currentAgentEvaluationIndex]->value;
+			$backfeed_config['currentContribution']->currentAgentVote = $currentAgentEvaluationValue;
+		}
 	}
 });
 
-function get_config($key = '')
-{
+function get_config($key = '') {
 	global $backfeed_config;
 	if (!$key) return $backfeed_config;
 	return (isset($backfeed_config[$key])) ? $backfeed_config[$key] : null;
