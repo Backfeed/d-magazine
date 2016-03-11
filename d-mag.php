@@ -15,6 +15,7 @@ Requests::register_autoloader();
 require_once('lib/social-sharing.php');
 require_once('lib/template-tags.php');
 require_once('lib/protocol-api.php');
+require_once('lib/comments.php');
 
 add_action('wp_footer', function() {
 	if (current_user_can('manage_options')) {
