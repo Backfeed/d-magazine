@@ -1,10 +1,12 @@
-<aside id="backfeed-collabar" class="<?=backfeed_collabar_class()?>">
+<?php namespace Backfeed; ?>
+
+<aside id="backfeed-collabar" class="<?=collabar_class()?>">
 
     <section>
         <?php if (is_singular('post')): ?>
             <div class="backfeed-sharing">
-                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(backfeed_get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
-                <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. backfeed_get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
+                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
+                <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
             </div>
         <?php endif; ?>
 
@@ -35,8 +37,8 @@
         <div class="backfeed-user-info">
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
-                <div><label>My Tokens:</label> 41</div>
-                <div><label>Rank:</label> NOVICE (0.12%)</div>
+                <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
+                <div><label>Rank:</label> NOVICE (<?=get_config('currentAgent')->reputation?>)</div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -53,8 +55,8 @@
     </section>
     
     <section class="stats-strip hidden-md-up">
-        <div><label>Rank:</label> NOVICE (0.12%)</div>
-        <div><label>My Tokens:</label> 41</div>
+        <div><label>Rank:</label> NOVICE (<?=get_config('currentAgent')->reputation?>)</div>
+        <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
     </section>
 
     <nav id="backfeed-avatar-menu" class="backfeed-avatar-menu">

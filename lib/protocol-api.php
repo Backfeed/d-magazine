@@ -1,5 +1,7 @@
 <?php
-class Backfeed_Api {
+namespace Backfeed;
+
+class Api {
     const API_KEY = 'mJJEYE6DlC5BAJ4hOAuwG9pUNwuBZAb8aLsik7K8',
         API_URL = 'https://api.backfeed.cc/dmag/';
 
@@ -10,7 +12,11 @@ class Backfeed_Api {
         $headers = array_merge($default_headers, $headers);
 
         $data = json_encode($data);
-        $response = Requests::$method(self::API_URL . $endpoint, $headers, $data);
+
+        if ($method == 'post' || $method == 'put')
+            $response = \Requests::$method(self::API_URL . $endpoint, $headers, $data);
+        else
+            $response = \Requests::$method(self::API_URL . $endpoint, $headers);
 
         //if (!$response->success) throw new Exception('Backfeed Backend returned error');
         return json_decode($response->body);
@@ -20,12 +26,12 @@ class Backfeed_Api {
         return self::request('post', 'biddings');
     }
 
-    public static function create_user() {
+    public static function create_agent() {
         return self::request('post', 'users');
     }
 
-    public static function get_user($user_id) {
-        return self::request('get', 'users/'.$user_id);
+    public static function get_agent($agent_id) {
+        return self::request('get', 'users/'.$agent_id);
     }
 
     public static function create_contribution($backfeed_user_id) {

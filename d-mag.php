@@ -9,13 +9,40 @@ Author URI:  http://backfeed.cc/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
+namespace Backfeed;
+
 require_once 'vendor/backend/Requests/library/Requests.php';
-Requests::register_autoloader();
+\Requests::register_autoloader();
 
 require_once('lib/social-sharing.php');
 require_once('lib/template-tags.php');
 require_once('lib/protocol-api.php');
 require_once('lib/comments.php');
+
+$backfeed_config = [];
+
+add_action('wp', function() {
+	global $backfeed_config;
+
+	$currentAgentId = get_user_meta(get_current_user_id(), 'backfeed_agent_id', true);
+
+	$backfeed_config['apiKey'] 		 = Api::API_KEY;
+	$backfeed_config['apiUrl'] 		 = Api::API_URL;
+	$backfeed_config['biddingId'] 	 = get_option('backfeed_bidding_id');
+	$backfeed_config['currentAgent'] = Api::get_agent($currentAgentId);
+
+	if (is_singular('post')) {
+		$currentContributionId = get_post_meta(get_queried_object_id(), 'backfeed_contribution_id', true);
+		$backfeed_config['currentContribution'] = Api::get_contribution($currentContributionId);
+	}
+});
+
+function get_config($key = '')
+{
+	global $backfeed_config;
+	if (!$key) return $backfeed_config;
+	return (isset($backfeed_config[$key])) ? $backfeed_config[$key] : null;
+}
 
 add_action('wp_footer', function() {
 	if (current_user_can('manage_options')) {
@@ -32,58 +59,48 @@ add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 
 	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', [], false, true);
-	$localized_data = [
-		'apiKey' => Backfeed_Api::API_KEY,
-		'apiUrl' => Backfeed_Api::API_URL,
-		'biddingId' => get_option('backfeed_bidding_id'),
-		'userId' => get_user_meta(get_current_user_id(), 'backfeed_user_id', true)
-	];
-
-	if (is_singular('post'))
-		$localized_data['contributionId'] = get_post_meta(get_queried_object_id(), 'backfeed_contribution_id', true);
-
-	wp_localize_script('collabar', 'Backfeed', $localized_data);
+	wp_localize_script('collabar', 'Backfeed', get_config());
 	wp_enqueue_script('collabar');
 });
 
 register_activation_hook(__FILE__, function() {
 	// single bidding for the magazine
 	if (!get_option('backfeed_bidding_id')) {
-		$bidding = Backfeed_Api::create_bidding();
+		$bidding = Api::create_bidding();
 		add_option('backfeed_bidding_id', $bidding->id);
 	}
 
 	// transform all magazine users into backfeed users
 	foreach (get_users(["fields" => "ID"]) as $user_id) {
-		make_backfeed_user($user_id);
+		make_agent($user_id);
 	}
 
 	// transform all magazine articles into contributions
 	foreach (get_posts(["posts_per_page" => -1]) as $post) {
-		make_backfeed_contribution($post->ID);
+		make_contribution($post->ID);
 	}
 });
 
-function make_backfeed_contribution($post_id) {
+function make_contribution($post_id) {
 	$post = get_post($post_id);
 	if (!get_post_meta($post_id, 'backfeed_contribution_id', true)) {
-		$backfeed_user_id = get_user_meta($post->post_author, 'backfeed_user_id', true);
+		$agent_id = get_user_meta($post->post_author, 'backfeed_agent_id', true);
 
-		$contribution = Backfeed_Api::create_contribution($backfeed_user_id);
+		$contribution = Api::create_contribution($agent_id);
 
 		if ($contribution && $contribution->id)
 			add_post_meta($post_id, 'backfeed_contribution_id', $contribution->id);
 	}
 }
 
-function make_backfeed_user($user_id) {
-	if (!get_user_meta($user_id, 'backfeed_user_id', true)) {
-		$backfeed_user = Backfeed_Api::create_user();
+function make_agent($user_id) {
+	if (!get_user_meta($user_id, 'backfeed_agent_id', true)) {
+		$new_agent = Api::create_agent();
 
-		if ($backfeed_user && $backfeed_user->id)
-			add_user_meta($user_id, 'backfeed_user_id', $backfeed_user->id);
+		if ($new_agent && $new_agent->id)
+			add_user_meta($user_id, 'backfeed_agent_id', $new_agent->id);
 	}
 }
 
-add_action('publish_post', 'make_backfeed_contribution');
-add_action('user_register', 'make_backfeed_user');
+add_action('publish_post', 'make_contribution');
+add_action('user_register', 'make_agent');

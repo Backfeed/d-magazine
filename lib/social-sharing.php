@@ -1,4 +1,6 @@
 <?php
+namespace Backfeed;
+
 //1. Add a new hidden form element with the referrer user, if any
 add_action('register_form', function() { ?>
     <input type="hidden" name="referrer_user" id="referrer_user" />

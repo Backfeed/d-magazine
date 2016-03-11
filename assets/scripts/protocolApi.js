@@ -11,24 +11,19 @@ let protocolApi = {
             .then(res => res.json())
             .catch(console.log.bind(console));
     },
-    createUser: () => {
-        return protocolApi.request('users', {method: 'POST'});
-    },
-    getUserById: (userId) => {
-        return protocolApi.request('users/'+userId)
-    },
     evaluate: (value) => {
-        return protocolApi.request('evaluations/submit', {
+        var options = {
             method: 'POST',
             body: JSON.stringify({
-                userId: Backfeed.userId,
+                userId: Backfeed.currentAgent.id,
                 biddingId: Backfeed.biddingId,
                 evaluations: [{
-                    contributionId: Backfeed.contributionId,
-                    value
+                    contributionId: Backfeed.currentContribution.id,
+                    value: value
                 }]
             })
-        });
+        };
+        return protocolApi.request('evaluations/submit', options);
     }
 };
 

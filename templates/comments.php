@@ -31,7 +31,7 @@ $barcelona_hide_avatars = ( get_option( 'show_avatars' ) == '1' ) ? '' : ' hide-
 		<div class="comments-list<?=esc_attr( $barcelona_hide_avatars )?>">
 			<?php wp_list_comments([
 				'type'          => 'comment',
-				'callback'      => 'backfeed_comments_cb',
+				'callback'      => 'Backfeed\comments_cb',
 				'avatar_size'   => 100,
 				'style'         => 'div',
 				'max_depth'     => '2'

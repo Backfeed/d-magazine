@@ -1,18 +1,14 @@
 <?php
+namespace Backfeed;
+
 add_filter( 'comments_template', function() {
     return plugin_dir_path(__FILE__).'templates/comments.php';
-});
-
-add_action('wp', function() {
-    if (is_singular('post')) {
-        add_filter('comments_open', '__return_true');
-    }
 });
 
 /*
 * Comment List Callback
 */
-function backfeed_comments_cb( $comment, $args, $depth ) {
+function comments_cb( $comment, $args, $depth ) {
     global $post;
     $GLOBALS['comment'] = $comment;
 ?>

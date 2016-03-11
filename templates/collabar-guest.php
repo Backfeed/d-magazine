@@ -1,4 +1,6 @@
-<aside id="backfeed-collabar" class="<?=backfeed_collabar_class()?>">
+<?php namespace Backfeed; ?>
+
+<aside id="backfeed-collabar" class="<?=collabar_class()?>">
 	<section class="hidden-sm-up">
 		<div class="backfeed-register">
 			<a class="button" href="<?=esc_url(wp_registration_url())?>">REGISTER</a>
