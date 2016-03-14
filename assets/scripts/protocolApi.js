@@ -1,29 +1,22 @@
 let protocolApi = {
-    request: (endpoint, options, headers) => {
-        let defaultHeaders = {
-                'X-Api-Key': Backfeed.apiKey
-            },
+    request: (options, headers) => {
+        let defaultHeaders = {},
             defaultOptions = {
                 headers: new Headers(_.extend(defaultHeaders, headers))
             };
 
-        return fetch(Backfeed.apiUrl + endpoint, _.extend(defaultOptions, options))
+        return fetch(Backfeed.ajaxUrl, _.extend(defaultOptions, options))
             .then(res => res.json())
             .catch(console.log.bind(console));
     },
     evaluate: (value) => {
-        var options = {
+        return protocolApi.request({
             method: 'POST',
             body: JSON.stringify({
-                userId: Backfeed.currentAgent.id,
-                biddingId: Backfeed.biddingId,
-                evaluations: [{
-                    contributionId: Backfeed.currentContribution.id,
-                    value: value
-                }]
+                action: 'submit_evaluation',
+                value: value
             })
-        };
-        return protocolApi.request('evaluations/submit', options);
+        });
     }
 };
 

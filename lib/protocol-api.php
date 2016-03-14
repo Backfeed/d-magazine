@@ -41,11 +41,31 @@ class Api {
         ]);
     }
 
+    public static function create_evaluation($vote, $contribution_id, $agent_id) {
+        if (!$contribution_id) get_config('currentContribution')->id;
+        if (!$agent_id) get_config('currentAgent')->id;
+
+        return self::request('post', 'evaluations/submit', [
+            "userId" => $agent_id,
+            "biddingId" => get_option('backfeed_bidding_id'),
+            "evaluations" => [
+                [
+                    "contributionId" => $contribution_id,
+                    "value" => $vote
+                ]
+            ]
+        ]);
+    }
+
     public static function get_contribution($post_id) {
         return self::request('get', 'contributions/'.$post_id);
     }
 
     public static function get_evaluations($contribution_id) {
         return self::request('get', 'contributions/'.$contribution_id.'/evaluations');
+    }
+
+    public static function get_score($contribution_id) {
+        return self::request('get', 'contributions/'.$contribution_id.'/score');
     }
 }
