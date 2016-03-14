@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let expandable = document.getElementById('backfeed-collabar'),
         expander = document.getElementById('backfeed-collabar-more'),
         avatar = document.getElementById('backfeed-avatar'),
-        votingWidget = document.getElementById('backfeed-voting'),
-        featuredImageUploader = document.getElementsByClassName('ninja-forms-field-featured-image-wrap')[0];
+        votingWidget = document.getElementById('backfeed-voting');
 
     if (expander) {
         expander.addEventListener('click', () => {
@@ -58,12 +57,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 votingWidget.classList.add('disabled');
             }
         }, true)
-    }
-
-    if (featuredImageUploader) {
-        featuredImageUploader.addEventListener('change', e => {
-            let label = e.target.parentElement.querySelector('label');
-            label.textContent = 'Image File Loaded';
-        });
     }
 });

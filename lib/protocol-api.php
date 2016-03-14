@@ -18,7 +18,7 @@ class Api {
         else
             $response = \Requests::$method(self::API_URL . $endpoint, $headers);
 
-        //if (!$response->success) throw new Exception('Backfeed Backend returned error');
+        if (!$response->success) throw new Exception('Backfeed Backend returned error');
         return json_decode($response->body);
     }
 

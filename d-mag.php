@@ -18,6 +18,7 @@ require_once('lib/social-sharing.php');
 require_once('lib/template-tags.php');
 require_once('lib/protocol-api.php');
 require_once('lib/comments.php');
+require_once('lib/ajax.php');
 
 add_action('wp', function() {
 	global $backfeed_config;
@@ -112,3 +113,18 @@ function make_agent($user_id) {
 
 add_action('publish_post', 'make_contribution');
 add_action('user_register', 'make_agent');
+
+
+function ajax_submit_evaluation() {
+	/*if ( isset($_REQUEST) ) {
+        $vote = $_REQUEST['value'];
+        $response = Api::create_evaluation($vote);
+        echo $response;
+
+    }*/
+	echo 'aaaaaa';
+	wp_die();
+}
+
+add_action('wp_ajax_nopriv_submit_evaluation','ajax_submit_evaluation' );
+add_action('wp_ajax_submit_evaluation','ajax_submit_evaluation' );

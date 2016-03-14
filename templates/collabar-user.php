@@ -28,7 +28,7 @@
                 <img id="backfeed-voting-down" class="backfeed-voting-handle" src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-down.png" />
                 <div class="backfeed-meter">
                     <p>Article Quality</p>
-                    <?=get_config('currentContribution')->score?>
+                    <?php //echo get_config('currentContribution')->score?>
                 </div>
                 <img id="backfeed-voting-up" class="backfeed-voting-handle" src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-up.png" />
             </div>
