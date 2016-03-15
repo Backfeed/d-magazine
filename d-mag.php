@@ -89,17 +89,37 @@ register_activation_hook(__FILE__, function() {
 	foreach (get_posts(["posts_per_page" => -1]) as $post) {
 		make_contribution($post->ID);
 	}
+
+	// transform all magazine comments into contributions
+	foreach (get_comments(["post_type" => "post"]) as $comment) {
+		if ($comment->user_id) {
+			// TODO: register a user using their email. Remember to send them a custom email explaining what happened
+		}
+		make_contribution($comment->comment_ID);
+	}
 });
 
-function make_contribution($post_id) {
-	$post = get_post($post_id);
-	if (!get_post_meta($post_id, 'backfeed_contribution_id', true)) {
+function make_contribution($ID) {
+	$post = get_post($ID);
+	$comment = get_comment($ID);
+
+	// it is a post of post_type="post" that just got "publish"ed and doesn't have a contribution_id associated with it
+	if ($post && $post->post_type == 'post' && $post->post_status == 'publish' && !get_post_meta($ID, 'backfeed_contribution_id', true)) {
 		$agent_id = get_user_meta($post->post_author, 'backfeed_agent_id', true);
 
 		$contribution = Api::create_contribution($agent_id);
 
 		if ($contribution && $contribution->id)
-			add_post_meta($post_id, 'backfeed_contribution_id', $contribution->id);
+			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
+
+	// it is a comment by a registered user that doesn't have a contribution_id associated with it
+	} else if ($comment && $comment->user_id && !get_comment_meta($ID, 'backfeed_contribution_id', true)) {
+		$agent_id = get_user_meta($comment->user_id, 'backfeed_agent_id', true);
+
+		$contribution = Api::create_contribution($agent_id);
+
+		if ($contribution && $contribution->id)
+			add_comment_meta($ID, 'backfeed_contribution_id', $contribution->id);
 	}
 }
 
@@ -112,20 +132,8 @@ function make_agent($user_id) {
 	}
 }
 
-add_action('publish_post', 'make_contribution');
-add_action('user_register', 'make_agent');
+add_action('wp_insert_post', __NAMESPACE__.'\\make_contribution');
+add_action('user_register', __NAMESPACE__.'\\make_agent');
+add_action('wp_insert_comment', __NAMESPACE__.'\\make_contribution');
 
 
-function ajax_submit_evaluation() {
-	if (isset($_REQUEST)) {
-		$value = $_REQUEST['value'];
-		$contribution_id = $_REQUEST['contributionId'];
-		$agent_id = $_REQUEST['agentId'];
-		$response = Api::create_evaluation($value, $contribution_id, $agent_id);
-		print_r($response);
-		wp_die();
-	}
-}
-
-add_action('wp_ajax_nopriv_submit_evaluation', __NAMESPACE__.'\\ajax_submit_evaluation');
-add_action('wp_ajax_submit_evaluation', __NAMESPACE__.'\\ajax_submit_evaluation');
