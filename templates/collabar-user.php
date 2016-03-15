@@ -5,6 +5,7 @@
     <section>
         <?php if (is_singular('post')): ?>
             <div class="backfeed-sharing">
+                <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode(get_referral_url())?>"><span class="bf-fa bf-fa-link"></span></button>
                 <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
                 <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
             </div>

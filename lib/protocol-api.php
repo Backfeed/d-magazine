@@ -18,7 +18,7 @@ class Api {
         else
             $response = \Requests::$method(self::API_URL . $endpoint, $headers);
 
-        if (!$response->success) throw new Exception('Backfeed Backend returned error');
+        //if (!$response->success) throw new \Exception('Backfeed Backend returned error');
         return json_decode($response->body);
     }
 
@@ -42,8 +42,8 @@ class Api {
     }
 
     public static function create_evaluation($vote, $contribution_id, $agent_id) {
-        if (!$contribution_id) get_config('currentContribution')->id;
-        if (!$agent_id) get_config('currentAgent')->id;
+        //if (!$contribution_id) get_config('currentContribution')->id;
+        //if (!$agent_id) get_config('currentAgent')->id;
 
         return self::request('post', 'evaluations/submit', [
             "userId" => $agent_id,
@@ -51,7 +51,7 @@ class Api {
             "evaluations" => [
                 [
                     "contributionId" => $contribution_id,
-                    "value" => $vote
+                    "value" => intval($vote)
                 ]
             ]
         ]);

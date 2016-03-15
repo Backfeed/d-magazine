@@ -7,16 +7,16 @@ if (helpers.getQueryParameterByName('referrer')) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    let expandable = document.getElementById('backfeed-collabar'),
-        expander = document.getElementById('backfeed-collabar-more'),
-        avatar = document.getElementById('backfeed-avatar'),
-        votingWidget = document.getElementById('backfeed-voting');
+    let avatar = document.getElementById('backfeed-avatar'),
+        votingWidget = document.getElementById('backfeed-voting'),
+        copyToClipboardButton = document.getElementById('copy-to-clipboard');
 
-    if (expander) {
-        expander.addEventListener('click', () => {
-            expandable.classList.toggle('expanded');
-            expander.innerText = expandable.classList.contains('expanded') ? 'Close' : 'Learn More';
-        }, false);
+    if (copyToClipboardButton) {
+        new Clipboard(copyToClipboardButton, {
+            text: function(trigger) {
+                return decodeURIComponent(trigger.dataset.clipboardText);
+            }
+        });
     }
 
     if (avatar) {

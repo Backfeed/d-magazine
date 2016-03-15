@@ -64,6 +64,7 @@ add_action('wp_footer', function() {
 
 add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_script('fetch', plugin_dir_url(__FILE__).'vendor/bower_components/fetch/fetch.js', [], false, true);
+	wp_enqueue_script('clipboard', plugin_dir_url(__FILE__).'vendor/bower_components/clipboard/dist/clipboard.js', [], false, true);
 	wp_enqueue_script('underscore');
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 
@@ -116,15 +117,15 @@ add_action('user_register', 'make_agent');
 
 
 function ajax_submit_evaluation() {
-	/*if ( isset($_REQUEST) ) {
-        $vote = $_REQUEST['value'];
-        $response = Api::create_evaluation($vote);
-        echo $response;
-
-    }*/
-	echo 'aaaaaa';
-	wp_die();
+	if (isset($_REQUEST)) {
+		$value = $_REQUEST['value'];
+		$contribution_id = $_REQUEST['contributionId'];
+		$agent_id = $_REQUEST['agentId'];
+		$response = Api::create_evaluation($value, $contribution_id, $agent_id);
+		print_r($response);
+		wp_die();
+	}
 }
 
-add_action('wp_ajax_nopriv_submit_evaluation','ajax_submit_evaluation' );
-add_action('wp_ajax_submit_evaluation','ajax_submit_evaluation' );
+add_action('wp_ajax_nopriv_submit_evaluation', __NAMESPACE__.'\\ajax_submit_evaluation');
+add_action('wp_ajax_submit_evaluation', __NAMESPACE__.'\\ajax_submit_evaluation');

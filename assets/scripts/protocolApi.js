@@ -1,21 +1,36 @@
 let protocolApi = {
-    request: (options, headers) => {
-        let defaultHeaders = {},
+    request: (options) => {
+        /*let defaultHeaders = {},
             defaultOptions = {
                 headers: new Headers(_.extend(defaultHeaders, headers))
             };
 
         return fetch(Backfeed.ajaxUrl, _.extend(defaultOptions, options))
             .then(res => res.json())
-            .catch(console.log.bind(console));
+            .catch(console.log.bind(console));*/
+        
+        return jQuery.ajax({
+            url: Backfeed.ajaxUrl,
+            type: options.type,
+            dataType: "json",
+            data: options.body,
+            success: function(response) {
+                debugger;
+            },
+            error: function(response) {
+                debugger;
+            }
+        });
     },
     evaluate: (value) => {
         return protocolApi.request({
-            method: 'POST',
-            body: JSON.stringify({
+            type: 'post',
+            body: {
                 action: 'submit_evaluation',
-                value: value
-            })
+                value: parseInt(value),
+                contributionId: Backfeed.currentContribution.id,
+                agentId: Backfeed.currentAgent.id
+            }
         });
     }
 };
