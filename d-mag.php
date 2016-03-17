@@ -74,6 +74,8 @@ add_action('wp_enqueue_scripts', function() {
 });
 
 register_activation_hook(__FILE__, function() {
+	global $wpdb;
+
 	// single bidding for the magazine
 	if (!get_option('backfeed_bidding_id')) {
 		$bidding = Api::create_bidding();
@@ -92,11 +94,33 @@ register_activation_hook(__FILE__, function() {
 
 	// transform all magazine comments into contributions
 	foreach (get_comments(["post_type" => "post"]) as $comment) {
-		if ($comment->user_id) {
-			// TODO: register a user using their email. Remember to send them a custom email explaining what happened
-		}
 		make_contribution($comment->comment_ID);
+
+		if ($comment->user_id == 0 && $comment->comment_author_email) {
+			$user = get_user_by('email', $comment->comment_author_email);
+
+			if ($user) {
+				$user_id = $user->ID;
+			} else {
+				$user_id = wp_insert_user([
+					'user_email' => $comment->comment_author_email,
+					'user_login' => $comment->comment_author_email,
+					'display_name' => $comment->comment_author
+				]);
+				// TODO: send custom email
+			}
+
+			wp_update_comment([
+				'comment_ID' => $comment->comment_ID,
+				'user_id' => $user_id
+			]);
+		}
 	}
+});
+
+register_deactivation_hook(__FILE__, function() {
+	delete_option('backfeed_bidding_id', $bidding->id);
+
 });
 
 function make_contribution($ID) {
@@ -113,13 +137,15 @@ function make_contribution($ID) {
 			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
 
 	// it is a comment by a registered user that doesn't have a contribution_id associated with it
-	} else if ($comment && $comment->user_id && !get_comment_meta($ID, 'backfeed_contribution_id', true)) {
+	} else if ($comment && !get_comment_meta($ID, 'backfeed_contribution_id', true) && !$comment->comment_parent) {
 		$agent_id = get_user_meta($comment->user_id, 'backfeed_agent_id', true);
 
-		$contribution = Api::create_contribution($agent_id);
+		if ($agent_id) {
+			$contribution = Api::create_contribution($agent_id);
 
-		if ($contribution && $contribution->id)
-			add_comment_meta($ID, 'backfeed_contribution_id', $contribution->id);
+			if ($contribution && $contribution->id)
+				add_comment_meta($ID, 'backfeed_contribution_id', $contribution->id);
+		}
 	}
 }
 

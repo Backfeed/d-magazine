@@ -2,7 +2,7 @@
 namespace Backfeed;
 
 add_filter( 'comments_template', function() {
-    return plugin_dir_path(__FILE__).'templates/comments.php';
+    return dirname(__FILE__) . '/../templates/comments.php';
 });
 
 /*
@@ -14,7 +14,7 @@ function comments_cb( $comment, $args, $depth ) {
 ?>
 
 <div <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
-    <article id="comment-<?php comment_ID(); ?>" class="comment-body clearfix">
+    <article id="comment-<?php comment_ID(); ?>" class="comment-body clearfix" data-contribution-id="<?=get_contribution_id($comment->comment_ID)?>">
 
         <div class="comment-author vcard">
             <div class="author-image">
