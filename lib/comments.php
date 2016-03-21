@@ -39,11 +39,8 @@ function comments_cb( $comment, $args, $depth ) {
         <div class="comment-meta">
             <ul class="clearfix">
 
-                <?php if ( barcelona_get_option( 'show_comment_voting' ) == 'on' ):
-
-                    foreach ( ['down', 'up'] as $k ):
-
-                        ?>
+                <?php if (barcelona_get_option( 'show_comment_voting' ) == 'on'):
+                    foreach (['down', 'up'] as $k): ?>
                         <li class="comment-vote<?php if ( $barcelona_voted = barcelona_is_voted_comment() ) { echo ' comment-vote-disabled'; } ?>">
                             <button class="btn-vote btn-vote-<?=sanitize_html_class( $k ) . ( $barcelona_voted == $k ? ' btn-voted' : '' )?>"
                                     data-nonce="<?=wp_create_nonce( 'barcelona-comment-vote' )?>"
@@ -53,25 +50,21 @@ function comments_cb( $comment, $args, $depth ) {
                                 <span class="fa fa-thumbs-<?=sanitize_html_class( $k )?>"></span>
                             </button>
                         </li>
-                        <?php
-
-                    endforeach;
-
+                    <?php endforeach;
                 endif; ?>
 
                 <li class="comment-reply">
-                    <?php
-                    comment_reply_link( array_merge( $args, [
+                    <?php comment_reply_link(array_merge($args, [
                         'reply_text' => 'Reply',
                         'depth'     => $depth,
                         'max_depth' => $args['max_depth']
-                    ] ) );
-                    ?>
+                    ])); ?>
                 </li>
             </ul>
         </div><!-- .comment-metadata -->
 
     </article><!-- .comment-body -->
 </div><!-- .comment_class -->
+    
 <?php
 }

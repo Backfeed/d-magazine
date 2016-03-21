@@ -119,8 +119,7 @@ register_activation_hook(__FILE__, function() {
 });
 
 register_deactivation_hook(__FILE__, function() {
-	delete_option('backfeed_bidding_id', $bidding->id);
-
+	delete_option('backfeed_bidding_id');
 });
 
 function make_contribution($ID) {
