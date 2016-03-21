@@ -5,17 +5,24 @@ import './polyfills.js';
 if (helpers.getQueryParameterByName('referrer')) {
     localStorage['referrer'] = helpers.getQueryParameterByName('referrer');
 }
-
-document.addEventListener("DOMContentLoaded", () => {
+jQuery($ => {
     let avatar = document.getElementById('backfeed-avatar'),
         votingWidget = document.getElementById('backfeed-voting'),
-        copyToClipboardButton = document.getElementById('copy-to-clipboard');
+        copyToClipboardButton = document.getElementById('copy-to-clipboard'),
+        comments = document.getElementById('comments');
 
     if (copyToClipboardButton) {
         new Clipboard(copyToClipboardButton, {
             text: function(trigger) {
                 return decodeURIComponent(trigger.dataset.clipboardText);
             }
+        });
+    }
+
+    if (comments) {
+        $(comments).on("click", ".btn-vote", e => {
+            e.preventDefault();
+            debugger;
         });
     }
 
@@ -27,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('backfeed-avatar-menu').classList.toggle('open');
         }, false);
     }
-    
+
     if (votingWidget) {
         let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
 
@@ -58,4 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }, true)
     }
+});
+document.addEventListener("DOMContentLoaded", () => {
+
 });

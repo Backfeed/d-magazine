@@ -41,7 +41,7 @@ function comments_cb( $comment, $args, $depth ) {
 
                 <?php if ( barcelona_get_option( 'show_comment_voting' ) == 'on' ):
 
-                    foreach ( ['up', 'down'] as $k ):
+                    foreach ( ['down', 'up'] as $k ):
 
                         ?>
                         <li class="comment-vote<?php if ( $barcelona_voted = barcelona_is_voted_comment() ) { echo ' comment-vote-disabled'; } ?>">

@@ -71,7 +71,7 @@ add_action('wp_enqueue_scripts', function() {
 	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', [], false, true);
 	wp_localize_script('collabar', 'Backfeed', get_config());
 	wp_enqueue_script('collabar');
-});
+}, 100);
 
 register_activation_hook(__FILE__, function() {
 	global $wpdb;

@@ -1,0 +1,15 @@
+.comment-body .comment-meta .comment-vote {
+  display: inline-flex;
+  justify-content: center;
+  background-color: black;
+  width: 21px;
+  height: 21px;
+}
+.comment-vote .btn-vote .fa {
+  margin-right: 0;
+  color: white;
+}
+
+.comment:not(.depth-1) .comment-vote {
+  display: none;
+}
