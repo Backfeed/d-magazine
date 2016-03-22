@@ -22,6 +22,11 @@ jQuery($ => {
     if (comments) {
         $(comments).on("click", ".btn-vote", e => {
             e.preventDefault();
+            if (this.classList.contains('btn-vote-up')) {
+                api.evaluate(1);
+            } else if (this.classList.contains('btn-vote-down')) {
+                api.evaluate(0);
+            }
             debugger;
         });
     }

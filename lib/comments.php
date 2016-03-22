@@ -39,19 +39,17 @@ function comments_cb( $comment, $args, $depth ) {
         <div class="comment-meta">
             <ul class="clearfix">
 
-                <?php if (barcelona_get_option( 'show_comment_voting' ) == 'on'):
-                    foreach (['down', 'up'] as $k): ?>
-                        <li class="comment-vote<?php if ( $barcelona_voted = barcelona_is_voted_comment() ) { echo ' comment-vote-disabled'; } ?>">
-                            <button class="btn-vote btn-vote-<?=sanitize_html_class( $k ) . ( $barcelona_voted == $k ? ' btn-voted' : '' )?>"
-                                    data-nonce="<?=wp_create_nonce( 'barcelona-comment-vote' )?>"
-                                    data-type="<?=esc_attr( $k )?>"
-                                    data-vote-type="comment"
-                                    data-vote-id="<?=esc_attr( $comment->comment_ID ) .'_'. esc_attr( $post->ID )?>">
-                                <span class="fa fa-thumbs-<?=sanitize_html_class( $k )?>"></span>
-                            </button>
-                        </li>
-                    <?php endforeach;
-                endif; ?>
+                <?php foreach (['down', 'up'] as $k): ?>
+                    <li class="comment-vote<?php if ( $barcelona_voted = barcelona_is_voted_comment() ) { echo ' comment-vote-disabled'; } ?>">
+                        <button class="btn-vote btn-vote-<?=sanitize_html_class( $k ) . ( $barcelona_voted == $k ? ' btn-voted' : '' )?>"
+                                data-nonce="<?=wp_create_nonce( 'barcelona-comment-vote' )?>"
+                                data-type="<?=esc_attr( $k )?>"
+                                data-vote-type="comment"
+                                data-vote-id="<?=esc_attr($comment->comment_ID) .'_'. esc_attr($post->ID)?>">
+                            <span class="fa fa-thumbs-<?=sanitize_html_class( $k )?>"></span>
+                        </button>
+                    </li>
+                <?php endforeach; ?>
 
                 <li class="comment-reply">
                     <?php comment_reply_link(array_merge($args, [

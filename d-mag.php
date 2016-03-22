@@ -94,8 +94,7 @@ register_activation_hook(__FILE__, function() {
 
 	// transform all magazine comments into contributions
 	foreach (get_comments(["post_type" => "post"]) as $comment) {
-		make_contribution($comment->comment_ID);
-
+		//Register user for comment author, if we have their email and if they're not registered already
 		if ($comment->user_id == 0 && $comment->comment_author_email) {
 			$user = get_user_by('email', $comment->comment_author_email);
 
@@ -115,6 +114,9 @@ register_activation_hook(__FILE__, function() {
 				'user_id' => $user_id
 			]);
 		}
+
+		//Save comment as contribution
+		make_contribution($comment->comment_ID);
 	}
 });
 
@@ -135,7 +137,7 @@ function make_contribution($ID) {
 		if ($contribution && $contribution->id)
 			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
 
-	// it is a comment by a registered user that doesn't have a contribution_id associated with it
+	// it is a top-level comment by a registered user that doesn't have a contribution_id associated with it
 	} else if ($comment && !get_comment_meta($ID, 'backfeed_contribution_id', true) && !$comment->comment_parent) {
 		$agent_id = get_user_meta($comment->user_id, 'backfeed_agent_id', true);
 
