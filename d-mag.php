@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: D-Mag
+Plugin Name: D-Magazine
 Plugin URI:  http://URI_Of_Page_Describing_Plugin_and_Updates
 Description: Real time collaboration features for your website or app.
 Version:     0.0.0
