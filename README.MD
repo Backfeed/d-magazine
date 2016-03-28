@@ -25,10 +25,16 @@ If you already have a WordPress instance ready, and you just want to install the
 Now, point your web browser your server ( e.g. http://127.0.0.1/ ), and you should see the infamous "Welcome to nginx!" message.
 
 #### Configure Nginx
-Edit `/etc/nginx/sites-available/default` and make the following changes inside the `server` block:
+Edit `/etc/nginx/sites-available/default`.
+
+Make the following changes inside the `server` block:
 
 1. the line that begins with `index` should be `index index.php index.html index.htm;`
 2. the line that begins with `server_name` should be something like `server_name server_domain_name_or_IP;`
+
+Also, find the `location /` block and inside it:
+
+1. the line that begins with `try_files_` should be `try_files $uri $uri/ /index.php?q=$uri&$args;`
 
 After that, reload nginx: `service nginx reload`.
 
