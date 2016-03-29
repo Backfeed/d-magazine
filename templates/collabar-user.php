@@ -25,13 +25,13 @@
         </div>
 
         <?php if (is_singular('post')): ?>
-            <div id="backfeed-voting" class="backfeed-voting">
-                <img id="backfeed-voting-down" class="backfeed-voting-handle" src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-down.png" />
+            <div id="backfeed-voting" class="backfeed-voting" data-status="loading">
+                <i class="backfeed-icon-vote backfeed-icon-vote-down"></i>
                 <div class="backfeed-meter">
                     <p>Article Quality</p>
                     <?php //echo get_config('currentContribution')->score?>
                 </div>
-                <img id="backfeed-voting-up" class="backfeed-voting-handle" src="<?=plugin_dir_url(__FILE__)?>../assets/icons/thumb-up.png" />
+                <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>
             </div>
         <?php endif; ?>
 
@@ -39,7 +39,7 @@
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
                 <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
-                <div><label>Rank:</label> NOVICE (<?=get_config('currentAgent')->reputation?>%)</div>
+                <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>%)</div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -56,17 +56,15 @@
     </section>
     
     <section class="stats-strip hidden-md-up">
-        <div><label>Rank:</label> NOVICE (<?=get_config('currentAgent')->reputation?>%)</div>
+        <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>%)</div>
         <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
     </section>
 
-    <nav id="backfeed-avatar-menu" class="backfeed-avatar-menu">
-        <ul>
-            <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
-            <li><a href="<?=get_edit_profile_url()?>">Edit Profile</a></li>
-            <li class="backfeed-disabled">Statistics</li>
-            <li><a href="<?=get_permalink(396)?>">Submit an Article</a></li>
-        </ul>
-    </nav>
+    <ul id="backfeed-avatar-menu" class="backfeed-avatar-menu">
+        <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
+        <li><a href="<?=get_edit_profile_url()?>">Edit Profile</a></li>
+        <li class="backfeed-disabled">Statistics</li>
+        <li><a href="<?=get_permalink(396)?>">Submit an Article</a></li>
+    </ul>
 
 </aside>

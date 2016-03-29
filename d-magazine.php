@@ -36,9 +36,10 @@ add_action('wp', function() {
 		$backfeed_config['currentContribution']->evaluations = Api::get_evaluations($currentContributionId);
 		$backfeed_config['currentContribution']->score = Api::get_score($currentContributionId);
 		
-		if (is_array($backfeed_config['currentContribution']->evaluations)) {
+		if (!empty($backfeed_config['currentContribution']->evaluations) && is_array($backfeed_config['currentContribution']->evaluations)) {
 			$agentIdsThatEvaluated = array_column($backfeed_config['currentContribution']->evaluations, 'userId');
 			$currentAgentEvaluationIndex = array_search($currentAgentId, $agentIdsThatEvaluated);
+
 			if ($currentAgentEvaluationIndex !== false) {
 				$currentAgentEvaluationValue = $backfeed_config['currentContribution']->evaluations[$currentAgentEvaluationIndex]->value;
 				$backfeed_config['currentContribution']->currentAgentVote = $currentAgentEvaluationValue;
@@ -54,18 +55,21 @@ function get_config($key = '') {
 }
 
 add_action('wp_footer', function() {
-	if (current_user_can('manage_options')) {
+//	if (current_user_can('manage_options')) {
 		if (is_user_logged_in())
 			require 'templates/collabar-user.php';
 		else
 			require 'templates/collabar-guest.php';
-	}
+//	}
 });
 
 add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_script('fetch', plugin_dir_url(__FILE__).'vendor/bower_components/fetch/fetch.js', [], false, true);
 	wp_enqueue_script('clipboard', plugin_dir_url(__FILE__).'vendor/bower_components/clipboard/dist/clipboard.js', [], false, true);
+	wp_enqueue_script('jquery-noty', plugin_dir_url(__FILE__).'vendor/bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js', ['jquery'], false, true);
 	wp_enqueue_script('underscore');
+
+
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 
 	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', [], false, true);

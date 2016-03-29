@@ -165,10 +165,37 @@
         @extend .backfeed-subsection;
 
         background: linear-gradient(to bottom, rgba(black, .17) 0%, rgba(#606060, .17) 100%) ,#484848;
+
+        &[data-status="loading"] {
+
+        }
+
+        &[data-status="vote-down"] {
+            .backfeed-icon-vote-down {
+                background-position-y: -136px;
+            }
+        }
+
+        &[data-status="vote-up"] {
+            .backfeed-icon-vote-up {
+                background-position-y: -196px;
+            }
+        }
     }
 
-    .backfeed-voting-handle {
+    .backfeed-icon-vote {
         cursor: pointer;
+        background-image: url('../../assets/icons/vote-sprite.png');
+        width: 44px;
+        height: 44px;
+
+        &.backfeed-icon-vote-down {
+            background-position-y: -16px;
+        }
+
+        &.backfeed-icon-vote-up {
+            background-position-y: -76px;
+        }
     }
 
     .backfeed-meter {
@@ -211,47 +238,47 @@
         }
     }
 
-    nav.backfeed-avatar-menu {
+    .backfeed-avatar-menu {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
         position: absolute;
         top: -55px;
-        right: 0;
         width: 100%;
-        background-color: #3d3d3d;
-        text-align: right;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        background: linear-gradient(to bottom, rgba(black, .17) 0%, rgba(#606060, .17) 100%) ,#151515;
+        margin-bottom: 0;
+        padding: 5px 0;
+        list-style: none;
+
         transition: top .5s linear, visibility 0s linear .5s, opacity .5s linear;
         visibility: hidden;
         opacity: 0;
 
         &.open {
-            top: -47px;
+            top: -27px;
             visibility: visible;
             opacity: 1;
             transition-delay: 0s;
-
-            @media (min-width: 398px) {
-                top: -30px;
-            }
-        }
-
-        ul {
-            list-style: none;
-            display: inline-flex;
-            margin-bottom: 0;
-            padding: 0;
-            align-items: center;
         }
 
         li {
-            border-left: #818181 1px solid;
-            padding-left: 1rem;
-            padding-right: 1rem;
-            font-size: 13px;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            font-size: 12px;
             text-align: center;
 
+            @media (min-width: 356px) {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            &:not(:last-child) {
+                border-right: #818181 1px solid;
+            }
+
             &.backfeed-disabled {
-                color: #8f8585;
+                color: #575757;
                 cursor: not-allowed;
             }
         }

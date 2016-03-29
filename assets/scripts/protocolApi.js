@@ -1,5 +1,5 @@
 let protocolApi = {
-    request: (options) => {
+    request: (options, callback) => {
         /*let defaultHeaders = {},
             defaultOptions = {
                 headers: new Headers(_.extend(defaultHeaders, headers))
@@ -14,15 +14,13 @@ let protocolApi = {
             type: options.type,
             dataType: "json",
             data: options.body,
-            success: function(response) {
-                debugger;
-            },
+            success: callback,
             error: function(response) {
                 debugger;
             }
         });
     },
-    evaluate: (value) => {
+    evaluate: (value, callback) => {
         return protocolApi.request({
             type: 'post',
             body: {
@@ -31,7 +29,7 @@ let protocolApi = {
                 contributionId: Backfeed.currentContribution.id,
                 agentId: Backfeed.currentAgent.id
             }
-        });
+        }, callback);
     }
 };
 

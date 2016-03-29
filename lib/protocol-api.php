@@ -20,6 +20,7 @@ class Api {
 
         //warning: will crash website if enabled
         if (!$response->success) {
+            error_log($response);
             //throw new \Exception('Backfeed Backend returned error');
         }
         return json_decode($response->body);
