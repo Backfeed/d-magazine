@@ -16,11 +16,14 @@ jQuery($ => {
         comments = document.getElementById('comments');
 
     if (copyToClipboardButton) {
-        new Clipboard(copyToClipboardButton, {
-            text: function(trigger) {
+        let clipboard = new Clipboard(copyToClipboardButton, {
+            text: trigger => {
                 return decodeURIComponent(trigger.dataset.clipboardText);
             }
         });
+        clipboard.on('success', e => {
+            noty({"text": "Copied to clipboard..."})
+        })
     }
 
     if (comments) {
