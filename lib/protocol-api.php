@@ -1,22 +1,22 @@
 <?php
 namespace Backfeed;
 
-class Api {
-    const API_KEY = 'mJJEYE6DlC5BAJ4hOAuwG9pUNwuBZAb8aLsik7K8',
-        API_URL = 'https://api.backfeed.cc/dmag/';
+if (!defined('API_URL')) define('API_URL', 'https://api.backfeed.cc/dmag/');
+if (!defined('API_KEY')) define('API_KEY', 'mJJEYE6DlC5BAJ4hOAuwG9pUNwuBZAb8aLsik7K8');
 
+class Api {
     private static function request($method = 'get', $endpoint, $data = [], $headers = []) {
         $default_headers = [
-            'x-api-key' => self::API_KEY
+            'x-api-key' => API_KEY
         ];
         $headers = array_merge($default_headers, $headers);
 
         $data = json_encode($data);
 
         if ($method == 'post' || $method == 'put')
-            $response = \Requests::$method(self::API_URL . $endpoint, $headers, $data);
+            $response = \Requests::$method(API_URL . $endpoint, $headers, $data);
         else
-            $response = \Requests::$method(self::API_URL . $endpoint, $headers);
+            $response = \Requests::$method(API_URL . $endpoint, $headers);
 
         //warning: will crash website if enabled
         if (!$response->success) {

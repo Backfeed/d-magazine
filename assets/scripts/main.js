@@ -39,9 +39,9 @@ jQuery($ => {
 
     if (avatar) {
         avatar.addEventListener('click', e => {
-            let caret = e.currentTarget.querySelector('i');
-            caret.classList.toggle('bf-fa-caret-down');
-            caret.classList.toggle('bf-fa-caret-up');
+            let chevron = e.currentTarget.querySelector('i');
+            chevron.classList.toggle('bf-fa-chevron-down');
+            chevron.classList.toggle('bf-fa-chevron-up');
             document.getElementById('backfeed-avatar-menu').classList.toggle('open');
         }, false);
     }

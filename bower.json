@@ -19,6 +19,7 @@
   "dependencies": {
     "fetch": "^0.11.0",
     "clipboard": "^1.5.9",
-    "noty": "^2.3.8"
+    "noty": "^2.3.8",
+    "waypoints": "^4.0.0"
   }
 }

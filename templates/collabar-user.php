@@ -2,10 +2,15 @@
 
 <aside id="backfeed-collabar" class="<?=collabar_class()?>">
 
-    <section>
+    <section class="backfeed-main-bar">
         <?php if (is_singular('post')): ?>
             <div class="backfeed-sharing">
-                <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode(get_referral_url())?>"><span class="bf-fa bf-fa-link"></span></button>
+                <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode(get_referral_url())?>">
+                    <span class="bf-fa-stack">
+                      <i class="bf-fa bf-fa-square bf-fa-stack-2x"></i>
+                      <i class="bf-fa bf-fa-link bf-fa-stack-1x"></i>
+                    </span>
+                </button>
                 <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
                 <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
             </div>
@@ -27,9 +32,11 @@
         <?php if (is_singular('post')): ?>
             <div id="backfeed-voting" class="backfeed-voting" data-status="loading">
                 <i class="backfeed-icon-vote backfeed-icon-vote-down"></i>
-                <div class="backfeed-meter">
-                    <p>Article Quality</p>
-                    <?php //echo get_config('currentContribution')->score?>
+                <div class="backfeed-article-score">
+                    <label>Article Quality</label>
+                    <div class="backfeed-meter">
+                        <div class="backfeed-meter-filled" style="width:<?=get_current_contribution_score()?>%;"></div>
+                    </div>
                 </div>
                 <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>
             </div>
@@ -39,7 +46,7 @@
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
                 <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
-                <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>%)</div>
+                <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>% R)</div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -48,15 +55,15 @@
 
             <div id="backfeed-avatar" class="backfeed-avatar">
                 <?=get_avatar(wp_get_current_user()->ID, 32)?>
-                <i class="bf-fa bf-fa-caret-down"></i>
+                <i class="bf-fa bf-fa-chevron-down"></i>
             </div>
 
         </div>
 
     </section>
     
-    <section class="stats-strip hidden-md-up">
-        <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>%)</div>
+    <section class="backfeed-stats-bar hidden-md-up">
+        <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>% R)</div>
         <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
     </section>
 

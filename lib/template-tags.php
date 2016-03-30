@@ -15,3 +15,7 @@ function get_contribution_id($object_id) {
     //TODO: abstract later to support more meta types
     return get_comment_meta($object_id, 'backfeed_contribution_id', true);
 }
+
+function get_current_contribution_score() {
+    return get_config('currentContribution')->score ? get_config('currentContribution')->score : 0;
+}
