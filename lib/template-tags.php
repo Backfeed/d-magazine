@@ -17,7 +17,7 @@ function get_contribution_id($object_id) {
 }
 
 function get_current_contribution_score() {
-    return get_config('currentContribution')->score ? get_config('currentContribution')->score : 0;
+    return is_int(get_config('currentContribution')->score) ? get_config('currentContribution')->score : 0;
 }
 
 function get_current_agent_reputation() {

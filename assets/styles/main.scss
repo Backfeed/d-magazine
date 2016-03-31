@@ -19,7 +19,7 @@
 
     &.single-post {
         .backfeed-teaser {
-            flex-basis: 230px;
+            flex-basis: 180px;
 
             @include media-breakpoint-up(lg) {
                 flex-basis: 300px;
@@ -31,8 +31,6 @@
         display: flex;
         justify-content: space-between;
         align-items: stretch;
-        /*padding-left: 10px;
-        padding-right: 10px;*/
 
         @include media-breakpoint-up(md) {
             width: 750px;
@@ -62,6 +60,12 @@
             justify-content: space-around;
             padding-top: 9px;
             padding-bottom: 9px;
+        }
+
+        &.backfeed-explainer-bar {
+            flex-direction: column;
+            align-items: center;
+            background-color: darkslategray;
         }
     }
 
@@ -107,7 +111,17 @@
         justify-content: center;
         padding-right: 10px;
         padding-left: 10px;
-        background: linear-gradient(to bottom, rgba(0,0,0,.17) 0%, rgba(96,96,96,.17) 100%), rgba(72,72,72,0.39);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.17) 0%, rgba(96, 96, 96, 0.17) 100%), #484848;
+        font-size: 12px;
+    }
+
+    .backfeed-stat-reputation {
+        font-weight: bold;
+
+        small {
+            font-size: 11px;
+            font-weight: normal;
+        }
     }
 
     .backfeed-learn {
@@ -130,6 +144,7 @@
 
     .backfeed-learn-button {
         text-decoration: underline;
+        font-size: 12px;
     }
 
     .backfeed-tagline {
@@ -164,6 +179,15 @@
         padding-right: 10px;
     }
 
+    .backfeed-teaser-content {
+        font-size: 12px;
+        line-height: 1.45;
+    }
+
+    .backfeed-user-info {
+        flex: 1;
+    }
+
     .backfeed-voting {
         @extend .backfeed-subsection;
 
@@ -171,19 +195,38 @@
         padding-left: 4px;
         padding-right: 4px;
 
-        &[data-status="loading"] {
+        @include media-breakpoint-up(xl) {
+            margin-left: 90px;
+        }
 
+        &[data-status="loading"] {
+            .backfeed-icon-vote-up,
+            .backfeed-icon-vote-down {
+                background-position-y: -496px;
+
+                &:hover {
+                    background-position-y: -496px;
+                }
+            }
         }
 
         &[data-status="vote-down"] {
             .backfeed-icon-vote-down {
-                background-position-y: -136px;
+                background-position-y: -260px;
+
+                &:hover {
+                    background-position-y: -380px;
+                }
             }
         }
 
         &[data-status="vote-up"] {
             .backfeed-icon-vote-up {
-                background-position-y: -196px;
+                background-position-y: -319px;
+
+                &:hover {
+                    background-position-y: -439px;
+                }
             }
         }
     }
@@ -196,10 +239,18 @@
 
         &.backfeed-icon-vote-down {
             background-position-y: -16px;
+
+            &:hover {
+                background-position-y: -136px;
+            }
         }
 
         &.backfeed-icon-vote-up {
             background-position-y: -76px;
+
+            &:hover {
+                background-position-y: -196px;
+            }
         }
     }
 
@@ -237,9 +288,17 @@
     .backfeed-sharing {
         @extend .backfeed-subsection;
 
-        padding-left: 7px;
-        padding-right: 7px;
-        //background-color: #404040;
+        flex: 1;
+        justify-content: center;
+
+        padding-left: 10px;
+        padding-right: 11px;
+
+        @include media-breakpoint-up(sm) {
+            justify-content: flex-start;
+            flex: 0;
+            background-color: #404040;
+        }
 
         & > a:hover,
         & > button:hover {
@@ -268,8 +327,10 @@
     }
 
     .backfeed-avatar {
-        display: flex;
-        align-items: center;
+        @extend .backfeed-subsection;
+
+        justify-content: flex-end;
+
         cursor: pointer;
         padding: 10px 6px 10px 8px;
 

@@ -23,7 +23,10 @@ class Api {
             error_log($response);
             //throw new \Exception('Backfeed Backend returned error');
         }
-        return json_decode($response->body);
+
+        $json_response = json_decode($response->body);
+        if ($json_response->errorMessage) return 0;
+        return $json_response;
     }
 
     public static function create_bidding() {
@@ -49,7 +52,7 @@ class Api {
         //if (!$contribution_id) get_config('currentContribution')->id;
         //if (!$agent_id) get_config('currentAgent')->id;
 
-        return self::request('post', 'evaluations/submit', [
+        return self::request('post', 'evaluations/single', [
             "userId" => $agent_id,
             "biddingId" => get_option('backfeed_bidding_id'),
             "evaluations" => [

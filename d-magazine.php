@@ -20,7 +20,9 @@ require_once('lib/protocol-api.php');
 require_once('lib/comments.php');
 require_once('lib/ajax.php');
 
-add_action('wp', function() {
+//add_action('wp', );
+
+function init_config() {
 	global $backfeed_config;
 	$backfeed_config = [];
 
@@ -35,7 +37,7 @@ add_action('wp', function() {
 		$backfeed_config['currentContribution'] = Api::get_contribution($currentContributionId);
 		$backfeed_config['currentContribution']->evaluations = Api::get_evaluations($currentContributionId);
 		$backfeed_config['currentContribution']->score = Api::get_score($currentContributionId);
-		
+
 		if (!empty($backfeed_config['currentContribution']->evaluations) && is_array($backfeed_config['currentContribution']->evaluations)) {
 			$agentIdsThatEvaluated = array_column($backfeed_config['currentContribution']->evaluations, 'userId');
 			$currentAgentEvaluationIndex = array_search($currentAgentId, $agentIdsThatEvaluated);
@@ -46,7 +48,9 @@ add_action('wp', function() {
 			}
 		}
 	}
-});
+
+	return $backfeed_config;
+}
 
 function get_config($key = '') {
 	global $backfeed_config;
@@ -55,12 +59,10 @@ function get_config($key = '') {
 }
 
 add_action('wp_footer', function() {
-//	if (current_user_can('manage_options')) {
-		if (is_user_logged_in())
-			require 'templates/collabar-user.php';
-		else
-			require 'templates/collabar-guest.php';
-//	}
+	if (is_user_logged_in())
+		require 'templates/collabar-user.php';
+	else
+		require 'templates/collabar-guest.php';
 });
 
 add_action('wp_enqueue_scripts', function() {
@@ -73,7 +75,7 @@ add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 
 	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', [], false, true);
-	wp_localize_script('collabar', 'Backfeed', get_config());
+	wp_localize_script('collabar', 'Backfeed', init_config());
 	wp_enqueue_script('collabar');
 }, 100);
 
@@ -97,7 +99,7 @@ register_activation_hook(__FILE__, function() {
 	}
 
 	// transform all magazine comments into contributions
-	foreach (get_comments(["post_type" => "post"]) as $comment) {
+	/*foreach (get_comments(["post_type" => "post"]) as $comment) {
 		//Register user for comment author, if we have their email and if they're not registered already
 		if ($comment->user_id == 0 && $comment->comment_author_email) {
 			$user = get_user_by('email', $comment->comment_author_email);
@@ -121,12 +123,10 @@ register_activation_hook(__FILE__, function() {
 
 		//Save comment as contribution
 		make_contribution($comment->comment_ID);
-	}
+	}*/
 });
 
-register_deactivation_hook(__FILE__, function() {
-	delete_option('backfeed_bidding_id');
-});
+register_deactivation_hook(__FILE__, function() {});
 
 function make_contribution($ID) {
 	$post = get_post($ID);
