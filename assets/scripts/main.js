@@ -9,6 +9,7 @@ if (helpers.getQueryParameterByName('referrer')) {
 jQuery($ => {
     $.noty.defaults.layout = 'bottomRight';
     $.noty.defaults.type =  'information';
+    $.noty.defaults.timeout =  4000;
 
     let avatar = document.getElementById('backfeed-avatar'),
         votingWidget = document.getElementById('backfeed-voting'),

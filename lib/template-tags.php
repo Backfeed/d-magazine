@@ -19,3 +19,11 @@ function get_contribution_id($object_id) {
 function get_current_contribution_score() {
     return get_config('currentContribution')->score ? get_config('currentContribution')->score : 0;
 }
+
+function get_current_agent_reputation() {
+    return get_config('currentAgent')->reputation ? round(get_config('currentAgent')->reputation, 2) : 0;
+}
+
+function get_current_agent_reputation_rank() {
+    return 'Novice';
+}

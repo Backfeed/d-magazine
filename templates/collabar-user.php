@@ -25,7 +25,7 @@
                     <span class="hidden-sm-up">Be part of the collective intelligence and earn tokens!</span>
                     <span class="hidden-xs-down">Explore our magazine, be part of the collective intelligence and earn tokens!</span>
                 <?php endif; ?>
-                &nbsp;<button class="button backfeed-learn-button">Learn more</button>
+                &nbsp;<a href="<?=site_url('/faq/')?>" class="button backfeed-learn-button">Learn more</a>
             </p>
         </div>
 
@@ -46,7 +46,7 @@
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
                 <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
-                <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>% R)</div>
+                <div><label>Rank:</label> <?=get_current_agent_reputation_rank()?> (<?=get_current_agent_reputation()?>% R)</div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -63,7 +63,7 @@
     </section>
     
     <section class="backfeed-stats-bar hidden-md-up">
-        <div><label>Rank:</label> NOVICE (<?=round(get_config('currentAgent')->reputation, 2)?>% R)</div>
+        <div><label>Rank:</label> <?=get_current_agent_reputation_rank()?> (<?=get_current_agent_reputation()?>% R)</div>
         <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
     </section>
 
@@ -71,7 +71,7 @@
         <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
         <li><a href="<?=get_edit_profile_url()?>">Edit Profile</a></li>
         <li class="backfeed-disabled">Statistics</li>
-        <li><a href="<?=get_permalink(396)?>">Submit an Article</a></li>
+        <li><a href="<?=site_url('/submit-article/')?>">Submit an Article</a></li>
     </ul>
 
 </aside>
