@@ -1,31 +1,31 @@
 <?php
 namespace Backfeed;
 
-if (!defined('API_URL')) define('API_URL', 'https://api.backfeed.cc/dmag/');
-if (!defined('API_KEY')) define('API_KEY', 'mJJEYE6DlC5BAJ4hOAuwG9pUNwuBZAb8aLsik7K8');
+if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'https://api.backfeed.cc/dmag/');
+if (!defined('BACKFEED_API_KEY')) define('BACKFEED_API_KEY', 'mJJEYE6DlC5BAJ4hOAuwG9pUNwuBZAb8aLsik7K8');
 
 class Api {
     private static function request($method = 'get', $endpoint, $data = [], $headers = []) {
         $default_headers = [
-            'x-api-key' => API_KEY
+            'x-api-key' => BACKFEED_API_KEY
         ];
         $headers = array_merge($default_headers, $headers);
 
         $data = json_encode($data);
 
         if ($method == 'post' || $method == 'put')
-            $response = \Requests::$method(API_URL . $endpoint, $headers, $data);
+            $response = \Requests::$method(BACKFEED_API_URL . $endpoint, $headers, $data);
         else
-            $response = \Requests::$method(API_URL . $endpoint, $headers);
+            $response = \Requests::$method(BACKFEED_API_URL . $endpoint, $headers);
 
         //warning: will crash website if enabled
         if (!$response->success) {
-            error_log($response);
+            error_log('Backfeed API returned meh: '.print_r($response));
             //throw new \Exception('Backfeed Backend returned error');
         }
 
         $json_response = json_decode($response->body);
-        if ($json_response->errorMessage) return 0;
+        if (isset($json_response->errorMessage)) return 0;
         return $json_response;
     }
 

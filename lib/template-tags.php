@@ -7,7 +7,8 @@ function get_referral_url() {
 
 function collabar_class() {
     $class = '';
-    if (is_singular('post')) $class .= 'single-post';
+    if (is_singular('post')) $class .= ' single-post';
+    if (!is_user_logged_in()) $class .= ' logged-out';
     return $class;
 }
 
@@ -25,5 +26,5 @@ function get_current_agent_reputation() {
 }
 
 function get_current_agent_reputation_rank() {
-    return 'Novice';
+    return 'NOVICE';
 }

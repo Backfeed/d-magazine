@@ -1,20 +1,21 @@
 @import 'variables';
 @import 'abstractions';
 @import 'responsive-utilities';
+@import 'logged-out';
 @import 'tooltip';
 @import 'comments';
-@import '../../vendor/frontend/font-awesome/font-awesome';
+@import 'fonts';
 
 #backfeed-collabar {
     position: fixed;
     bottom: 0;
     z-index: 999;
     color: white;
-    background-color: #0f0f0f;
+    background: $footer-gradient, #0f0f0f;
     width: 100%;
 
     @include media-breakpoint-up(md) {
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, rgba(96, 96, 96, 0.25) 100%), #242424;
+        background: $footer-gradient, #242424;
     }
 
     &.single-post {
@@ -49,7 +50,7 @@
         }
 
         &.backfeed-main-bar {
-            background: #242424 linear-gradient(to top, rgba(0, 0, 0, 0.17) 0%, rgba(96, 96, 96, 0.17) 100%);
+            background: $footer-gradient, #242424;
 
             @include media-breakpoint-up(md) {
                 background: none;
@@ -58,6 +59,7 @@
 
         &.backfeed-stats-bar {
             justify-content: space-around;
+            background-color: black;
             padding-top: 9px;
             padding-bottom: 9px;
         }
@@ -93,25 +95,13 @@
         font-weight: normal;
     }
 
-    .backfeed-register {
-        display: flex;
-        align-items: center;
-        background-color: #b80443;
-        padding: 10px 20px;
-
-        @include media-breakpoint-up(md) {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-    }
-
     .backfeed-stats {
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding-right: 10px;
         padding-left: 10px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.17) 0%, rgba(96, 96, 96, 0.17) 100%), #484848;
+        background: $footer-gradient, #484848;
         font-size: 12px;
     }
 
@@ -121,45 +111,6 @@
         small {
             font-size: 11px;
             font-weight: normal;
-        }
-    }
-
-    .backfeed-learn {
-        @extend .backfeed-subsection;
-
-        flex: 1;
-        text-align: center;
-        padding: 8px;
-        font-size: 12px;
-
-        @include media-breakpoint-up(sm) {
-            padding: 0;
-            flex: 0 1 230px;
-        }
-
-        @include media-breakpoint-up(xl) {
-            flex: initial;
-        }
-    }
-
-    .backfeed-learn-button {
-        text-decoration: underline;
-        font-size: 12px;
-    }
-
-    .backfeed-tagline {
-        @extend .backfeed-subsection;
-        flex-direction: column;
-        justify-content: center;
-
-        font-size: 12px;
-        text-align: center;
-        text-transform: uppercase;
-
-        span {
-            font-size: 22px;
-            text-transform: uppercase;
-            line-height: 1;
         }
     }
 
@@ -191,7 +142,7 @@
     .backfeed-voting {
         @extend .backfeed-subsection;
 
-        background: linear-gradient(to bottom, rgba(black, .17) 0%, rgba(#606060, .17) 100%) ,#484848;
+        background: $footer-gradient, #484848;
         padding-left: 4px;
         padding-right: 4px;
 
@@ -355,7 +306,7 @@
         position: absolute;
         top: -12px;
         width: 100%;
-        background: linear-gradient(to bottom, rgba(black, .17) 0%, rgba(#606060, .17) 100%) ,#151515;
+        background: $footer-gradient ,#151515;
         margin-bottom: 0;
         padding: 5px 0;
         list-style: none;

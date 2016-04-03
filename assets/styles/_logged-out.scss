@@ -1,0 +1,121 @@
+#backfeed-collabar {
+  &.logged-out {
+    color: #d9d9d9;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.5) 0%, rgba(96, 96, 96, 0.5) 100%), black;
+
+    .backfeed-logged-out-bar {
+      @include media-breakpoint-up(md) {
+        position: relative;
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: 970px;
+      }
+    }
+  }
+
+  .backfeed-gloss {
+    width: 278px;
+    height: 100%;
+    position: absolute;
+    background-color: black;
+    transform: skew(-25deg);
+    z-index: -1;
+    left: -17%;
+
+    @include media-breakpoint-up(lg) {
+      left: -808px;
+      width: 100%;
+    }
+  }
+
+  .backfeed-register-button {
+    display: flex;
+    align-items: center;
+    background-color: #b80443;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    &:hover {
+      background-color: #D62663;
+    }
+
+    @include media-breakpoint-up(sm) {
+      margin: 15px 10px;
+      padding-top: 6.5px;
+      padding-bottom: 6.5px;
+    }
+  }
+
+  .backfeed-promotion {
+    @extend .backfeed-subsection;
+
+    justify-content: space-around;
+    flex: 1;
+
+    @include media-breakpoint-up(lg) {
+      background: initial;
+    }
+  }
+
+  .backfeed-learn-button {
+    text-decoration: underline;
+    font-size: 14px;
+
+    @include media-breakpoint-up(lg) {
+      flex: 1;
+      text-align: center;
+
+      font-size: 13px;
+    }
+  }
+
+  .backfeed-learn {
+    @extend .backfeed-subsection;
+
+    flex-direction: column;
+    flex: 1;
+
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+
+    @include media-breakpoint-up(sm) {
+      padding: 0;
+      flex: initial;
+      text-align: left;
+    }
+
+    @include media-breakpoint-up(lg) {
+      background: initial;
+      font-size: 13px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex: initial;
+    }
+  }
+
+  .backfeed-tagline {
+    @extend .backfeed-subsection;
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: 12px;
+    text-align: center;
+    margin-top: 3px;
+    margin-left: 30px;
+
+    @include media-breakpoint-up(lg) {
+      flex: 1;
+    }
+
+    span {
+      font-size: 22px;
+      text-transform: uppercase;
+      line-height: 0.9;
+    }
+  }
+}
