@@ -80,7 +80,7 @@ add_action('wp_enqueue_scripts', function() {
 }, 100);
 
 register_activation_hook(__FILE__, function() {
-	global $wpdb;
+	//global $wpdb;
 
 	// single bidding for the magazine
 	if (!get_option('backfeed_bidding_id')) {
@@ -133,7 +133,7 @@ function make_contribution($ID) {
 	$comment = get_comment($ID);
 
 	// it is a post of post_type="post" that just got "publish"ed and doesn't have a contribution_id associated with it
-	if ($post && $post->post_type == 'post' && $post->post_status == 'publish' && !get_post_meta($ID, 'backfeed_contribution_id', true)) {
+	if ($post && $post->post_type == 'post' && !get_post_meta($ID, 'backfeed_contribution_id', true)) {
 		$agent_id = get_user_meta($post->post_author, 'backfeed_agent_id', true);
 
 		$contribution = Api::create_contribution($agent_id);
@@ -142,7 +142,7 @@ function make_contribution($ID) {
 			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
 
 	// it is a top-level comment by a registered user that doesn't have a contribution_id associated with it
-	} else if ($comment && !get_comment_meta($ID, 'backfeed_contribution_id', true) && !$comment->comment_parent) {
+	}/* else if ($comment && !get_comment_meta($ID, 'backfeed_contribution_id', true) && !$comment->comment_parent) {
 		$agent_id = get_user_meta($comment->user_id, 'backfeed_agent_id', true);
 
 		if ($agent_id) {
@@ -151,7 +151,7 @@ function make_contribution($ID) {
 			if ($contribution && $contribution->id)
 				add_comment_meta($ID, 'backfeed_contribution_id', $contribution->id);
 		}
-	}
+	}*/
 }
 
 function make_agent($user_id) {

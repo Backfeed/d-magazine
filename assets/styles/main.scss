@@ -4,7 +4,7 @@
 @import 'logged-out';
 @import 'tooltip';
 @import 'comments';
-@import 'fonts';
+@import '../../vendor/frontend/font-awesome/font-awesome';
 
 #backfeed-collabar {
     position: fixed;
@@ -339,7 +339,6 @@
 
             &.backfeed-disabled {
                 color: #575757;
-                cursor: not-allowed;
             }
         }
     }
