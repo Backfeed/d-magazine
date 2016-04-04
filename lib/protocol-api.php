@@ -20,7 +20,7 @@ class Api {
 
         //warning: will crash website if enabled
         if (!$response->success) {
-            error_log('Backfeed API returned meh: '.print_r($response));
+            error_log('Backfeed API returned meh: '.serialize($response));
             //throw new \Exception('Backfeed Backend returned error');
         }
 
@@ -62,6 +62,10 @@ class Api {
                 ]
             ]
         ]);
+    }
+
+    public static function get_all_contributions() {
+        return self::request('get', 'contributions/');
     }
 
     public static function get_contribution($post_id) {

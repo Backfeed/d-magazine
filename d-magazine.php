@@ -20,8 +20,6 @@ require_once('lib/protocol-api.php');
 require_once('lib/comments.php');
 require_once('lib/ajax.php');
 
-//add_action('wp', );
-
 function init_config() {
 	global $backfeed_config;
 	$backfeed_config = [];
@@ -80,8 +78,6 @@ add_action('wp_enqueue_scripts', function() {
 }, 100);
 
 register_activation_hook(__FILE__, function() {
-	//global $wpdb;
-
 	// single bidding for the magazine
 	if (!get_option('backfeed_bidding_id')) {
 		$bidding = Api::create_bidding();
@@ -166,5 +162,3 @@ function make_agent($user_id) {
 add_action('wp_insert_post', __NAMESPACE__.'\\make_contribution');
 add_action('user_register', __NAMESPACE__.'\\make_agent');
 add_action('wp_insert_comment', __NAMESPACE__.'\\make_contribution');
-
-
