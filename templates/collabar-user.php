@@ -46,7 +46,7 @@
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
                 <div class="backfeed-stat-tokens"><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
-                <div class="backfeed-stat-reputation"><label>Rank:</label> <?=get_current_agent_reputation_rank()?> <small>(<?=get_current_agent_reputation()?>% R)</small></div>
+                <div class="backfeed-stat-reputation"><label>Rank:</label> <small><?=get_current_agent_reputation()?>% Reputation</small></div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -69,7 +69,7 @@
     </section>
     
     <section class="backfeed-stats-bar hidden-md-up">
-        <div><label>Rank:</label> <?=get_current_agent_reputation_rank()?> (<?=get_current_agent_reputation()?>% R)</div>
+        <div><label>Rank:</label> <?=get_current_agent_reputation()?>% Reputation</div>
         <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
     </section>
 

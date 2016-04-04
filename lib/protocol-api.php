@@ -18,9 +18,9 @@ class Api {
         else
             $response = \Requests::$method(BACKFEED_API_URL . $endpoint, $headers);
 
-        //warning: will crash website if enabled
         if (!$response->success) {
             error_log('Backfeed API returned meh: '.serialize($response));
+            //warning: will crash website if enabled
             //throw new \Exception('Backfeed Backend returned error');
         }
 
@@ -54,13 +54,8 @@ class Api {
 
         return self::request('post', 'evaluations/single', [
             "userId" => $agent_id,
-            "biddingId" => get_option('backfeed_bidding_id'),
-            "evaluations" => [
-                [
-                    "contributionId" => $contribution_id,
-                    "value" => intval($vote)
-                ]
-            ]
+            "contributionId" => $contribution_id,
+            "value" => intval($vote)
         ]);
     }
 

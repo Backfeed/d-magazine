@@ -24,7 +24,3 @@ function get_current_contribution_score() {
 function get_current_agent_reputation() {
     return get_config('currentAgent')->reputation ? round(get_config('currentAgent')->reputation, 2) : 0;
 }
-
-function get_current_agent_reputation_rank() {
-    return 'NOVICE';
-}
