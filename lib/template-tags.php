@@ -21,6 +21,10 @@ function get_current_contribution_score() {
     return is_int(get_config('currentContribution')->score) ? get_config('currentContribution')->score : 0;
 }
 
+function get_current_agent_tokens() {
+    return isset(get_config('currentAgent')->tokens) ? get_config('currentAgent')->tokens : 0;
+}
+
 function get_current_agent_reputation() {
-    return get_config('currentAgent')->reputation ? round(get_config('currentAgent')->reputation, 2) : 0;
+    return isset(get_config('currentAgent')->reputation) ? round(get_config('currentAgent')->reputation, 2) : 0;
 }

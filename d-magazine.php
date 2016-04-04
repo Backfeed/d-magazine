@@ -134,7 +134,7 @@ function make_contribution($ID) {
 
 		$contribution = Api::create_contribution($agent_id);
 
-		if ($contribution && $contribution->id)
+		if ($contribution && isset($contribution->id))
 			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
 
 	// it is a top-level comment by a registered user that doesn't have a contribution_id associated with it
@@ -154,7 +154,7 @@ function make_agent($user_id) {
 	if (!get_user_meta($user_id, 'backfeed_agent_id', true)) {
 		$new_agent = Api::create_agent();
 
-		if ($new_agent && $new_agent->id)
+		if ($new_agent && isset($new_agent->id))
 			add_user_meta($user_id, 'backfeed_agent_id', $new_agent->id);
 	}
 }

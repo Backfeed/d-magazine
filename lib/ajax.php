@@ -3,7 +3,7 @@ namespace Backfeed;
 
 function ajax_submit_evaluation() {
     if (isset($_REQUEST)) {
-        $config = init_config();
+        //$config = init_config();
         $value = $_REQUEST['value'];
         $contribution_id = $_REQUEST['contributionId'];
         $agent_id = $_REQUEST['agentId'];

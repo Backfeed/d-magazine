@@ -45,7 +45,7 @@
         <div class="backfeed-user-info">
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
-                <div class="backfeed-stat-tokens"><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
+                <div class="backfeed-stat-tokens"><label>My Tokens:</label> <?=get_current_agent_tokens()?></div>
                 <div class="backfeed-stat-reputation"><label>Rank:</label> <small><?=get_current_agent_reputation()?>% Reputation</small></div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
@@ -70,7 +70,7 @@
     
     <section class="backfeed-stats-bar hidden-md-up">
         <div><label>Rank:</label> <?=get_current_agent_reputation()?>% Reputation</div>
-        <div><label>My Tokens:</label> <?=get_config('currentAgent')->tokens?></div>
+        <div><label>My Tokens:</label> <?=get_current_agent_tokens()?></div>
     </section>
 
     <ul id="backfeed-avatar-menu" class="backfeed-avatar-menu">

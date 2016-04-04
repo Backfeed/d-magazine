@@ -65,6 +65,7 @@
         }
 
         &.backfeed-explainer-bar {
+            display: none !important; /* TODO: style it */
             flex-direction: column;
             align-items: center;
             background-color: darkslategray;
@@ -289,11 +290,16 @@
             margin-left: 5px;
         }
 
+        &:hover .bf-fa {
+            transform: scale(1.15);
+            transition: transform 0.1s linear;
+        }
+
         img {
             margin-right: 5px;
         }
 
-        i {
+        .bf-fa {
             font-size: 10px;
         }
     }
@@ -331,6 +337,10 @@
             @media (min-width: 356px) {
                 padding-left: 1rem;
                 padding-right: 1rem;
+            }
+
+            &:not(.backfeed-disabled):hover {
+                color: lightgray;
             }
 
             &:not(:last-child) {
