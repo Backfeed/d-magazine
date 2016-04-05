@@ -71,8 +71,9 @@ add_action('wp_enqueue_scripts', function() {
 
 
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
+	wp_enqueue_style('animate', plugin_dir_url(__FILE__).'vendor/bower_components/animate.css/animate.css');
 
-	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', [], false, true);
+	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', ['jquery-noty'], false, true);
 	wp_localize_script('collabar', 'Backfeed', init_config());
 	wp_enqueue_script('collabar');
 }, 100);

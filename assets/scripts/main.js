@@ -1,20 +1,38 @@
 import api from './protocolApi.js';
 import helpers from './helpers.js';
 import './polyfills.js';
+import './notyTheme.js';
 
 if (helpers.getQueryParameterByName('referrer')) {
     localStorage['referrer'] = helpers.getQueryParameterByName('referrer');
 }
 
 jQuery($ => {
+    $.noty.defaults.theme =  'backfeedTheme';
     $.noty.defaults.layout = 'bottomRight';
     $.noty.defaults.type =  'information';
     $.noty.defaults.timeout =  4000;
+    $.noty.defaults.animation = {
+        open: 'animated fadeIn',
+        close: 'animated fadeOut'
+    };
 
     let avatar = document.getElementById('backfeed-avatar'),
         votingWidget = document.getElementById('backfeed-voting'),
         copyToClipboardButton = document.getElementById('copy-to-clipboard'),
         comments = document.getElementById('comments');
+
+    let updateUiTokens = newTokensAmount => {
+        $('.backfeed-stat-tokens-value').each((i, el) => {
+            $(el).text($(el).text() - newTokensAmount);
+        });
+    };
+
+    let updateUiReputation = newReputationAmount => {
+        $('.backfeed-stat-reputation-value').each((i, el) => {
+            $(el).text($(el).text() - newReputationAmount);
+        });
+    };
 
     if (copyToClipboardButton) {
         let clipboard = new Clipboard(copyToClipboardButton, {
@@ -72,15 +90,21 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                api.evaluate(0, res => {
+                noty({text: 'Downvote registered, thank you.', type: 'success'});
+                votingWidget.dataset.status = 'vote-down';
+
+                updateUiTokens(2);
+                updateUiReputation(0.25);
+
+                /*api.evaluate(0, res => {
                     if (typeof res == "object") {
                         noty({text: 'Downvote registered, thank you.', type: 'success'});
                         votingWidget.dataset.status = 'vote-down';
+                        // debugger;
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error'});
-
                     }
-                });
+                });*/
 
             } else if (e.target.classList.contains('backfeed-icon-vote-up')) {
 
@@ -91,15 +115,21 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                api.evaluate(1, res => {
+                noty({text: 'Upvote registered, thank you.', type: 'success'});
+                votingWidget.dataset.status = 'vote-up';
+
+                updateUiTokens(1);
+                updateUiReputation(0.15);
+
+                /*api.evaluate(1, res => {
                     if (typeof res == "object") {
                         noty({text: 'Upvote registered, thank you.', type: 'success'});
                         votingWidget.dataset.status = 'vote-up';
+                        // debugger;
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error'});
-
                     }
-                });
+                });*/
 
             }
         }, true)

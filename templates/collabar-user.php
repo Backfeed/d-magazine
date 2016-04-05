@@ -45,8 +45,8 @@
         <div class="backfeed-user-info">
 
             <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
-                <div class="backfeed-stat-tokens"><label>My Tokens:</label> <?=get_current_agent_tokens()?></div>
-                <div class="backfeed-stat-reputation"><label>Rank:</label> <small><?=get_current_agent_reputation()?>% Reputation</small></div>
+                <div class="backfeed-stat-tokens"><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=get_current_agent_tokens()?></span></div>
+                <div class="backfeed-stat-reputation"><label>Rank:</label> <small><span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>% Reputation</small></div>
                 <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -69,8 +69,8 @@
     </section>
     
     <section class="backfeed-stats-bar hidden-md-up">
-        <div><label>Rank:</label> <?=get_current_agent_reputation()?>% Reputation</div>
-        <div><label>My Tokens:</label> <?=get_current_agent_tokens()?></div>
+        <div><label>Rank:</label> <span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>% Reputation</div>
+        <div><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=get_current_agent_tokens()?></span></div>
     </section>
 
     <ul id="backfeed-avatar-menu" class="backfeed-avatar-menu">

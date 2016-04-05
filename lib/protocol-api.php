@@ -25,7 +25,7 @@ class Api {
         }
 
         $json_response = json_decode($response->body);
-        if (isset($json_response->errorMessage)) return 0;
+        if (isset($json_response->errorMessage)) return $json_response->errorMessage;
         return $json_response;
     }
 
@@ -64,7 +64,7 @@ class Api {
     }
 
     public static function get_contribution($post_id) {
-        return self::request('get', 'contributions/'.$post_id);
+        return self::request('get', 'contributions/getprotostats/'.$post_id);
     }
 
     public static function get_evaluations($contribution_id) {

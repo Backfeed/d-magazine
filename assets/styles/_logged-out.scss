@@ -12,6 +12,10 @@
         width: 970px;
       }
     }
+
+    .backfeed-learn-button {
+      font-size: 14px;
+    }
   }
 
   .backfeed-gloss {
@@ -55,18 +59,6 @@
 
     @include media-breakpoint-up(lg) {
       background: initial;
-    }
-  }
-
-  .backfeed-learn-button {
-    text-decoration: underline;
-    font-size: 14px;
-
-    @include media-breakpoint-up(lg) {
-      flex: 1;
-      text-align: center;
-
-      font-size: 13px;
     }
   }
 
