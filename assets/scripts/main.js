@@ -93,7 +93,6 @@ jQuery($ => {
                 noty({text: 'Downvote registered, thank you.', type: 'success'});
                 votingWidget.dataset.status = 'vote-down';
 
-                updateUiTokens(2);
                 updateUiReputation(0.25);
 
                 /*api.evaluate(0, res => {
@@ -118,7 +117,6 @@ jQuery($ => {
                 noty({text: 'Upvote registered, thank you.', type: 'success'});
                 votingWidget.dataset.status = 'vote-up';
 
-                updateUiTokens(1);
                 updateUiReputation(0.15);
 
                 /*api.evaluate(1, res => {

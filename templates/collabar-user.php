@@ -11,7 +11,7 @@
                       <i class="bf-fa bf-fa-link bf-fa-stack-1x"></i>
                     </span>
                 </button>
-                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
+                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&toolbar=no&menubar=no&scrollbars=no&resizable=no&location=no&directories=no&status=no&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
                 <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
             </div>
         <?php endif; ?>
@@ -35,7 +35,7 @@
                 <div class="backfeed-article-score">
                     <label>Article Quality</label>
                     <div class="backfeed-meter">
-                        <div class="backfeed-meter-filled" style="width:<?=get_current_contribution_score()?>%;"></div>
+                        <div class="backfeed-meter-filled" style="width:50<?php//=get_current_contribution_score()?>%;"></div>
                     </div>
                 </div>
                 <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>
