@@ -17,6 +17,11 @@ function get_contribution_id($object_id) {
     return get_comment_meta($object_id, 'backfeed_contribution_id', true);
 }
 
+function get_contribution_field($post_id, $field) {
+    $contribution_id = get_post_meta($post_id, 'backfeed_contribution_id', true);
+    return Api::get_contribution($contribution_id)->$field;
+}
+
 function get_current_contribution_score() {
     return is_int(get_config('currentContribution')->score) ? get_config('currentContribution')->score : 0;
 }

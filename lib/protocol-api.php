@@ -63,8 +63,8 @@ class Api {
         return self::request('get', 'contributions/');
     }
 
-    public static function get_contribution($post_id) {
-        return self::request('get', 'contributions/getprotostats/'.$post_id);
+    public static function get_contribution($contribution_id) {
+        return self::request('get', 'contributions/getprotostats/'.$contribution_id);
     }
 
     public static function get_evaluations($contribution_id) {
