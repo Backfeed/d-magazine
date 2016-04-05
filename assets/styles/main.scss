@@ -166,30 +166,30 @@
         &[data-status="loading"] {
             .backfeed-icon-vote-up,
             .backfeed-icon-vote-down {
-                background-position-y: -496px;
+                background-position: 0 -496px;
 
                 &:hover {
-                    background-position-y: -496px;
+                    background-position: 0 -496px;
                 }
             }
         }
 
         &[data-status="vote-down"] {
             .backfeed-icon-vote-down {
-                background-position-y: -260px;
+                background-position: 0 -260px;
 
                 &:hover {
-                    background-position-y: -380px;
+                    background-position: 0 -380px;
                 }
             }
         }
 
         &[data-status="vote-up"] {
             .backfeed-icon-vote-up {
-                background-position-y: -319px;
+                background-position: 0 -319px;
 
                 &:hover {
-                    background-position-y: -439px;
+                    background-position: 0 -439px;
                 }
             }
         }
@@ -202,18 +202,18 @@
         height: 44px;
 
         &.backfeed-icon-vote-down {
-            background-position-y: -16px;
+            background-position: 0 -16px;
 
             &:hover {
-                background-position-y: -136px;
+                background-position: 0 -136px;
             }
         }
 
         &.backfeed-icon-vote-up {
-            background-position-y: -76px;
+            background-position: 0 -76px;
 
             &:hover {
-                background-position-y: -196px;
+                background-position: 0 -196px;
             }
         }
     }
