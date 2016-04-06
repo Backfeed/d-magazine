@@ -2,14 +2,14 @@
 
 <aside id="backfeed-collabar" class="<?=collabar_class()?>">
 	<section class="backfeed-logged-out-bar hidden-sm-up">
-		<a class="backfeed-register-button" href="<?=esc_url(wp_registration_url())?>">REGISTER</a>
+		<a class="backfeed-register-button" href="<?=site_url('/register/')?>">REGISTER</a>
 		<div class="backfeed-learn">Join our crowd intelligence&nbsp;&nbsp;
 			<a href="<?=site_url('/faq/')?>" class="button backfeed-learn-button">Learn more</a>
 		</div>
 	</section>
 	<section class="backfeed-logged-out-bar hidden-xs-down">
 		<div class="backfeed-gloss hidden-sm-down"></div>
-		<a class="backfeed-register-button" href="<?=esc_url(wp_registration_url())?>">REGISTER</a>
+		<a class="backfeed-register-button" href="<?=site_url('/register/')?>">REGISTER</a>
 		<div class="backfeed-promotion">
 			<div class="backfeed-tagline hidden-sm-down"><span>We are</span>crowdsourced</div>
 			<div class="backfeed-learn hidden-lg-up">Register to participate,<br />get compensated for your contribution.</div>

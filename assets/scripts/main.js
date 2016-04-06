@@ -90,20 +90,16 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                noty({text: 'Downvote registered, thank you.', type: 'success'});
-                votingWidget.dataset.status = 'vote-down';
-
-                updateUiReputation(0.25);
-
-                /*api.evaluate(0, res => {
+                api.evaluate(0, res => {
                     if (typeof res == "object") {
                         noty({text: 'Downvote registered, thank you.', type: 'success'});
                         votingWidget.dataset.status = 'vote-down';
+                        updateUiReputation(0.25);
                         // debugger;
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error'});
                     }
-                });*/
+                });
 
             } else if (e.target.classList.contains('backfeed-icon-vote-up')) {
 
@@ -114,20 +110,15 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                noty({text: 'Upvote registered, thank you.', type: 'success'});
-                votingWidget.dataset.status = 'vote-up';
-
-                updateUiReputation(0.15);
-
-                /*api.evaluate(1, res => {
+                api.evaluate(1, res => {
                     if (typeof res == "object") {
                         noty({text: 'Upvote registered, thank you.', type: 'success'});
                         votingWidget.dataset.status = 'vote-up';
-                        // debugger;
+                        updateUiReputation(0.15);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error'});
                     }
-                });*/
+                });
 
             }
         }, true)

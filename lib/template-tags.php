@@ -19,7 +19,8 @@ function get_contribution_id($object_id) {
 
 function get_contribution_field($post_id, $field) {
     $contribution_id = get_post_meta($post_id, 'backfeed_contribution_id', true);
-    return Api::get_contribution($contribution_id)->$field;
+    $contribution_field = Api::get_contribution($contribution_id)->$field;
+    return $contribution_field;
 }
 
 function get_current_contribution_score() {
