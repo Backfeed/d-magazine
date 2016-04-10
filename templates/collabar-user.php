@@ -35,7 +35,7 @@
                 <div class="backfeed-article-score">
                     <label>Article Quality</label>
                     <div class="backfeed-meter">
-                        <div class="backfeed-meter-filled" style="width:50<?php//=get_current_contribution_score()?>%;"></div>
+                        <div class="backfeed-meter-filled" style="width:<?=get_current_contribution_score()?>%;"></div>
                     </div>
                 </div>
                 <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>
@@ -44,10 +44,10 @@
 
         <div class="backfeed-user-info">
 
-            <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
+            <div class="backfeed-stats hidden-sm-down backfeed-collabar-tooltip">
                 <div class="backfeed-stat-tokens"><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=get_current_agent_tokens()?></span></div>
-                <div class="backfeed-stat-reputation"><label>Rank:</label> <small><span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>% Reputation</small></div>
-                <div class="backfeed-tooltip-content">
+                <div class="backfeed-stat-reputation"><label>My Reputation:</label> <small><span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>%</small></div>
+                <div class="backfeed-collabar-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
                 </div>
@@ -69,7 +69,7 @@
     </section>
     
     <section class="backfeed-stats-bar hidden-md-up">
-        <div><label>Rank:</label> <span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>% Reputation</div>
+        <div><label>My Reputation:</label> <span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>%</div>
         <div><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=get_current_agent_tokens()?></span></div>
     </section>
 
