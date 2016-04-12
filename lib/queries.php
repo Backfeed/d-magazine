@@ -1,14 +1,13 @@
 <?php
 namespace Backfeed;
 
-function front_page_query() {
+function front_page_query($paged) {
     $query_args = [
         'posts_per_page'        => 8,
         'post_type'             => 'post',
         'post_status'           => 'publish',
-        'ignore_sticky_posts'   => false,
         'no_found_rows'         => false,
-        'paged'                 => 1
+        'paged'                 => $paged
     ];
 
     $contributions = Api::get_all_contributions();
@@ -26,5 +25,16 @@ function front_page_query() {
         ];
     }
     
+    return new \WP_Query($query_args);
+}
+
+function raw_space_query($paged) {
+    $query_args = [
+        'posts_per_page'        => 8,
+        'post_type'             => 'post',
+        'post_status'           => 'publish',
+        'paged'                 => $paged
+    ];
+
     return new \WP_Query($query_args);
 }
