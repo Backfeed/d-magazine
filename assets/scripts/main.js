@@ -20,7 +20,8 @@ jQuery($ => {
     let avatar = document.getElementById('backfeed-avatar'),
         votingWidget = document.getElementById('backfeed-voting'),
         copyToClipboardButton = document.getElementById('copy-to-clipboard'),
-        comments = document.getElementById('comments');
+        comments = document.getElementById('comments'),
+        sharingWidget = document.getElementById('backfeed-sharing');
 
     let updateUiTokens = newTokensAmount => {
         $('.backfeed-stat-tokens-value').each((i, el) => {
@@ -43,6 +44,22 @@ jQuery($ => {
         clipboard.on('success', e => {
             noty({"text": "Copied to clipboard..."})
         })
+    }
+
+    if (sharingWidget) {
+        $('.backfeed-share-facebook').click(e => {
+            e.preventDefault();
+            var href = $(e.currentTarget).attr('href');
+            window.open(href, 'fbShareWindow', 'display=popup, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no, height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225));
+            return false;
+        });
+
+        $('.backfeed-share-twitter').click(e => {
+            e.preventDefault();
+            var href = $(e.currentTarget).attr('href');
+            window.open(href, 'twShareWindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225));
+            return false;
+        });
     }
 
     if (comments) {

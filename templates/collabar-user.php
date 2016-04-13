@@ -4,15 +4,19 @@
 
     <section class="backfeed-main-bar">
         <?php if (is_singular('post')): ?>
-            <div class="backfeed-sharing">
+            <div id="backfeed-sharing" class="backfeed-sharing">
                 <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode(get_referral_url())?>">
                     <span class="bf-fa-stack">
                       <i class="bf-fa bf-fa-square bf-fa-stack-2x"></i>
                       <i class="bf-fa bf-fa-link bf-fa-stack-1x"></i>
                     </span>
                 </button>
-                <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&toolbar=no&menubar=no&scrollbars=no&resizable=no&location=no&directories=no&status=no&href=<?=urlencode(get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-facebook-square"></span></a>
-                <a href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>" target="_blank"><span class="bf-fa bf-fa-twitter-square"></span></a>
+                <a class="backfeed-share-facebook" href="https://www.facebook.com/dialog/share?app_id=145634995501895&href=<?=urlencode(get_referral_url())?>">
+                    <span class="bf-fa bf-fa-facebook-square"></span>
+                </a>
+                <a class="backfeed-share-twitter" href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>">
+                    <span class="bf-fa bf-fa-twitter-square"></span>
+                </a>
             </div>
         <?php endif; ?>
 
@@ -74,7 +78,6 @@
     </section>
 
     <ul id="backfeed-avatar-menu" class="backfeed-avatar-menu">
-        <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
         <li><a href="<?=site_url('/edit-profile/')?>">Edit Profile</a></li>
         <li class="backfeed-disabled">Statistics</li>
         <li><a href="<?=site_url('/submit-article/')?>">Submit an Article</a></li>
