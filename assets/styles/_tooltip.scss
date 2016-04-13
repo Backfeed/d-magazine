@@ -1,15 +1,15 @@
 #backfeed-collabar {
-  .backfeed-tooltip {
+  .backfeed-collabar-tooltip {
     cursor: help;
 
-    &:hover .backfeed-tooltip-content {
+    &:hover .backfeed-collabar-tooltip-content {
       opacity: 1;
     }
   }
 
-  .backfeed-tooltip-content {
+  .backfeed-collabar-tooltip-content {
     opacity: 0;
-    transition: opacity .5s linear;
+    transition: opacity .1s linear;
     position: absolute;
     bottom: 70%;
     transform: translateX(-25%);
@@ -25,7 +25,7 @@
     }
   }
 
-  .backfeed-tooltip-content:after {
+  .backfeed-collabar-tooltip-content:after {
     content: "";
     position: absolute;
     bottom: -15px;

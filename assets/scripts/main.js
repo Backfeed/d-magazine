@@ -25,14 +25,22 @@ jQuery($ => {
 
     let updateUiTokens = newTokensAmount => {
         $('.backfeed-stat-tokens-value').each((i, el) => {
-            $(el).text($(el).text() - newTokensAmount);
+            $(el).text(newTokensAmount);
         });
     };
 
     let updateUiReputation = newReputationAmount => {
         $('.backfeed-stat-reputation-value').each((i, el) => {
-            $(el).text($(el).text() - newReputationAmount);
+            $(el).text(newReputationAmount.toFixed(2));
         });
+    };
+
+    let updateUiScore = newArticleScore => {
+        $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2));
+    };
+
+    let updateUiScorePercentage = newArticleScorePercentage => {
+        $('.backfeed-meter-filled').css('width', newArticleScorePercentage+'%');
     };
 
     if (copyToClipboardButton) {
@@ -111,7 +119,9 @@ jQuery($ => {
                     if (typeof res == "object") {
                         noty({text: 'Downvote registered, thank you.', type: 'success'});
                         votingWidget.dataset.status = 'vote-down';
-                        updateUiReputation(0.25);
+                        updateUiReputation(res.evaluatorNewReputationBalance);
+                        updateUiScore(res.contributionScore);
+                        updateUiScorePercentage(res.contributionScorePercentage);
                         // debugger;
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error'});
@@ -131,7 +141,8 @@ jQuery($ => {
                     if (typeof res == "object") {
                         noty({text: 'Upvote registered, thank you.', type: 'success'});
                         votingWidget.dataset.status = 'vote-up';
-                        updateUiReputation(0.15);
+                        updateUiReputation(res.evaluatorNewReputationBalance);
+                        updateUiScore(res.contributionScorePercentage);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error'});
                     }

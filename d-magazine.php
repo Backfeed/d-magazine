@@ -19,6 +19,7 @@ require_once('lib/template-tags.php');
 require_once('lib/protocol-api.php');
 require_once('lib/comments.php');
 require_once('lib/ajax.php');
+require_once('lib/queries.php');
 
 function init_config() {
 	global $backfeed_config;
