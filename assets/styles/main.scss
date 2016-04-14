@@ -50,7 +50,7 @@
         }
 
         &.backfeed-main-bar {
-            background: $footer-gradient, #242424;
+            background: $footer-gradient-upside-down, #242424;
 
             @include media-breakpoint-up(md) {
                 background: none;
@@ -65,10 +65,23 @@
         }
 
         &.backfeed-explainer-bar {
-            display: none !important; /* TODO: style it */
+            display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: darkslategray;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: $footer-gradient-upside-down, #242424;
+
+            .backfeed-explainer-bar-title {
+                margin-top: 0;
+                margin-bottom: 5px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .backfeed-explainer-bar-sentence {
+                font-size: 13px;
+            }
         }
     }
 

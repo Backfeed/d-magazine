@@ -66,10 +66,9 @@
 
     </section>
 
-    <section class="backfeed-explainer-bar hidden-md-up">
-        <h4>Rate / Share / Comment</h4>
-        <p>on this article in order to get Tokens and Reputation
-        </p>
+    <section id="backfeed-explainer-bar" class="backfeed-explainer-bar hidden-sm-up">
+        <h4 class="backfeed-explainer-bar-title">Rate / Share / Comment</h4>
+        <p class="backfeed-explainer-bar-sentence">on this article in order to get Tokens and Reputation</p>
     </section>
     
     <section class="backfeed-stats-bar hidden-md-up">

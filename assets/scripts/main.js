@@ -21,10 +21,12 @@ jQuery($ => {
         votingWidget = document.getElementById('backfeed-voting'),
         copyToClipboardButton = document.getElementById('copy-to-clipboard'),
         comments = document.getElementById('comments'),
-        sharingWidget = document.getElementById('backfeed-sharing');
+        sharingWidget = document.getElementById('backfeed-sharing'),
+        explainerBar = document.getElementById('backfeed-explainer-bar');
 
-    let updateUiTokens = newTokensAmount => {
+    let updateUiTokens = (newTokensAmount, isDelta) => {
         $('.backfeed-stat-tokens-value').each((i, el) => {
+            if (isDelta) newTokensAmount = $(el).text() + newTokensAmount;
             $(el).text(newTokensAmount);
         });
     };
@@ -52,6 +54,13 @@ jQuery($ => {
         clipboard.on('success', e => {
             noty({"text": "Copied to clipboard..."})
         })
+    }
+
+    if (explainerBar) {
+        document.addEventListener('scroll', e => {
+            if (document.body.scrollTop > 0) $(explainerBar).slideUp();
+            if (document.body.scrollTop == 0) $(explainerBar).slideDown();
+        });
     }
 
     if (sharingWidget) {
@@ -142,7 +151,8 @@ jQuery($ => {
                         noty({text: 'Upvote registered, thank you.', type: 'success'});
                         votingWidget.dataset.status = 'vote-up';
                         updateUiReputation(res.evaluatorNewReputationBalance);
-                        updateUiScore(res.contributionScorePercentage);
+                        updateUiScore(res.contributionScore);
+                        updateUiScorePercentage(res.contributionScorePercentage);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error'});
                     }
