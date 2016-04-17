@@ -2,6 +2,7 @@ import api from './protocolApi.js';
 import helpers from './helpers.js';
 import './polyfills.js';
 import './notyTheme.js';
+import './tour.js';
 
 if (helpers.getQueryParameterByName('referrer')) {
     localStorage['referrer'] = helpers.getQueryParameterByName('referrer');

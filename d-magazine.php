@@ -68,11 +68,13 @@ add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_script('fetch', plugin_dir_url(__FILE__).'vendor/bower_components/fetch/fetch.js', [], false, true);
 	wp_enqueue_script('clipboard', plugin_dir_url(__FILE__).'vendor/bower_components/clipboard/dist/clipboard.js', [], false, true);
 	wp_enqueue_script('jquery-noty', plugin_dir_url(__FILE__).'vendor/bower_components/noty/js/noty/packaged/jquery.noty.packaged.min.js', ['jquery'], false, true);
+	wp_enqueue_script('hopscotch', plugin_dir_url(__FILE__).'vendor/bower_components/hopscotch/dist/js/hopscotch.js', ['jquery'], false, true);
 	wp_enqueue_script('underscore');
 
 
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 	wp_enqueue_style('animate', plugin_dir_url(__FILE__).'vendor/bower_components/animate.css/animate.css');
+	wp_enqueue_style('hopscotch', plugin_dir_url(__FILE__).'vendor/bower_components/hopscotch/dist/css/hopscotch.css');
 
 	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', ['jquery-noty'], false, true);
 	wp_localize_script('collabar', 'Backfeed', init_config());

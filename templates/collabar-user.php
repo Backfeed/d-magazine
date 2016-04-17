@@ -3,48 +3,48 @@
 <aside id="backfeed-collabar" class="<?=collabar_class()?>">
 
     <section class="backfeed-main-bar">
-        <?php if (is_singular('post')): ?>
-            <div id="backfeed-sharing" class="backfeed-sharing">
-                <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode(get_referral_url())?>">
-                    <span class="bf-fa-stack">
-                      <i class="bf-fa bf-fa-square bf-fa-stack-2x"></i>
-                      <i class="bf-fa bf-fa-link bf-fa-stack-1x"></i>
-                    </span>
-                </button>
-                <a class="backfeed-share-facebook" href="https://www.facebook.com/dialog/share?app_id=145634995501895&href=<?=urlencode(get_referral_url())?>">
-                    <span class="bf-fa bf-fa-facebook-square"></span>
-                </a>
-                <a class="backfeed-share-twitter" href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>">
-                    <span class="bf-fa bf-fa-twitter-square"></span>
-                </a>
-            </div>
-        <?php endif; ?>
+    <?php if (is_singular('post')): ?>
+        <div id="backfeed-sharing" class="backfeed-sharing">
+            <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode(get_referral_url())?>">
+                <span class="bf-fa-stack">
+                  <i class="bf-fa bf-fa-square bf-fa-stack-2x"></i>
+                  <i class="bf-fa bf-fa-link bf-fa-stack-1x"></i>
+                </span>
+            </button>
+            <a class="backfeed-share-facebook" href="https://www.facebook.com/dialog/share?app_id=145634995501895&href=<?=urlencode(get_referral_url())?>">
+                <span class="bf-fa bf-fa-facebook-square"></span>
+            </a>
+            <a class="backfeed-share-twitter" href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>">
+                <span class="bf-fa bf-fa-twitter-square"></span>
+            </a>
+        </div>
+    <?php endif; ?>
 
         <div class="backfeed-teaser<?php if (is_singular('post')): ?> hidden-xs-down<?php endif; ?>">
             <p class="backfeed-teaser-content">
-                <?php if (is_singular('post')): ?>
-                    <span class="hidden-lg-up">Rate, Share or Comment to get tokens</span>
-                    <span class="hidden-md-down">Rate, Share or Comment on this article in order to get tokens</span>
-                <?php else: ?>
-                    <span class="hidden-sm-up">Be part of the collective intelligence and earn tokens!</span>
-                    <span class="hidden-xs-down">Explore our magazine, be part of the collective intelligence and earn tokens!</span>
-                <?php endif; ?>
+            <?php if (is_singular('post')): ?>
+                <span class="hidden-lg-up">Rate, Share or Comment to get tokens</span>
+                <span class="hidden-md-down">Rate, Share or Comment on this article in order to get tokens</span>
+            <?php else: ?>
+                <span class="hidden-sm-up">Be part of the collective intelligence and earn tokens!</span>
+                <span class="hidden-xs-down">Explore our magazine, be part of the collective intelligence and earn tokens!</span>
+            <?php endif; ?>
                 &nbsp;<a href="<?=site_url('/faq/')?>" class="button backfeed-learn-button">Learn more</a>
             </p>
         </div>
 
-        <?php if (is_singular('post')): ?>
-            <div id="backfeed-voting" class="backfeed-voting" data-status="loading">
-                <i class="backfeed-icon-vote backfeed-icon-vote-down"></i>
-                <div class="backfeed-article-score">
-                    <label>Article Quality</label>
-                    <div class="backfeed-meter">
-                        <div class="backfeed-meter-filled" style="width:<?=get_current_contribution_score()?>%;"></div>
-                    </div>
+    <?php if (is_singular('post')): ?>
+        <div id="backfeed-voting" class="backfeed-voting" data-status="loading">
+            <i class="backfeed-icon-vote backfeed-icon-vote-down"></i>
+            <div class="backfeed-article-score">
+                <label>Article Quality</label>
+                <div class="backfeed-meter">
+                    <div class="backfeed-meter-filled" style="width:<?=get_current_contribution_score()?>%;"></div>
                 </div>
-                <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>
             </div>
-        <?php endif; ?>
+            <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>
+        </div>
+    <?php endif; ?>
 
         <div class="backfeed-user-info">
 
@@ -66,11 +66,13 @@
 
     </section>
 
+<?php if (is_singular('post')): ?>
     <section id="backfeed-explainer-bar" class="backfeed-explainer-bar hidden-sm-up">
         <h4 class="backfeed-explainer-bar-title">Rate / Share / Comment</h4>
         <p class="backfeed-explainer-bar-sentence">on this article in order to get Tokens and Reputation</p>
     </section>
-    
+<?php endif; ?>
+
     <section class="backfeed-stats-bar hidden-md-up">
         <div><label>My Reputation:</label> <span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>%</div>
         <div><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=get_current_agent_tokens()?></span></div>

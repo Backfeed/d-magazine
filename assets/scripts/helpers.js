@@ -6,6 +6,14 @@ let helpers = {
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
+    },
+    openMobileNavMenu: () => {
+        var navMenuToggleButton = document.querySelector('button[data-target="#navbar"]');
+        if (navMenuToggleButton.classList.contains('collapsed')) navMenuToggleButton.click();
+    },
+    closeMobileNavMenu: () => {
+        var navMenuToggleButton = document.querySelector('button[data-target="#navbar"]');
+        if (!navMenuToggleButton.classList.contains('collapsed')) navMenuToggleButton.click();
     }
 };
 
