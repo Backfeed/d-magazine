@@ -25,7 +25,7 @@ var tour = {
         },
         {
             title: "Single Article",
-            content: "Click on one of the article to continue with tour",
+            content: "Click on one of the articles to continue with tour",
             target: document.querySelector("#main .posts-wrapper .col:nth-of-type(2)"),
             placement: "top",
             multipage: true,
@@ -35,26 +35,26 @@ var tour = {
             title: "User Profile",
             content: "Left-click to edit your user profile.",
             target: 'backfeed-avatar',
-            placement: "left",
+            placement: "top",
             fixedElement: true
         },
         {
             title: "Wallet",
             content: "Here you can monitor the Tokens you’ve earned and the Reputation you enjoy. Left-click to access your user profile.",
             target: document.querySelector(".backfeed-stats"),
-            placement: "left"
+            placement: "top"
         },
         {
             title: "Tokens",
             content: "You earn Tokens every time you contribute something that is found to be valuable by our community. This can be an article you’ve written, or even just your up/down votes on someone else's work. As soon as we’re out of Beta, Magazine Tokens will bare real monetary value. At the end of the tour we’ll link you to the FAQ where you can learn more about how and when that happens.",
             target: document.querySelector(".backfeed-stat-tokens"),
-            placement: "left"
+            placement: "top"
         },
         {
             title: "Reputation",
             content: "Your Reputation score determines how impactful you are in the editorial process. The more aligned you are with the backfeed community, the more influence you enjoy.",
             target: document.querySelector(".backfeed-stat-reputation"),
-            placement: "left"
+            placement: "top"
         },
         {
             title: "Article Quality Bar",
