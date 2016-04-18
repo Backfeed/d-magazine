@@ -142,9 +142,7 @@ if (hopscotch) {
 
     if (hopscotch.getState() === "d-mag-main-tour:3") {
         hopscotch.startTour(tour);
-    }
-
-    if (hopscotch.getState() === "d-mag-main-tour:11:3") {
+    } else if (hopscotch.getState() === "d-mag-main-tour:11:3") {
         helpers.openMobileNavMenu();
         hopscotch.startTour(tour);
     }

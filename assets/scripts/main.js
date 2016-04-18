@@ -53,7 +53,7 @@ jQuery($ => {
             }
         });
         clipboard.on('success', e => {
-            noty({"text": "Copied to clipboard..."})
+            noty({"text": "Copied to clipboard...", "layout": "bottomLeft"})
         })
     }
 
