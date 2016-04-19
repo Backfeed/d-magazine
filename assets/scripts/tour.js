@@ -39,7 +39,7 @@ let tour = {
             arrowOffset: 272
         }, {
             title: "Wallet",
-            content: "Here you can monitor the Tokens you’ve earned and the Reputation you enjoy. Left-click to access your user profile.",
+            content: "Here you can monitor the Tokens you’ve earned and the Reputation you enjoy.",
             target: document.querySelector(".backfeed-stats-bar"),
             placement: "top",
             fixedElement: true,

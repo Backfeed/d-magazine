@@ -119,7 +119,7 @@ jQuery($ => {
             if (e.target.classList.contains('backfeed-icon-vote-down')) {
 
                 if (votingWidget.dataset.status == "vote-down") {
-                    noty({text: 'Cannot downvote again.', type: 'error'});
+                    noty({text: 'Cannot downvote again.', type: 'error', layout: 'bottomCenter'});
                     return false;
                 }
 
@@ -127,21 +127,20 @@ jQuery($ => {
 
                 api.evaluate(0, res => {
                     if (typeof res == "object") {
-                        noty({text: 'Downvote registered, thank you.', type: 'success'});
+                        noty({text: 'Downvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-down';
                         updateUiReputation(res.evaluatorNewReputationBalance);
                         updateUiScore(res.contributionScore);
                         updateUiScorePercentage(res.contributionScorePercentage);
-                        // debugger;
                     } else {
-                        noty({text: 'Some error happened. Please reload the page.', type: 'error'});
+                        noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }
                 });
 
             } else if (e.target.classList.contains('backfeed-icon-vote-up')) {
 
                 if (votingWidget.dataset.status == "vote-up") {
-                    noty({text: 'Cannot upvote again.', type: 'error'});
+                    noty({text: 'Cannot upvote again.', type: 'error', layout: 'bottomCenter'});
                     return false;
                 }
 
@@ -149,13 +148,13 @@ jQuery($ => {
 
                 api.evaluate(1, res => {
                     if (typeof res == "object") {
-                        noty({text: 'Upvote registered, thank you.', type: 'success'});
+                        noty({text: 'Upvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-up';
                         updateUiReputation(res.evaluatorNewReputationBalance);
                         updateUiScore(res.contributionScore);
                         updateUiScorePercentage(res.contributionScorePercentage);
                     } else {
-                        noty({text: 'Some error happened. Please reload the page.', type: 'error'});
+                        noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }
                 });
 
