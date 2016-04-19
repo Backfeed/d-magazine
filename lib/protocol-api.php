@@ -1,13 +1,12 @@
 <?php
 namespace Backfeed;
 
-if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'https://api.backfeed.cc/dmag/');
-if (!defined('BACKFEED_API_KEY')) define('BACKFEED_API_KEY', 'mJJEYE6DlC5BAJ4hOAuwG9pUNwuBZAb8aLsik7K8');
+if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'http://api.staging.backfeed.cc/dmag/');
 
 class Api {
     private static function request($method = 'get', $endpoint, $data = [], $headers = []) {
         $default_headers = [
-            'x-api-key' => BACKFEED_API_KEY
+            //'x-api-key' => BACKFEED_API_KEY
         ];
         $headers = array_merge($default_headers, $headers);
 
@@ -20,7 +19,7 @@ class Api {
 
         if (!$response->success) {
             error_log('Backfeed API returned meh: '.serialize($response));
-            //warning: will crash website if enabled
+            //TODO: set up proper error handling
             //throw new \Exception('Backfeed Backend returned error');
         }
 
@@ -29,12 +28,11 @@ class Api {
         return $json_response;
     }
 
-    public static function create_bidding() {
-        return self::request('post', 'biddings');
-    }
-
-    public static function create_agent() {
-        return self::request('post', 'users');
+    public static function create_agent($tokens = null, $reputation = null) {
+        $request_parameters = [];
+        if (!is_null($tokens)) $request_parameters['tokens'] = (float) $tokens;
+        if (!is_null($reputation)) $request_parameters['reputation'] = (float) $reputation;
+        return self::request('post', 'users', $request_parameters);
     }
 
     public static function get_agent($agent_id) {
@@ -43,8 +41,7 @@ class Api {
 
     public static function create_contribution($agent_id) {
         return self::request('post', 'contributions', [
-            "userId" => $agent_id,
-            "biddingId" => get_option('backfeed_bidding_id')
+            "contributor_id" => $agent_id
         ]);
     }
 
@@ -52,9 +49,9 @@ class Api {
         //if (!$contribution_id) get_config('currentContribution')->id;
         //if (!$agent_id) get_config('currentAgent')->id;
 
-        return self::request('post', 'evaluations/single', [
-            "userId" => $agent_id,
-            "contributionId" => $contribution_id,
+        return self::request('post', 'evaluations', [
+            "evaluator_id" => $agent_id,
+            "contribution_id" => $contribution_id,
             "value" => intval($vote)
         ]);
     }
@@ -63,15 +60,16 @@ class Api {
         return self::request('get', 'contributions/');
     }
 
-    public static function get_contribution($contribution_id) {
-        return self::request('get', 'contributions/getprotostats/'.$contribution_id);
+    public static function get_contribution($contribution_id, $field = '') {
+        $response = self::request('get', 'contributions/' . $contribution_id);
+        return empty($field) ? $response : $response->$field;
     }
 
     public static function get_evaluations($contribution_id) {
         return self::request('get', 'contributions/'.$contribution_id.'/evaluations');
     }
 
-    public static function get_score($contribution_id) {
+    /*public static function get_score($contribution_id) {
         return self::request('get', 'contributions/'.$contribution_id.'/score');
-    }
+    }*/
 }

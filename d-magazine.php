@@ -34,8 +34,8 @@ function init_config() {
 	if (is_singular('post')) {
 		$currentContributionId = get_post_meta(get_queried_object_id(), 'backfeed_contribution_id', true);
 		$backfeed_config['currentContribution'] = Api::get_contribution($currentContributionId);
-		$backfeed_config['currentContribution']->evaluations = Api::get_evaluations($currentContributionId);
-		$backfeed_config['currentContribution']->score = Api::get_score($currentContributionId);
+//		$backfeed_config['currentContribution']->evaluations = Api::get_evaluations($currentContributionId);
+//		$backfeed_config['currentContribution']->score = Api::get_score($currentContributionId);
 
 		if (!empty($backfeed_config['currentContribution']->evaluations) && is_array($backfeed_config['currentContribution']->evaluations)) {
 			$agentIdsThatEvaluated = array_column($backfeed_config['currentContribution']->evaluations, 'userId');
