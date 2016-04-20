@@ -1,7 +1,7 @@
 <?php
 namespace Backfeed;
 
-function front_page_query($paged) {
+function front_page_query($paged = 1) {
     $query_args = [
         'posts_per_page'        => 8,
         'post_type'             => 'post',
@@ -28,7 +28,7 @@ function front_page_query($paged) {
     return new \WP_Query($query_args);
 }
 
-function raw_space_query($paged) {
+function raw_space_query($paged = 1) {
     $query_args = [
         'posts_per_page'        => 8,
         'post_type'             => 'post',

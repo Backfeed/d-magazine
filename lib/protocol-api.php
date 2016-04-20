@@ -5,17 +5,18 @@ if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'http://api.staging
 
 class Api {
     private static function request($method = 'get', $endpoint, $data = [], $headers = []) {
-        $default_headers = [
-            //'x-api-key' => BACKFEED_API_KEY
-        ];
+        $default_headers = [];
         $headers = array_merge($default_headers, $headers);
 
-        $data = json_encode($data);
+        if (empty($data)) $data = null;
+
+        // If it's a GET request, treat $data as query parameters. Otherwise, $data will be the request payload.
+        $url = ($method == 'get' && !empty($data)) ? add_query_arg($data, BACKFEED_API_URL.$endpoint) : BACKFEED_API_URL.$endpoint;
 
         if ($method == 'post' || $method == 'put')
-            $response = \Requests::$method(BACKFEED_API_URL . $endpoint, $headers, $data);
+            $response = \Requests::$method($url, $headers, $data);
         else
-            $response = \Requests::$method(BACKFEED_API_URL . $endpoint, $headers);
+            $response = \Requests::$method($url, $headers);
 
         if (!$response->success) {
             error_log('Backfeed API returned meh: '.serialize($response));
@@ -41,7 +42,7 @@ class Api {
 
     public static function create_contribution($agent_id) {
         return self::request('post', 'contributions', [
-            "contributor_id" => $agent_id
+            "contributor_id" => (int) $agent_id
         ]);
     }
 
@@ -50,8 +51,8 @@ class Api {
         //if (!$agent_id) get_config('currentAgent')->id;
 
         return self::request('post', 'evaluations', [
-            "evaluator_id" => $agent_id,
-            "contribution_id" => $contribution_id,
+            "evaluator_id" => intval($agent_id),
+            "contribution_id" => intval($contribution_id),
             "value" => intval($vote)
         ]);
     }
@@ -65,11 +66,10 @@ class Api {
         return empty($field) ? $response : $response->$field;
     }
 
-    public static function get_evaluations($contribution_id) {
-        return self::request('get', 'contributions/'.$contribution_id.'/evaluations');
+    public static function get_evaluations($contribution_id = null, $contributor_id = null) {
+        $data = [];
+        if (!empty($contribution_id)) $data['contribution_id'] = (int) $contribution_id;
+        if (!empty($contributor_id)) $data['contributor_id'] = (int) $contributor_id;
+        return self::request('get', 'evaluations', $data);
     }
-
-    /*public static function get_score($contribution_id) {
-        return self::request('get', 'contributions/'.$contribution_id.'/score');
-    }*/
 }

@@ -39,7 +39,7 @@
             <div class="backfeed-article-score">
                 <label>Article Quality</label>
                 <div class="backfeed-meter">
-                    <div class="backfeed-meter-filled" style="width:<?=get_current_contribution_score()?>%;"></div>
+                    <div id="backfeed-meter-filled" class="backfeed-meter-filled"></div>
                 </div>
             </div>
             <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>

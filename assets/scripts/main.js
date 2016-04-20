@@ -20,17 +20,18 @@ jQuery($ => {
 
     let avatar = document.getElementById('backfeed-avatar'),
         votingWidget = document.getElementById('backfeed-voting'),
+        qualityMeterFilled = document.getElementById('backfeed-meter-filled'),
         copyToClipboardButton = document.getElementById('copy-to-clipboard'),
         comments = document.getElementById('comments'),
         sharingWidget = document.getElementById('backfeed-sharing'),
         explainerBar = document.getElementById('backfeed-explainer-bar');
 
-    let updateUiTokens = (newTokensAmount, isDelta) => {
+    /*let updateUiTokens = (newTokensAmount, isDelta) => {
         $('.backfeed-stat-tokens-value').each((i, el) => {
             if (isDelta) newTokensAmount = $(el).text() + newTokensAmount;
             $(el).text(newTokensAmount);
         });
-    };
+    };*/
 
     let updateUiReputation = newReputationAmount => {
         $('.backfeed-stat-reputation-value').each((i, el) => {
@@ -38,12 +39,13 @@ jQuery($ => {
         });
     };
 
-    let updateUiScore = newArticleScore => {
-        $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2));
+    let updateUiEngagedReputation = newArticleEngagedReputation => {
+        $('.post-engagedrep > .post-meta-value').text(newArticleEngagedReputation.toFixed(2)+'%');
     };
 
-    let updateUiScorePercentage = newArticleScorePercentage => {
-        $('.backfeed-meter-filled').css('width', newArticleScorePercentage+'%');
+    let updateUiScore = newArticleScore => {
+        $('.backfeed-meter-filled').css('width', (newArticleScore*100)+'%');
+        $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2));
     };
 
     if (copyToClipboardButton) {
@@ -103,6 +105,8 @@ jQuery($ => {
     if (votingWidget) {
         let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
 
+        $(qualityMeterFilled).css('width', Backfeed.currentContribution.score * 100);
+
         if (currentAgentVote || currentAgentVote === 0) {
             if (currentAgentVote == 0) {
                 votingWidget.dataset.status = 'vote-down';
@@ -125,13 +129,13 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                api.evaluate(0, res => {
-                    if (typeof res == "object") {
+                api.evaluate(0, response => {
+                    if (typeof response == "object") {
                         noty({text: 'Downvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-down';
-                        updateUiReputation(res.evaluatorNewReputationBalance);
-                        updateUiScore(res.contributionScore);
-                        updateUiScorePercentage(res.contributionScorePercentage);
+                        updateUiReputation(response.evaluator.reputation);
+                        updateUiScore(response.contribution.score);
+                        updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }
@@ -146,13 +150,13 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                api.evaluate(1, res => {
-                    if (typeof res == "object") {
+                api.evaluate(1, response => {
+                    if (typeof response == "object") {
                         noty({text: 'Upvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-up';
-                        updateUiReputation(res.evaluatorNewReputationBalance);
-                        updateUiScore(res.contributionScore);
-                        updateUiScorePercentage(res.contributionScorePercentage);
+                        updateUiReputation(response.evaluator.reputation);
+                        updateUiScore(response.contribution.score);
+                        updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }

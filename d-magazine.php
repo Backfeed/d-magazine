@@ -25,26 +25,19 @@ function init_config() {
 	global $backfeed_config;
 	$backfeed_config = [];
 
-	$currentAgentId = get_user_meta(get_current_user_id(), 'backfeed_agent_id', true);
+	$backfeed_config['ajaxUrl'] = admin_url('admin-ajax.php');
 
-	$backfeed_config['ajaxUrl'] 	 = admin_url('admin-ajax.php');
-	$backfeed_config['biddingId'] 	 = get_option('backfeed_bidding_id');
+	$currentAgentId = get_user_meta(get_current_user_id(), 'backfeed_agent_id', true);
 	$backfeed_config['currentAgent'] = Api::get_agent($currentAgentId);
 
 	if (is_singular('post')) {
 		$currentContributionId = get_post_meta(get_queried_object_id(), 'backfeed_contribution_id', true);
 		$backfeed_config['currentContribution'] = Api::get_contribution($currentContributionId);
-//		$backfeed_config['currentContribution']->evaluations = Api::get_evaluations($currentContributionId);
-//		$backfeed_config['currentContribution']->score = Api::get_score($currentContributionId);
 
-		if (!empty($backfeed_config['currentContribution']->evaluations) && is_array($backfeed_config['currentContribution']->evaluations)) {
-			$agentIdsThatEvaluated = array_column($backfeed_config['currentContribution']->evaluations, 'userId');
-			$currentAgentEvaluationIndex = array_search($currentAgentId, $agentIdsThatEvaluated);
+		$evaluationByCurrentAgent = Api::get_evaluations($currentContributionId, $currentAgentId);
 
-			if ($currentAgentEvaluationIndex !== false) {
-				$currentAgentEvaluationValue = $backfeed_config['currentContribution']->evaluations[$currentAgentEvaluationIndex]->value;
-				$backfeed_config['currentContribution']->currentAgentVote = $currentAgentEvaluationValue;
-			}
+		if ($evaluationByCurrentAgent->count == 1) {
+			$backfeed_config['currentContribution']->currentAgentVote = $evaluationByCurrentAgent->items[0]->value;
 		}
 	}
 
@@ -82,12 +75,6 @@ add_action('wp_enqueue_scripts', function() {
 }, 100);
 
 register_activation_hook(__FILE__, function() {
-	// single bidding for the magazine
-	if (!get_option('backfeed_bidding_id')) {
-		$bidding = Api::create_bidding();
-		add_option('backfeed_bidding_id', $bidding->id);
-	}
-
 	// transform all magazine users into backfeed users
 	foreach (get_users(["fields" => "ID"]) as $user_id) {
 		make_agent($user_id);
