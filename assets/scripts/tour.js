@@ -6,10 +6,10 @@ let tour = {
         {
             title: "Hello!",
             content: "We are a Decentralized Magazine. Everything you see here is user-generated and edited by our collective intelligence. The value we create together is distributed among the members of our community: The submission of articles, rating of such and even comments, are rewarded with Tokens if they are found to be useful by our community.",
-            target: "backfeed-featured-section-btn",
+            target: document.querySelector(".logo-location-header .logo-light img"),
             placement: "bottom",
-            xOffset: -70,
-            arrowOffset: 127,
+            xOffset: -105,
+            arrowOffset: 140,
             onNext: helpers.openMobileNavMenu
         }, {
             title: "Home",
@@ -129,6 +129,11 @@ if (matchMedia("(min-width: 420px)").matches) {
 }
 
 if (matchMedia("(min-width: 768px)").matches) {
+    tour.steps[0].target = document.querySelector(".logo-location-header .logo-dark img");
+    tour.steps[0].xOffset = 40;
+    tour.steps[0].yOffset = -30;
+    tour.steps[0].arrowOffset = 140;
+
     tour.steps[5].target = document.querySelector(".backfeed-stats");
     tour.steps[5].xOffset = -267;
     tour.steps[5].arrowOffset = 272;
@@ -151,5 +156,9 @@ if (hopscotch) {
         startTourButton.addEventListener('click', e => {
             hopscotch.startTour(tour, 0);
         });
+    }
+
+    if (document.body.classList.contains('home') && helpers.getQueryParameterByName('starttour') !== null) {
+        hopscotch.startTour(tour, 0);
     }
 }
