@@ -51,6 +51,16 @@ function get_config($key = '') {
 }
 
 add_action('wp_footer', function() {
+	$viewmodel = [
+		'current_agent_tokens' => get_current_agent_tokens(),
+		'current_agent_reputation' => get_current_agent_reputation(),
+		'current_agent_avatar' => get_avatar(wp_get_current_user()->ID, 32),
+	];
+	
+	if (is_singular('post')) {
+		$viewmodel['referral_url'] = get_referral_url();
+	}
+	
 	if (is_user_logged_in())
 		require 'templates/collabar-user.php';
 	else

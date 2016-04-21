@@ -8,8 +8,8 @@ let tour = {
             content: "We are a Decentralized Magazine. Everything you see here is user-generated and edited by our collective intelligence. The value we create together is distributed among the members of our community: The submission of articles, rating of such and even comments, are rewarded with Tokens if they are found to be useful by our community.",
             target: document.querySelector(".logo-location-header .logo-light img"),
             placement: "bottom",
-            xOffset: -105,
-            arrowOffset: 140,
+            xOffset: 5,
+            arrowOffset: 40,
             onNext: helpers.openMobileNavMenu
         }, {
             title: "Home",
@@ -28,7 +28,14 @@ let tour = {
             target: document.querySelector("#main .posts-wrapper .col:nth-of-type(2)"),
             placement: "top",
             multipage: true,
-            showNextButton: false
+            showNextButton: false,
+            nextOnTargetClick: true,
+            onShow: () => {
+                let linksToArticles = document.querySelectorAll('article>.post-image>a, article>.post-details>.post-title>a');
+                Array.from(linksToArticles).forEach((articleLink) => {
+                    if (!articleLink.href.endsWith('?continuetour')) articleLink.href += '?continuetour';
+                });
+            }
         }, {
             title: "User Profile",
             content: "Left-click to edit your user profile.",
@@ -103,13 +110,13 @@ let tour = {
         }, {
             title: "End",
             content: "Got it? Register, if you haven't already, and be part of the Backfeed community!",
-            target: "backfeed-featured-section-btn",
+            target: document.querySelector(".logo-location-header .logo-light img"),
             placement: "bottom",
             showNextButton: false,
             showCTAButton: true,
             ctaLabel: "Register",
-            xOffset: -70,
-            arrowOffset: 127,
+            xOffset: 5,
+            arrowOffset: 40,
             onCTA: () => {
                 window.location = "/register"
             }
@@ -137,17 +144,22 @@ if (matchMedia("(min-width: 768px)").matches) {
     tour.steps[5].target = document.querySelector(".backfeed-stats");
     tour.steps[5].xOffset = -267;
     tour.steps[5].arrowOffset = 272;
-
     tour.steps[6].target = document.querySelector(".backfeed-stat-tokens");
+
     tour.steps[7].target = document.querySelector(".backfeed-stat-reputation");
+
+    tour.steps[13].target = document.querySelector(".logo-location-header .logo-dark img");
+    tour.steps[13].xOffset = 40;
+    tour.steps[13].yOffset = -30;
+    tour.steps[13].arrowOffset = 140;
 }
 
 if (hopscotch) {
     let startTourButton = document.getElementById('backfeed-featured-section-btn');
 
-    if (hopscotch.getState() === "d-mag-main-tour:3") {
+    if (hopscotch.getState() === "d-mag-main-tour:4") {
         hopscotch.startTour(tour);
-    } else if (hopscotch.getState() === "d-mag-main-tour:11:3") {
+    } else if (hopscotch.getState() === "d-mag-main-tour:11") {
         helpers.openMobileNavMenu();
         hopscotch.startTour(tour);
     }

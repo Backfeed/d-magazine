@@ -3,18 +3,19 @@
 <aside id="backfeed-collabar" class="<?=collabar_class()?>">
 
     <section class="backfeed-main-bar">
+
     <?php if (is_singular('post')): ?>
         <div id="backfeed-sharing" class="backfeed-sharing">
-            <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode(get_referral_url())?>">
+            <button id="copy-to-clipboard" data-clipboard-text="<?=urlencode($viewmodel['referral_url'])?>">
                 <span class="bf-fa-stack">
                   <i class="bf-fa bf-fa-square bf-fa-stack-2x"></i>
                   <i class="bf-fa bf-fa-link bf-fa-stack-1x"></i>
                 </span>
             </button>
-            <a class="backfeed-share-facebook" href="https://www.facebook.com/dialog/share?app_id=145634995501895&href=<?=urlencode(get_referral_url())?>">
+            <a class="backfeed-share-facebook" href="https://www.facebook.com/dialog/share?app_id=145634995501895&href=<?=urlencode($viewmodel['referral_url'])?>">
                 <span class="bf-fa bf-fa-facebook-square"></span>
             </a>
-            <a class="backfeed-share-twitter" href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. get_referral_url())?>">
+            <a class="backfeed-share-twitter" href="https://twitter.com/home?status=<?=urlencode(get_the_title() .' - '. $viewmodel['referral_url'])?>">
                 <span class="bf-fa bf-fa-twitter-square"></span>
             </a>
         </div>
@@ -49,8 +50,8 @@
         <div class="backfeed-user-info">
 
             <div class="backfeed-stats hidden-sm-down backfeed-collabar-tooltip">
-                <div class="backfeed-stat-tokens"><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=get_current_agent_tokens()?></span></div>
-                <div class="backfeed-stat-reputation"><label>My Reputation:</label> <small><span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>%</small></div>
+                <div class="backfeed-stat-tokens"><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=$viewmodel['current_agent_tokens']?></span></div>
+                <div class="backfeed-stat-reputation"><label>My Reputation:</label> <small><span class="backfeed-stat-reputation-value"><?=$viewmodel['current_agent_reputation']?></span>%</small></div>
                 <div class="backfeed-collabar-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -58,7 +59,7 @@
             </div>
 
             <div id="backfeed-avatar" class="backfeed-avatar">
-                <?=get_avatar(wp_get_current_user()->ID, 32)?>
+                <?=$viewmodel['current_agent_avatar']?>
                 <i class="bf-fa bf-fa-chevron-down"></i>
             </div>
 
@@ -74,8 +75,8 @@
 <?php endif; ?>
 
     <section class="backfeed-stats-bar hidden-md-up">
-        <div><label>My Reputation:</label> <span class="backfeed-stat-reputation-value"><?=get_current_agent_reputation()?></span>%</div>
-        <div><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=get_current_agent_tokens()?></span></div>
+        <div><label>My Reputation:</label> <span class="backfeed-stat-reputation-value"><?=$viewmodel['current_agent_reputation']?></span>%</div>
+        <div><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=$viewmodel['current_agent_tokens']?></span></div>
     </section>
 
     <ul id="backfeed-avatar-menu" class="backfeed-avatar-menu">
