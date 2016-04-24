@@ -1,5 +1,14 @@
 import helpers from './helpers.js';
 
+if (helpers.getQueryParameterByName('continuetour')) {
+    let explainerBar = document.getElementById('backfeed-explainer-bar');
+    if (explainerBar) {
+        explainerBar.style.visibility = 'hidden';
+        explainerBar.style.height = '0';
+        explainerBar.style.padding = '0';
+    }
+}
+
 let tour = {
     id: "d-mag-main-tour",
     steps: [
@@ -165,7 +174,7 @@ if (hopscotch) {
     }
 
     if (startTourButton) {
-        startTourButton.addEventListener('click', e => {
+        startTourButton.addEventListener('click', () => {
             hopscotch.startTour(tour, 0);
         });
     }

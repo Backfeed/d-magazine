@@ -54,17 +54,29 @@ add_action('wp_footer', function() {
 	$viewmodel = [
 		'current_agent_tokens' => get_current_agent_tokens(),
 		'current_agent_reputation' => get_current_agent_reputation(),
-		'current_agent_avatar' => get_avatar(wp_get_current_user()->ID, 32),
+		'current_agent_avatar' => get_avatar(wp_get_current_user()->ID, 32)
 	];
-	
+
 	if (is_singular('post')) {
 		$viewmodel['referral_url'] = get_referral_url();
 	}
-	
-	if (is_user_logged_in())
+
+	if ($GLOBALS['path'][1] == '?continuetour') {
+		$viewmodel = [
+			'current_agent_tokens' => 11,
+			'current_agent_reputation' => 0.2,
+			'current_agent_avatar' => '<img src="/wp-content/plugins/d-magazine/assets/icons/default-avatar.png" width="32" height="32" />',
+			'referral_url' => get_the_permalink()
+		];
 		require 'templates/collabar-user.php';
-	else
-		require 'templates/collabar-guest.php';
+	} else {
+		if (is_user_logged_in()) {
+			require 'templates/collabar-user.php';
+		} else {
+			require 'templates/collabar-guest.php';
+		}
+	}
+
 });
 
 add_action('wp_enqueue_scripts', function() {
