@@ -1,0 +1,276 @@
+/**! BASED ON: hopscotch v0.2.5 */
+.animated {
+  animation-fill-mode: both;
+  animation-duration: 1s;
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation-name: fadeInUp;
+}
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-down {
+  animation-name: fadeInDown;
+}
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.fade-in-right {
+  animation-name: fadeInRight;
+}
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.fade-in-left {
+  animation-name: fadeInLeft;
+}
+
+
+.hopscotch-bubble {
+  background-color: #ffffff;
+  border: 5px solid #333436;
+  color: #010101;
+  font-size: 13px;
+  position: absolute;
+  z-index: 999999;
+  box-sizing: content-box;
+  background-clip: padding-box;
+  box-shadow: 0 0 10px 1px rgba(#343434, 0.35);
+
+  & * {
+    box-sizing: content-box;
+  }
+
+  &.animate {
+    transition-property: top, left;
+    transition-duration: .5s;
+    transition-timing-function: ease-in-out;
+  }
+
+  &.invisible {
+    opacity: 0;
+  }
+
+  &.hide,
+  .hide,
+  .hide-all {
+    display: none;
+  }
+
+  h3 {
+    color: #333436;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 19px;
+    margin: -1px 15px 0 0;
+    padding: 0;
+  }
+
+  .hopscotch-nav-button {
+    border: 0;
+    cursor: pointer;
+    text-decoration: none !important;
+    padding: 11px 24px;
+    font-size: 16px;
+
+    &:hover {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    &:active {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    &.next {
+      color: #fefefe;
+      background-color: #c62851;
+
+      &:hover {
+        background-color: #E64F77;
+      }
+    }
+
+    &.prev {
+      color: #444;
+      background-color: #f2f2f2;
+
+      &:hover {
+        background-color: #e8e8e8;
+      }
+    }
+  }
+
+  .hopscotch-bubble-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    position: relative;
+    /* to fix text flickering */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hopscotch-content {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+    padding-top: 22px;
+  }
+
+  .hopscotch-bubble-content {
+    padding: 29px;
+  }
+
+  &.no-number .hopscotch-bubble-content {
+    margin: 0;
+  }
+
+  .hopscotch-bubble-close {
+    appearance: none;
+    border: 0;
+    color: #000;
+    background: transparent url(../../assets/images/sprite-green.png) -192px -92px no-repeat;
+    display: block;
+    padding: 8px;
+    position: absolute;
+    text-decoration: none;
+    text-indent: -9999px;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    right: 0;
+
+    &.hide,
+    &.hide-all {
+      display: none;
+    }
+  }
+
+  .hopscotch-bubble-number {
+    position: absolute;
+    bottom: 12px;
+    left: 29px;
+    font-size: 14px;
+    color: #e3e3e3;
+
+    &::after {
+      content: '/14';
+    }
+  }
+
+  .hopscotch-bubble-arrow-container {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+
+    .hopscotch-bubble-arrow,
+    .hopscotch-bubble-arrow-border {
+      width: 0;
+      height: 0;
+    }
+
+    &.up {
+      top: -22px;
+      left: 10px;
+
+      .hopscotch-bubble-arrow {
+        border-bottom: 17px solid #ffffff;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+        position: relative;
+        top: -10px;
+      }
+      .hopscotch-bubble-arrow-border {
+        border-bottom: 17px solid #333436;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+      }
+    }
+
+    &.down {
+      bottom: -39px;
+      left: 10px;
+
+      .hopscotch-bubble-arrow-border {
+        border-top: 17px solid #333436;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+      }
+    }
+
+    &.left {
+      top: 10px;
+      left: -22px;
+
+      .hopscotch-bubble-arrow {
+        border-bottom: 17px solid transparent;
+        border-right: 17px solid #ffffff;
+        border-top: 17px solid transparent;
+        position: relative;
+        left: 7px;
+        top: -34px;
+      }
+      .hopscotch-bubble-arrow-border {
+        border-right: 17px solid black;
+        border-bottom: 17px solid transparent;
+        border-top: 17px solid transparent;
+      }
+    }
+
+    &.right {
+      top: 10px;
+      right: -39px;
+
+      .hopscotch-bubble-arrow {
+        border-bottom: 17px solid transparent;
+        border-left: 17px solid #ffffff;
+        border-top: 17px solid transparent;
+        position: relative;
+        left: -7px;
+        top: -34px;
+      }
+      .hopscotch-bubble-arrow-border {
+        border-left: 17px solid #000000;
+        border-left: 17px solid rgba(0, 0, 0, 0.5);
+        border-bottom: 17px solid transparent;
+        border-top: 17px solid transparent;
+      }
+    }
+  }
+
+  .hopscotch-actions {
+    height: 44px;
+    text-align: right;
+    background-color: #333436;
+  }
+}

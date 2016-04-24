@@ -65,7 +65,7 @@ add_action('wp_footer', function() {
 		$viewmodel = [
 			'current_agent_tokens' => 11,
 			'current_agent_reputation' => 0.2,
-			'current_agent_avatar' => '<img src="/wp-content/plugins/d-magazine/assets/icons/default-avatar.png" width="32" height="32" />',
+			'current_agent_avatar' => '<img src="/assets/images/default-avatar.png" width="32" height="32" />',
 			'referral_url' => get_the_permalink()
 		];
 		require 'templates/collabar-user.php';
@@ -86,10 +86,8 @@ add_action('wp_enqueue_scripts', function() {
 	wp_enqueue_script('hopscotch', plugin_dir_url(__FILE__).'vendor/bower_components/hopscotch/dist/js/hopscotch.js', ['jquery'], false, true);
 	wp_enqueue_script('underscore');
 
-
 	wp_enqueue_style('collabar', plugin_dir_url(__FILE__).'dist/css/main.css');
 	wp_enqueue_style('animate', plugin_dir_url(__FILE__).'vendor/bower_components/animate.css/animate.css');
-	wp_enqueue_style('hopscotch', plugin_dir_url(__FILE__).'vendor/bower_components/hopscotch/dist/css/hopscotch.css');
 
 	wp_register_script('collabar', plugin_dir_url(__FILE__).'dist/js/bundle.js', ['jquery-noty'], false, true);
 	wp_localize_script('collabar', 'Backfeed', init_config());
