@@ -166,7 +166,7 @@ if (matchMedia("(min-width: 768px)").matches) {
 if (hopscotch) {
     let startTourButton = document.getElementById('backfeed-featured-section-btn');
 
-    if (hopscotch.getState() === "d-mag-main-tour:4") {
+    if (hopscotch.getState() === "d-mag-main-tour:3") {
         hopscotch.startTour(tour);
     } else if (hopscotch.getState() === "d-mag-main-tour:11") {
         helpers.openMobileNavMenu();

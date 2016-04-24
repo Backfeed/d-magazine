@@ -61,7 +61,7 @@ add_action('wp_footer', function() {
 		$viewmodel['referral_url'] = get_referral_url();
 	}
 
-	if ($GLOBALS['path'][1] == '?continuetour') {
+	if (isset($_GET['continuetour'])) {
 		$viewmodel = [
 			'current_agent_tokens' => 11,
 			'current_agent_reputation' => 0.2,
