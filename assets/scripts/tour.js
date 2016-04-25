@@ -10,8 +10,6 @@ let tour = {
             content: "We are a Decentralized Magazine. All our content is user-generated and edited by our collective intelligence. The revenue we create together is distributed among the members of our community in form of tokens, which in the future will bare <strong>real monetary value</strong>.",
             target: document.querySelector(".logo-location-header .logo-light img"),
             placement: "bottom",
-            xOffset: -95,
-            arrowOffset: 120,
             onNext: helpers.openMobileNavMenu
         }, {
             title: "Front Page",
@@ -42,7 +40,7 @@ let tour = {
         }, {
             title: "Article Quality Bar",
             content: "This indicates the community-determined quality of the article you’re currently viewing.",
-            target: document.querySelector(".backfeed-meter"),
+            target: "backfeed-voting",
             placement: "top",
             fixedElement: true,
             xOffset: -130,
@@ -96,16 +94,16 @@ let tour = {
             arrowOffset: 272,
             onNext: helpers.openMobileNavMenu
         }, {
-            title: "Submit Article",
-            content: "Submit your own article to the Backfeed Magazine. You’ll receive freshly minted tokens and reputation in case the article becomes popular.",
-            target: document.querySelector("#menu-main-menu > li:nth-last-of-type(2)"),
-            placement: "bottom"
-        }, {
             title: "FAQ",
             content: "Any question? Please visit our FAQ to learn more, or contact us at <a href=\"mailto:magazine@backfeed.cc\">magazine@backfeed.cc</a>.",
             target: document.querySelector("#menu-main-menu > li:nth-last-of-type(3)"),
             placement: "bottom",
             onNext: helpers.closeMobileNavMenu
+        }, {
+            title: "Submit Article",
+            content: "Submit your own article to the Backfeed Magazine. You’ll receive freshly minted tokens and reputation in case the article becomes popular.",
+            target: document.querySelector("#menu-main-menu > li:nth-last-of-type(2)"),
+            placement: "bottom"
         }, {
             title: "End",
             content: "Got it? Register, if you haven't already, and be part of the Backfeed community!",
@@ -114,8 +112,6 @@ let tour = {
             showNextButton: false,
             showCTAButton: true,
             ctaLabel: "Register",
-            xOffset: -95,
-            arrowOffset: 120,
             onCTA: () => {
                 window.location = "/register"
             }
@@ -128,6 +124,8 @@ let tour = {
  * tour.steps[7].title == "Wallet"
  * tour.steps[8].title == "Tokens"
  * tour.steps[9].title == "Reputation"
+ * tour.steps[11].title == "FAQ"
+ * tour.steps[12].title == "Submit Article"
  * tour.steps[13].title == "End"
  */
 
@@ -149,6 +147,12 @@ if (matchMedia("(min-width: 768px)").matches) {
     tour.steps[8].target = document.querySelector(".backfeed-stat-tokens");
 
     tour.steps[9].target = document.querySelector(".backfeed-stat-reputation");
+
+    tour.steps[11].xOffset = -200;
+    tour.steps[11].arrowOffset = 230;
+
+    tour.steps[12].xOffset = -200;
+    tour.steps[12].arrowOffset = 230;
 
     tour.steps[13].target = document.querySelector(".logo-location-header .logo-dark img");
     tour.steps[13].xOffset = 40;

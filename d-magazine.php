@@ -62,10 +62,11 @@ add_action('wp_footer', function() {
 	}
 
 	if (isset($_GET['continuetour'])) {
+		// Mock data
 		$viewmodel = [
 			'current_agent_tokens' => 11,
 			'current_agent_reputation' => 0.2,
-			'current_agent_avatar' => '<img src="/assets/images/default-avatar.png" width="32" height="32" />',
+			'current_agent_avatar' => '<img src="'.plugin_dir_url(__FILE__).'/assets/images/default-avatar.png" width="32" height="32" />',
 			'referral_url' => get_the_permalink()
 		];
 		require 'templates/collabar-user.php';

@@ -26,12 +26,12 @@ jQuery($ => {
         sharingWidget = document.getElementById('backfeed-sharing'),
         explainerBar = document.getElementById('backfeed-explainer-bar');
 
-    /*let updateUiTokens = (newTokensAmount, isDelta) => {
+    let updateUiTokens = (newTokensAmount, isDelta) => {
         $('.backfeed-stat-tokens-value').each((i, el) => {
-            if (isDelta) newTokensAmount = $(el).text() + newTokensAmount;
+            if (isDelta) newTokensAmount += $(el).text();
             $(el).text(newTokensAmount);
         });
-    };*/
+    };
 
     let updateUiReputation = newReputationAmount => {
         $('.backfeed-stat-reputation-value').each((i, el) => {
@@ -108,9 +108,9 @@ jQuery($ => {
         $(qualityMeterFilled).css('width', Backfeed.currentContribution.score * 100);
 
         if (currentAgentVote || currentAgentVote === 0) {
-            if (currentAgentVote == 0) {
+            if (currentAgentVote === 0) {
                 votingWidget.dataset.status = 'vote-down';
-            } else if (currentAgentVote == 1) {
+            } else if (currentAgentVote === 1) {
                 votingWidget.dataset.status = 'vote-up';
             }
         } else {
@@ -134,6 +134,7 @@ jQuery($ => {
                         noty({text: 'Downvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-down';
                         updateUiReputation(response.evaluator.reputation);
+                        updateUiTokens(response.evaluator.tokens);
                         updateUiScore(response.contribution.score);
                         updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
@@ -155,6 +156,7 @@ jQuery($ => {
                         noty({text: 'Upvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-up';
                         updateUiReputation(response.evaluator.reputation);
+                        updateUiTokens(response.evaluator.tokens);
                         updateUiScore(response.contribution.score);
                         updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
