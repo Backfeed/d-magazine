@@ -24,7 +24,7 @@ If you already have a WordPress instance ready, and you just want to install the
 Now, point your web browser your server ( e.g. http://127.0.0.1/ ), and you should see the infamous "Welcome to nginx!" message.
 
 #### Configure Nginx
-`touch /etc/nginx/sites-available/magazine.backfeed.cc`.
+`touch /etc/nginx/sites-available/bfmagazine`.
 Inside that file, write:
 
 ```
@@ -34,7 +34,7 @@ server {
 
   server_name _; # replace the underscore with a domain name, or leave it as a catch-all
 
-  root /var/www/magazine.backfeed.cc;
+  root /var/www/bfmagazine;
   index index.php;
 
   location / {
@@ -55,14 +55,14 @@ server {
 Then, apply the new server configuration and reload nginx:
 * `cd /etc/nginx/sites-enabled/`
 * `rm default`
-* `ln -s ../sites-available/magazine.backfeed.cc`
+* `ln -s ../sites-available/bfmagazine`
 * `service nginx reload`
 
 ### Verify PHP7 and nginx like each other
 
 * `cd /var/www`
-* `mkdir magazine.backfeed.cc && cd magazine.backfeed.cc`
-* `echo '<?=phpinfo()?>' > magazine.backfeed.cc/info.php`
+* `mkdir bfmagazine && cd bfmagazine`
+* `echo '<?=phpinfo()?>' > bfmagazine/info.php`
 
 Now, browse to that file on your server ( e.g. http://127.0.0.1/info.php ), and you should see the infamous [phpinfo](https://assets.digitalocean.com/articles/lemp_ubuntu_1604/php_info.png).
 
@@ -85,19 +85,21 @@ After this, we don't need this file anymore: `rm info.php`.
 * MariaDB> `FLUSH PRIVILEGES;`
 * MariaDB> `EXIT`
 
-### Install WordPress
+### Install WP-CLI
 
-* `cd /var/www/magazine.backfeed.cc`
-* `wget https://wordpress.org/latest.tar.gz`
-* `tar -xzvf latest.tar.gz`
-* `mv wordpress/* .`
-* `rm -r wordpress/ latest.tar.gz`
+* `curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar`
+* `chmod +x wp-cli.phar`
+* `mv wp-cli.phar /usr/local/bin/wp`
+
+### Install WordPress
+* `cd /var/www/bfmagazine`
+* `sudo -u www-data wp core download`
 
 Now, point your web browser to your server ( e.g. http://127.0.0.1/ ), and complete the installation wizard.
 
 ### Install D-magazine
 
-* `cd /var/www/html`
+* `cd /var/www/bfmagazine`
 * `git clone --recursive https://github.com/Backfeed/d-magazine.git wp-content/plugins/`
 * `cd wp-content/plugins/d-magazine`
 * `bower install`
@@ -106,5 +108,6 @@ Now, point your web browser to your server ( e.g. http://127.0.0.1/ ), and compl
 
 ## Usage Details
 Run `gulp watch` in the background when editing *.scss and *.js files to automatically compile them.
+
 Check the browser console to verify the plugin doesn't generate any errors.
 
