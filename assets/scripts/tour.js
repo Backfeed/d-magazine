@@ -30,7 +30,7 @@ let tour = {
             xOffset: 15,
             multipage: true,
             showNextButton: false,
-            nextOnTargetClick: true,
+            // nextOnTargetClick: true,
             onShow: () => {
                 let linksToArticles = document.querySelectorAll('article>.post-image>a, article>.post-details>.post-title>a');
                 Array.from(linksToArticles).forEach((articleLink) => {
@@ -163,7 +163,7 @@ if (matchMedia("(min-width: 768px)").matches) {
 if (hopscotch) {
     let startTourButton = document.getElementById('backfeed-featured-section-btn');
 
-    if (hopscotch.getState() === "d-mag-main-tour:4") {
+    if (hopscotch.getState() === "d-mag-main-tour:3") {
         hopscotch.startTour(tour);
     }
 

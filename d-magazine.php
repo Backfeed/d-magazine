@@ -61,17 +61,17 @@ add_action('wp_footer', function() {
 		$viewmodel['referral_url'] = get_referral_url();
 	}
 
-	if (isset($_GET['continuetour'])) {
-		// Mock data
-		$viewmodel = [
-			'current_agent_tokens' => 11,
-			'current_agent_reputation' => 0.2,
-			'current_agent_avatar' => '<img src="'.plugin_dir_url(__FILE__).'/assets/images/default-avatar.png" width="32" height="32" />',
-			'referral_url' => get_the_permalink()
-		];
+	if (is_user_logged_in()) {
 		require 'templates/collabar-user.php';
 	} else {
-		if (is_user_logged_in()) {
+		// If the URL end with ?continuetour, show mock logged-in footer even though the user is logged-out.
+		if (substr_compare($_SERVER['REQUEST_URI'], '?continuetour', -strlen( '?continuetour')) === 0) {
+			$viewmodel = [
+				'current_agent_tokens' => 11,
+				'current_agent_reputation' => 0.2,
+				'current_agent_avatar' => '<img src="'.plugin_dir_url(__FILE__).'/assets/images/default-avatar.png" width="32" height="32" />',
+				'referral_url' => get_the_permalink()
+			];
 			require 'templates/collabar-user.php';
 		} else {
 			require 'templates/collabar-guest.php';
