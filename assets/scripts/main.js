@@ -8,6 +8,9 @@ if (helpers.getQueryParameterByName('referrer')) {
     localStorage['referrer'] = helpers.getQueryParameterByName('referrer');
 }
 
+let hiddenFieldReferralUser = document.getElementById('referrer_user');
+if (hiddenFieldReferralUser && localStorage['referrer']) hiddenFieldReferralUser.value = localStorage['referrer'];
+
 jQuery($ => {
     $.noty.defaults.theme =  'backfeedTheme';
     $.noty.defaults.layout = 'bottomRight';

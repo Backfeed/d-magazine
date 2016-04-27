@@ -1,7 +1,7 @@
 <?php
 namespace Backfeed;
 
-if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'http://api.staging.backfeed.cc/dmag/');
+if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'http://localhost:8888/dmag/');
 
 class Api {
     private static function request($method = 'get', $endpoint, $data = [], $headers = []) {
@@ -29,8 +29,9 @@ class Api {
         return $json_response;
     }
 
-    public static function create_agent($tokens = null, $reputation = null) {
+    public static function create_agent($referrer_id = null, $tokens = null, $reputation = null) {
         $request_parameters = [];
+        if (!is_null($referrer_id)) $request_parameters['referrer_id'] = (float) $referrer_id;
         if (!is_null($tokens)) $request_parameters['tokens'] = (float) $tokens;
         if (!is_null($reputation)) $request_parameters['reputation'] = (float) $reputation;
         return self::request('post', 'users', $request_parameters);

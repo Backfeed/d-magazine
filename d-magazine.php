@@ -14,7 +14,6 @@ namespace Backfeed;
 require_once 'vendor/backend/Requests/library/Requests.php';
 \Requests::register_autoloader();
 
-require_once('lib/social-sharing.php');
 require_once('lib/template-tags.php');
 require_once('lib/protocol-api.php');
 require_once('lib/comments.php');
@@ -164,7 +163,13 @@ function make_contribution($ID) {
 
 function make_agent($user_id) {
 	if (!get_user_meta($user_id, 'backfeed_agent_id', true)) {
-		$new_agent = Api::create_agent();
+		if(empty($_POST['referrer_user'])) {
+			$new_agent = Api::create_agent();
+		} else {
+			$referrer_user = get_user_by('login', $_POST['referrer_user']);
+			$referrer_agent_id = get_user_meta($referrer_user->ID, 'backfeed_agent_id', true);
+			$new_agent = Api::create_agent($referrer_agent_id);
+		}
 
 		if ($new_agent && isset($new_agent->id))
 			add_user_meta($user_id, 'backfeed_agent_id', $new_agent->id);

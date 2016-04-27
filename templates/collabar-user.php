@@ -81,9 +81,9 @@
 
     <ul id="backfeed-avatar-menu" class="backfeed-avatar-menu">
         <li><?php wp_loginout($_SERVER['REQUEST_URI']); ?></li>
-        <li><a href="<?=site_url('/edit-profile/')?>">Edit Profile</a></li>
+        <li><a href="<?=site_url('/edit-profile/')?>">Edit profile</a></li>
         <li class="backfeed-disabled">Statistics</li>
-        <li><a href="<?=site_url('/submit-article/')?>">Submit an Article</a></li>
+        <li><a href="<?=site_url('/submit-article/')?>">Submit an article</a></li>
     </ul>
 
 </aside>
