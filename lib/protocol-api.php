@@ -14,7 +14,7 @@ class Api {
         $response = \Requests::request($url, $headers, $data, $method);
 
         if (!$response->success) {
-            error_log('Backfeed API returned meh: '.serialize($response));
+            error_log('Backfeed API returned meh: '.json_encode($response));
             //TODO: set up proper error handling
             //throw new \Exception('Backfeed Backend returned error');
         }
