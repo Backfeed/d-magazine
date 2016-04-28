@@ -14,7 +14,7 @@ function comments_cb( $comment, $args, $depth ) {
 ?>
 
 <div <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
-    <article id="comment-<?php comment_ID(); ?>" class="comment-body clearfix" data-contribution-id="<?=get_contribution_id($comment->comment_ID)?>">
+    <article id="comment-<?php comment_ID(); ?>" class="comment-body clearfix" data-contribution-id="<?=get_comment_contribution_id($comment->comment_ID)?>">
 
         <div class="comment-author vcard">
             <div class="author-image">

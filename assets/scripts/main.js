@@ -106,18 +106,19 @@ jQuery($ => {
     }
 
     if (votingWidget) {
-        let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
+        if (Backfeed.currentContribution) {
+            let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
+            $(qualityMeterFilled).css('width', Backfeed.currentContribution.score * 100);
 
-        $(qualityMeterFilled).css('width', Backfeed.currentContribution.score * 100);
-
-        if (currentAgentVote || currentAgentVote === 0) {
-            if (currentAgentVote === 0) {
-                votingWidget.dataset.status = 'vote-down';
-            } else if (currentAgentVote === 1) {
-                votingWidget.dataset.status = 'vote-up';
+            if (typeof currentAgentVote == 'number') {
+                if (currentAgentVote === 0) {
+                    votingWidget.dataset.status = 'vote-down';
+                } else if (currentAgentVote === 1) {
+                    votingWidget.dataset.status = 'vote-up';
+                }
+            } else {
+                votingWidget.dataset.status = 'vote-none';
             }
-        } else {
-            votingWidget.dataset.status = 'vote-none';
         }
 
         votingWidget.addEventListener('click', e => {

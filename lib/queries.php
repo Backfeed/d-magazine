@@ -10,19 +10,22 @@ function front_page_query($paged = 1) {
         'paged'                 => $paged
     ];
 
-    $contributions = Api::get_all_contributions();
+    $offset = $query_args['posts_per_page'] * $paged - 8;
 
-    if (is_array($contributions)) {
-        usort($contributions, function($a, $b) { return $b->score - $a->score; });
-        $contribution_ids = array_column($contributions, 'id');
-        
-        $query_args['meta_query'] = [
-            [
-                'key' => 'backfeed_contribution_id',
-                'value' => $contribution_ids,
-                'compare' => 'IN'
-            ]
-        ];
+    $contributions = Api::get_contributions(['start' => $offset, 'limit' => $query_args['posts_per_page']]);
+
+    if (is_array($contributions->items)) {
+        $contribution_ids = array_column($contributions->items, 'id');
+
+        $post_ids = array_map(function($contribution_id) {
+            return get_posts([
+                'meta_key' => 'backfeed_contribution_id',
+                'meta_value' => $contribution_id
+            ])[0]->ID;
+        }, $contribution_ids);
+
+        $query_args['post__in'] = $post_ids;
+        $query_args['orderby'] = 'post__in';
     }
     
     return new \WP_Query($query_args);
