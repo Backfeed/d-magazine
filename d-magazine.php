@@ -163,8 +163,43 @@ function make_contribution($ID) {
 
 function make_agent($user_id) {
 	if (!get_user_meta($user_id, 'backfeed_agent_id', true)) {
-		if(empty($_POST['referrer_user'])) {
-			$new_agent = Api::create_agent();
+		switch ($user_id) {
+			case 8:
+				$reputation = 300;
+				break;
+			case 43:
+				$reputation = 200;
+				break;
+			case 11:
+				$reputation = 200;
+				break;
+			case 9:
+				$reputation = 200;
+				break;
+			case 44:
+				$reputation = 100;
+				break;
+			case 59:
+				$reputation = 100;
+				break;
+			case 60:
+				$reputation = 100;
+				break;
+			case 61:
+				$reputation = 100;
+				break;
+			case 53:
+				$reputation = 100;
+				break;
+			case 25:
+				$reputation = 100;
+				break;
+			default:
+				$reputation = null;
+		}
+
+		if (empty($_POST['referrer_user'])) {
+			$new_agent = Api::create_agent(null, $reputation);
 		} else {
 			$referrer_user = get_user_by('login', $_POST['referrer_user']);
 			$referrer_agent_id = get_user_meta($referrer_user->ID, 'backfeed_agent_id', true);
