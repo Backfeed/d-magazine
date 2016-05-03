@@ -51,7 +51,7 @@
 
             <div class="backfeed-stats hidden-sm-down backfeed-collabar-tooltip">
                 <div class="backfeed-stat-tokens"><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=$viewmodel['current_agent_tokens']?></span></div>
-                <div class="backfeed-stat-reputation"><label>My Reputation:</label> <small><span class="backfeed-stat-reputation-value"><?=$viewmodel['current_agent_reputation'].'/'.$viewmodel['total_reputation']?></span></small></div>
+                <div class="backfeed-stat-reputation"><label>My Reputation:</label> <small><span class="backfeed-stat-reputation-value"><?=$viewmodel['current_agent_reputation']?></span>/<?=$viewmodel['total_reputation']?></small></div>
                 <div class="backfeed-collabar-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
@@ -75,7 +75,7 @@
 <?php endif; ?>
 
     <section class="backfeed-stats-bar hidden-md-up">
-        <div><label>My Reputation:</label> <span class="backfeed-stat-reputation-value"><?=$viewmodel['current_agent_reputation'].'/'.$viewmodel['total_reputation']?></span></div>
+        <div><label>My Reputation:</label> <span class="backfeed-stat-reputation-value"><?=$viewmodel['current_agent_reputation']?></span>/<?=$viewmodel['total_reputation']?></div>
         <div><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=$viewmodel['current_agent_tokens']?></span></div>
     </section>
 
