@@ -34,7 +34,7 @@ function get_current_agent_tokens() {
 
 function get_current_agent_reputation() {
     $current_agent_reputation = get_config('currentAgent')->reputation;
-    return isset($current_agent_reputation) ? round($current_agent_reputation, 2) : 0;
+    return isset($current_agent_reputation) ? round($current_agent_reputation) : 0;
 }
 
 function get_current_agent_normalized_reputation() {
