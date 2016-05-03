@@ -23,13 +23,26 @@ function get_contribution($post_id) {
 }
 
 function get_current_contribution_score() {
-    return is_int(get_config('currentContribution')->score) ? get_config('currentContribution')->score : 0;
+    $current_contribution_score = get_config('currentContribution')->score;
+    return is_int($current_contribution_score) ? $current_contribution_score : 0;
 }
 
 function get_current_agent_tokens() {
-    return isset(get_config('currentAgent')->tokens) ? get_config('currentAgent')->tokens : 0;
+    $current_agent_tokens = get_config('currentAgent')->tokens;
+    return isset($current_agent_tokens) ? $current_agent_tokens : 0;
 }
 
 function get_current_agent_reputation() {
-    return isset(get_config('currentAgent')->reputation) ? round(get_config('currentAgent')->reputation, 2) : 0;
+    $current_agent_reputation = get_config('currentAgent')->reputation;
+    return isset($current_agent_reputation) ? $current_agent_reputation : 0;
+}
+
+function get_current_agent_normalized_reputation() {
+    $current_agent_normalized_reputation = get_config('currentAgent')->normalized_reputation;
+    return isset($current_agent_normalized_reputation) ? round($current_agent_normalized_reputation, 2) : 0;
+}
+
+function get_total_reputation() {
+    $total_reputation = get_config('currentAgent')->total_reputation;
+    return isset($total_reputation) ? round($total_reputation / 1000, 1) . 'K' : 0;
 }

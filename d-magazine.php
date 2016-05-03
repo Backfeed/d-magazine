@@ -53,6 +53,7 @@ add_action('wp_footer', function() {
 	$viewmodel = [
 		'current_agent_tokens' => get_current_agent_tokens(),
 		'current_agent_reputation' => get_current_agent_reputation(),
+		'total_reputation' => get_total_reputation(),
 		'current_agent_avatar' => get_avatar(wp_get_current_user()->ID, 32)
 	];
 
