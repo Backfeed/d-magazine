@@ -38,7 +38,7 @@ jQuery($ => {
 
     let updateUiReputation = newReputationAmount => {
         $('.backfeed-stat-reputation-value').each((i, el) => {
-            $(el).text(newReputationAmount.toFixed(2));
+            $(el).text(newReputationAmount.toFixed());
         });
     };
 

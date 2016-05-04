@@ -10,10 +10,9 @@ function front_page_query($paged = 1) {
         'paged'                 => $paged
     ];
 
-    $limit = $query_args['posts_per_page'];
-    $offset = $limit * $paged - 8;
+    $offset = $query_args['posts_per_page'] * $paged - 8;
 
-    $contributions = Api::get_contributions(['start' => $offset, 'limit' => $limit]);
+    $contributions = Api::get_contributions(['start' => $offset]);
 
     if (is_array($contributions->items)) {
         $contribution_ids = array_column($contributions->items, 'id');

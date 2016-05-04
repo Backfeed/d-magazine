@@ -24,11 +24,11 @@ class Api {
         return $json_response;
     }
 
-    public static function create_agent($referrer_id = null, $tokens = null, $reputation = null) {
+    public static function create_agent($referrer_id = null, $reputation = null, $tokens = null) {
         $request_parameters = [];
         if (!is_null($referrer_id)) $request_parameters['referrer_id'] = (float) $referrer_id;
-        if (!is_null($tokens)) $request_parameters['tokens'] = (float) $tokens;
         if (!is_null($reputation)) $request_parameters['reputation'] = (float) $reputation;
+        if (!is_null($tokens)) $request_parameters['tokens'] = (float) $tokens;
         return self::request('POST', 'users', $request_parameters);
     }
 
