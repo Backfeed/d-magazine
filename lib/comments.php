@@ -62,7 +62,6 @@ function comments_cb( $comment, $args, $depth ) {
         </div><!-- .comment-metadata -->
 
     </article><!-- .comment-body -->
-</div><!-- .comment_class -->
     
 <?php
 }

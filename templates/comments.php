@@ -34,7 +34,7 @@ $barcelona_hide_avatars = ( get_option( 'show_avatars' ) == '1' ) ? '' : ' hide-
 				'callback'      => 'Backfeed\comments_cb',
 				'avatar_size'   => 100,
 				'style'         => 'div',
-				'max_depth'     => '2'
+				'max_depth'     => '5'
 			])?>
 		</div>
 
