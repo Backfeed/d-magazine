@@ -139,8 +139,8 @@ jQuery($ => {
                         votingWidget.dataset.status = 'vote-down';
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
-                        updateUiScore(response.contribution.stats.score);
-                        updateUiEngagedReputation(response.contribution.stats.engaged_reputation);
+                        updateUiScore(response.contribution.score);
+                        updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }
@@ -161,8 +161,8 @@ jQuery($ => {
                         votingWidget.dataset.status = 'vote-up';
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
-                        updateUiScore(response.contribution.stats.score);
-                        updateUiEngagedReputation(response.contribution.stats.engaged_reputation);
+                        updateUiScore(response.contribution.score);
+                        updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }
