@@ -65,10 +65,10 @@ class Api {
         return empty($field) ? $response : $response->$field;
     }
 
-    public static function get_evaluations($contribution_id = null, $contributor_id = null) {
+    public static function get_evaluations($contribution_id = null, $evaluator_id = null) {
         $data = [];
         if (!empty($contribution_id)) $data['contribution_id'] = (int) $contribution_id;
-        if (!empty($contributor_id)) $data['contributor_id'] = (int) $contributor_id;
+        if (!empty($evaluator_id)) $data['evaluator_id'] = (int) $evaluator_id;
         return self::request('GET', 'evaluations', $data);
     }
 }
