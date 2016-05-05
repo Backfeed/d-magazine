@@ -108,7 +108,7 @@ jQuery($ => {
     if (votingWidget) {
         if (Backfeed.currentContribution) {
             let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
-            qualityMeterFilled.style.width = Backfeed.currentContribution.stats.score * 100;
+            qualityMeterFilled.style.width = Backfeed.currentContribution.stats.score * 100 + '%';
 
             if (typeof currentAgentVote == 'number') {
                 if (currentAgentVote === 0) {
