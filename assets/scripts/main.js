@@ -140,7 +140,7 @@ jQuery($ => {
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
                         updateUiScore(response.contribution.stats.score);
-                        updateUiEngagedReputation(response.contribution.engaged_reputation);
+                        updateUiEngagedReputation(response.contribution.stats.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }
@@ -162,7 +162,7 @@ jQuery($ => {
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
                         updateUiScore(response.contribution.stats.score);
-                        updateUiEngagedReputation(response.contribution.engaged_reputation);
+                        updateUiEngagedReputation(response.contribution.stats.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }

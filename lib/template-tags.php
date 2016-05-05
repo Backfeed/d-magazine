@@ -22,11 +22,6 @@ function get_contribution($post_id) {
     return $contribution;
 }
 
-function get_current_contribution_score() {
-    $current_contribution_score = get_config('currentContribution')->score;
-    return is_int($current_contribution_score) ? $current_contribution_score : 0;
-}
-
 function get_current_agent_tokens() {
     $current_agent_tokens = get_config('currentAgent')->tokens;
     return isset($current_agent_tokens) ? $current_agent_tokens : 0;
