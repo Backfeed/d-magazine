@@ -47,7 +47,7 @@ jQuery($ => {
     };
 
     let updateUiScore = newArticleScore => {
-        $('.backfeed-meter-filled').css('width', (newArticleScore*100)+'%');
+        qualityMeterFilled.style.width = newArticleScore * 100 + '%';
         $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2));
     };
 
@@ -108,7 +108,7 @@ jQuery($ => {
     if (votingWidget) {
         if (Backfeed.currentContribution) {
             let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
-            $(qualityMeterFilled).css('width', Backfeed.currentContribution.score * 100);
+            qualityMeterFilled.style.width = Backfeed.currentContribution.stats.score * 100;
 
             if (typeof currentAgentVote == 'number') {
                 if (currentAgentVote === 0) {
@@ -139,7 +139,7 @@ jQuery($ => {
                         votingWidget.dataset.status = 'vote-down';
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
-                        updateUiScore(response.contribution.score);
+                        updateUiScore(response.contribution.stats.score);
                         updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
@@ -161,7 +161,7 @@ jQuery($ => {
                         votingWidget.dataset.status = 'vote-up';
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
-                        updateUiScore(response.contribution.score);
+                        updateUiScore(response.contribution.stats.score);
                         updateUiEngagedReputation(response.contribution.engaged_reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
