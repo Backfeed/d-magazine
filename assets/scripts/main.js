@@ -51,6 +51,8 @@ jQuery($ => {
         $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2));
     };
 
+    console.log(Backfeed);
+
     if (copyToClipboardButton) {
         let clipboard = new Clipboard(copyToClipboardButton, {
             text: trigger => {

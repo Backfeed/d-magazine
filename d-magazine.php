@@ -35,7 +35,7 @@ function init_config() {
 
 		$evaluationByCurrentAgent = Api::get_evaluations($currentContributionId, $currentAgentId);
 
-		if ($evaluationByCurrentAgent->count == 1) {
+		if ($evaluationByCurrentAgent->count > 0) {
 			$backfeed_config['currentContribution']->currentAgentVote = $evaluationByCurrentAgent->items[0]->value;
 		}
 	}

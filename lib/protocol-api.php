@@ -14,19 +14,18 @@ class Api {
         $response = \Requests::request($url, $headers, $data, $method);
 
         if (!$response->success) {
-            error_log('Backfeed API returned meh: '.json_encode($response));
+            error_log('Backfeed API returned meh: ' . json_encode($response));
             //TODO: set up proper error handling
             //throw new \Exception('Backfeed Backend returned error');
+            return false;
         }
 
-        $json_response = json_decode($response->body);
-        if (isset($json_response->errorMessage)) return $json_response->errorMessage;
-        return $json_response;
+        return json_decode($response->body);
     }
 
     public static function create_agent($referrer_id = null, $reputation = null, $tokens = null) {
         $request_parameters = [];
-        if (!is_null($referrer_id)) $request_parameters['referrer_id'] = (float) $referrer_id;
+        if (!is_null($referrer_id)) $request_parameters['referrer_id'] = (int) $referrer_id;
         if (!is_null($reputation)) $request_parameters['reputation'] = (float) $reputation;
         if (!is_null($tokens)) $request_parameters['tokens'] = (float) $tokens;
         return self::request('POST', 'users', $request_parameters);
