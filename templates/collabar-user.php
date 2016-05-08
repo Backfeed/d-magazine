@@ -49,10 +49,10 @@
 
         <div class="backfeed-user-info">
 
-            <div class="backfeed-stats hidden-sm-down backfeed-collabar-tooltip">
+            <div class="backfeed-stats hidden-sm-down backfeed-tooltip">
                 <div class="backfeed-stat-tokens"><label>My Tokens:</label> <span class="backfeed-stat-tokens-value"><?=$viewmodel['current_agent_tokens']?></span></div>
                 <div class="backfeed-stat-reputation"><label>My Reputation:</label> <small><span class="backfeed-stat-reputation-value"><?=$viewmodel['current_agent_reputation']?></span>/<?=$viewmodel['total_reputation']?></small></div>
-                <div class="backfeed-collabar-tooltip-content">
+                <div class="backfeed-tooltip-content">
                     <p>Reputation represents your influence on the editing process</p>
                     <p>Tokens are your share of the value we’ve created together</p>
                 </div>
