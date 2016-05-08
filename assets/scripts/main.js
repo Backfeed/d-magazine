@@ -43,12 +43,12 @@ jQuery($ => {
     };
 
     let updateUiEngagedReputation = newArticleEngagedReputation => {
-        $('.post-engagedrep > .post-meta-value').text(newArticleEngagedReputation.toFixed(2)+'%');
+        $('.post-engagedrep > .post-meta-value').text(newArticleEngagedReputation.toFixed(2) * 100 + '%');
     };
 
     let updateUiScore = newArticleScore => {
         qualityMeterFilled.style.width = newArticleScore * 100 + '%';
-        $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2));
+        $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2) * 100);
     };
 
     console.log(Backfeed);

@@ -96,14 +96,14 @@ let tour = {
         }, {
             title: "FAQ",
             content: "Any question? Please visit our FAQ to learn more, or contact us at <a href=\"mailto:magazine@backfeed.cc\">magazine@backfeed.cc</a>.",
-            target: document.querySelector("#menu-main-menu > li:nth-last-of-type(3)"),
-            placement: "bottom",
-            onNext: helpers.closeMobileNavMenu
+            target: document.querySelector("#menu-main-menu > li:nth-last-of-type(2)"),
+            placement: "bottom"
         }, {
             title: "Submit Article",
             content: "Submit your own article to the Backfeed Magazine. You’ll receive freshly minted tokens and reputation in case the article becomes popular.",
-            target: document.querySelector("#menu-main-menu > li:nth-last-of-type(2)"),
-            placement: "bottom"
+            target: document.querySelector("#menu-main-menu > li:nth-last-of-type(3)"),
+            placement: "bottom",
+            onNext: helpers.closeMobileNavMenu
         }, {
             title: "End",
             content: "Got it? Register, if you haven't already, and be part of the Backfeed community!",
