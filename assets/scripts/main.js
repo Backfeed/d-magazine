@@ -29,26 +29,27 @@ jQuery($ => {
         sharingWidget = document.getElementById('backfeed-sharing'),
         explainerBar = document.getElementById('backfeed-explainer-bar');
 
-    let updateUiTokens = (newTokensAmount, isDelta) => {
+    let updateUiTokens = (newTokensAmount) => {
         $('.backfeed-stat-tokens-value').each((i, el) => {
-            if (isDelta) newTokensAmount += $(el).text();
-            $(el).text(newTokensAmount);
+            $(el).text(newTokensAmount.toFixed());
         });
     };
 
     let updateUiReputation = newReputationAmount => {
         $('.backfeed-stat-reputation-value').each((i, el) => {
-            $(el).text(newReputationAmount.toFixed());
+            $(el).text(newReputationAmount.toFixed(2));
         });
     };
 
-    let updateUiEngagedReputation = newArticleEngagedReputation => {
-        $('.post-engagedrep > .post-meta-value').text(newArticleEngagedReputation.toFixed(2) * 100 + '%');
+    let updateUiEngagedReputation = newEngagedReputation => {
+        newEngagedReputation = (newEngagedReputation * 100).toFixed(2);
+        $('.post-engagedrep > .post-meta-value').text(newEngagedReputation + '%');
     };
 
     let updateUiScore = newArticleScore => {
-        qualityMeterFilled.style.width = newArticleScore * 100 + '%';
-        $('.post-score > .post-meta-value').text(newArticleScore.toFixed(2) * 100);
+        newArticleScore = (newArticleScore * 100).toFixed(2);
+        qualityMeterFilled.style.width = newArticleScore + '%';
+        $('.post-score > .post-meta-value').text(newArticleScore);
     };
 
     console.log(Backfeed);
