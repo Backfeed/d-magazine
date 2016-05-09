@@ -49,7 +49,7 @@ jQuery($ => {
     let updateUiScore = newArticleScore => {
         newArticleScore = (newArticleScore * 100).toFixed(2);
         qualityMeterFilled.style.width = newArticleScore + '%';
-        $('.post-score > .post-meta-value').text(newArticleScore);
+        $('.post-score > .post-meta-value').text(newArticleScore + '/100');
     };
 
     console.log(Backfeed);
