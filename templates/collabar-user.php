@@ -30,7 +30,7 @@
                 <span class="hidden-sm-up">Be part of the collective intelligence and earn tokens!</span>
                 <span class="hidden-xs-down">Explore our magazine, be part of the collective intelligence and earn tokens!</span>
             <?php endif; ?>
-                &nbsp;<a href="<?=site_url('/faq/')?>" class="button backfeed-learn-button">Learn more</a>
+                &nbsp;<a href="<?=site_url('/faq/')?>" class="button backfeed-learn-button">FAQ</a>
             </p>
         </div>
 

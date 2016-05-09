@@ -183,31 +183,29 @@
 
         &[data-status="loading"] {
             .backfeed-icon-vote-up,
-            .backfeed-icon-vote-down {
-                background-position: 0 -496px;
-
-                &:hover {
-                    background-position: 0 -496px;
-                }
+            .backfeed-icon-vote-down,
+            .backfeed-icon-vote-up:hover,
+            .backfeed-icon-vote-down:hover {
+                background-position-y: calc(44px * -8);
             }
         }
 
         &[data-status="vote-down"] {
             .backfeed-icon-vote-down {
-                background-position: 0 -260px;
+                background-position-y: calc(44px * -4);
 
                 &:hover {
-                    background-position: 0 -380px;
+                    background-position-y: calc(44px * -6);
                 }
             }
         }
 
         &[data-status="vote-up"] {
             .backfeed-icon-vote-up {
-                background-position: 0 -319px;
+                background-position-y: calc(44px * -5);
 
                 &:hover {
-                    background-position: 0 -439px;
+                    background-position-y: calc(44px * -7);
                 }
             }
         }
@@ -218,20 +216,21 @@
         background-image: url('../../assets/images/vote-sprite.png');
         width: 44px;
         height: 44px;
+        background-position-x: 0;
 
         &.backfeed-icon-vote-down {
-            background-position: 0 -16px;
+            background-position-y: calc(44px * 0);
 
             &:hover {
-                background-position: 0 -136px;
+                background-position-y: calc(44px * -2);
             }
         }
 
         &.backfeed-icon-vote-up {
-            background-position: 0 -76px;
+            background-position-y: calc(44px * -1);
 
             &:hover {
-                background-position: 0 -196px;
+                background-position-y: calc(44px * -3);
             }
         }
     }

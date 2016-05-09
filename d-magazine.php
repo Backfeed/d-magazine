@@ -64,8 +64,8 @@ add_action('wp_footer', function() {
 	if (is_user_logged_in()) {
 		require 'templates/collabar-user.php';
 	} else {
-		// If the URL end with ?continuetour, show mock logged-in footer even though the user is logged-out.
-		if (substr_compare($_SERVER['REQUEST_URI'], '?continuetour', -strlen( '?continuetour')) === 0) {
+		// If the URL ends with '?continuetour', show mock logged-in footer even though the user is logged-out.
+		if (substr_compare($_SERVER['REQUEST_URI'], '?continuetour', -strlen('?continuetour')) === 0) {
 			$viewmodel = [
 				'current_agent_tokens' => 11,
 				'current_agent_reputation' => 0.2,
@@ -77,7 +77,6 @@ add_action('wp_footer', function() {
 			require 'templates/collabar-guest.php';
 		}
 	}
-
 });
 
 add_action('wp_enqueue_scripts', function() {

@@ -19,7 +19,7 @@
   }
 
   .backfeed-gloss {
-    width: 278px;
+    width: 334px;
     height: 100%;
     position: absolute;
     background-color: black;
@@ -28,7 +28,7 @@
     left: -17%;
 
     @include media-breakpoint-up(lg) {
-      left: -808px;
+      left: -761px;
       width: 100%;
     }
   }
@@ -36,6 +36,7 @@
   .backfeed-register-button {
     display: flex;
     align-items: center;
+    text-transform: uppercase;
     background-color: #b80443;
     padding-left: 20px;
     padding-right: 20px;
