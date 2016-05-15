@@ -186,26 +186,26 @@
             .backfeed-icon-vote-down,
             .backfeed-icon-vote-up:hover,
             .backfeed-icon-vote-down:hover {
-                background-position-y: calc(44px * -8);
+                background-position: 0 calc(44px * -8);
             }
         }
 
         &[data-status="vote-down"] {
             .backfeed-icon-vote-down {
-                background-position-y: calc(44px * -4);
+                background-position: 0 calc(44px * -4);
 
                 &:hover {
-                    background-position-y: calc(44px * -6);
+                    background-position: 0 calc(44px * -6);
                 }
             }
         }
 
         &[data-status="vote-up"] {
             .backfeed-icon-vote-up {
-                background-position-y: calc(44px * -5);
+                background-position: 0 calc(44px * -5);
 
                 &:hover {
-                    background-position-y: calc(44px * -7);
+                    background-position: 0 calc(44px * -7);
                 }
             }
         }
@@ -216,21 +216,20 @@
         background-image: url('../../assets/images/vote-sprite.png');
         width: 44px;
         height: 44px;
-        background-position-x: 0;
 
         &.backfeed-icon-vote-down {
-            background-position-y: calc(44px * 0);
+            background-position: 0 calc(44px * 0);
 
             &:hover {
-                background-position-y: calc(44px * -2);
+                background-position: 0 calc(44px * -2);
             }
         }
 
         &.backfeed-icon-vote-up {
-            background-position-y: calc(44px * -1);
+            background-position: 0 calc(44px * -1);
 
             &:hover {
-                background-position-y: calc(44px * -3);
+                background-position: 0 calc(44px * -3);
             }
         }
     }
