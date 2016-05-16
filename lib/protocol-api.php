@@ -11,10 +11,15 @@ class Api {
         if (empty($data)) $data = null;
 
         $url = BACKFEED_API_URL.$endpoint;
-        $response = \Requests::request($url, $headers, $data, $method);
+
+        try {
+            $response = \Requests::request($url, $headers, $data, $method);
+        } catch (Exception $e) {
+            error_log('Backfeed API failed: ' . $e->getMessage() . '\n');
+        }
 
         if (!$response->success) {
-            error_log('Backfeed API returned meh: ' . json_encode($response));
+            error_log('Backfeed API returned meh: ' . json_encode($response) . '\n');
             //TODO: set up proper error handling
             //throw new \Exception('Backfeed Backend returned error');
             return false;
