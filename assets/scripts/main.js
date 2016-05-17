@@ -45,17 +45,17 @@ jQuery($ => {
     let updateUiEngagedReputation = (votedUpReputation, votedDownReputation) => {
         votedUpReputation = parseInt(votedUpReputation * 100);
         votedDownReputation = parseInt(votedDownReputation * 100);
-        engagedReputation = votedUpReputation + votedDownReputation;
-
         var $upvotesMeterFilled = $upvotesMeter.find('.backfeed-meter-filled');
+
         $upvotesMeterFilled.css('flex-basis', votedUpReputation + '%');
-
         var $downvotesMeterFilled = $downvotesMeter.find('.backfeed-meter-filled');
+
         $downvotesMeterFilled.css('flex-basis', votedDownReputation + '%');
-
         votedUpReputation < 50 ? $upvotesMeter.find('label').text(votedUpReputation + '%') : $upvotesMeterFilled[0].dataset.reputation = votedUpReputation + '%';
-        votedDownReputation < 50 ? $downvotesMeter.find('label').text(votedDownReputation + '%') : $downvotesMeterFilled[0].dataset.reputation = votedDownReputation + '%';
 
+        votedDownReputation < 50 ? $downvotesMeter.find('label').text(votedDownReputation + '%') : $downvotesMeterFilled[0].dataset.reputation = votedDownReputation + '%';
+        
+        let engagedReputation = votedUpReputation + votedDownReputation;
         $('.featured-image .post-engagedrep > .post-meta-value').text(engagedReputation + '%');
     };
 
