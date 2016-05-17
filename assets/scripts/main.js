@@ -133,7 +133,7 @@ jQuery($ => {
             }
 
             let currentEvaluations = Backfeed.currentContribution.stats.evaluations;
-            if ($.isEmptyObject(currentEvaluations)) {
+            if (!$.isEmptyObject(currentEvaluations)) {
                 let votedUpReputation = currentEvaluations[1].reputation;
                 let votedDownReputation = currentEvaluations[0].reputation;
                 updateUiEngagedReputation(votedUpReputation, votedDownReputation);
