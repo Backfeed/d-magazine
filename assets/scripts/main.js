@@ -43,8 +43,8 @@ jQuery($ => {
     };
 
     let updateUiEngagedReputation = (votedUpReputation, votedDownReputation) => {
-        votedUpReputation = (votedUpReputation * 100).toFixed(0);
-        votedDownReputation = (votedDownReputation * 100).toFixed(0);
+        votedUpReputation = parseInt(votedUpReputation * 100);
+        votedDownReputation = parseInt(votedDownReputation * 100);
 
         var $upvotesMeterFilled = $upvotesMeter.find('.backfeed-meter-filled');
         $upvotesMeterFilled.css('flex-basis', votedUpReputation + '%');
@@ -55,12 +55,12 @@ jQuery($ => {
         votedUpReputation < 50 ? $upvotesMeter.find('label').text(votedUpReputation + '%') : $upvotesMeterFilled[0].dataset.reputation = votedUpReputation + '%';
         votedDownReputation < 50 ? $downvotesMeter.find('label').text(votedDownReputation + '%') : $downvotesMeterFilled[0].dataset.reputation = votedDownReputation + '%';
 
-        $('.post-engagedrep > .post-meta-value').text((votedUpReputation + votedDownReputation) + '%');
+        $('.featured-image .post-engagedrep > .post-meta-value').text((votedUpReputation + votedDownReputation) + '%');
     };
 
     let updateUiScore = newArticleScore => {
         newArticleScore = (newArticleScore * 100).toFixed(2);
-        $('.post-score > .post-meta-value').text(newArticleScore + '/100');
+        $('.featured-image .post-score > .post-meta-value').text(newArticleScore + '/100');
     };
 
     console.log('Global State: %o', Backfeed);
@@ -158,7 +158,7 @@ jQuery($ => {
                         votingWidget.dataset.status = 'vote-down';
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
-                        updateUiScore(response.contribution.score);
+                        updateUiScore(response.contribution.stats.score);
                         updateUiEngagedReputation(response.contribution.stats.evaluations[1].reputation, response.contribution.stats.evaluations[0].reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
@@ -180,7 +180,7 @@ jQuery($ => {
                         votingWidget.dataset.status = 'vote-up';
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
-                        updateUiScore(response.contribution.score);
+                        updateUiScore(response.contribution.stats.score);
                         updateUiEngagedReputation(response.contribution.stats.evaluations[1].reputation, response.contribution.stats.evaluations[0].reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
