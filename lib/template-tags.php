@@ -24,7 +24,7 @@ function get_contribution($post_id) {
 
 function get_current_agent_tokens() {
     $current_agent_tokens = get_config('currentAgent')->tokens;
-    return isset($current_agent_tokens) ? round($current_agent_tokens) : 0;
+    return isset($current_agent_tokens) ? 10 * round($current_agent_tokens) : 0;
 }
 
 function get_current_agent_reputation() {

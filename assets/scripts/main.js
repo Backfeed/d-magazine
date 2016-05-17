@@ -23,7 +23,8 @@ jQuery($ => {
 
     let avatar = document.getElementById('backfeed-avatar'),
         votingWidget = document.getElementById('backfeed-voting'),
-        qualityMeterFilled = document.getElementById('backfeed-meter-filled'),
+        $upvotesMeter = $('#backfeed-meter-upvotes'),
+        $downvotesMeter = $('#backfeed-meter-downvotes'),
         copyToClipboardButton = document.getElementById('copy-to-clipboard'),
         comments = document.getElementById('comments'),
         sharingWidget = document.getElementById('backfeed-sharing'),
@@ -31,7 +32,7 @@ jQuery($ => {
 
     let updateUiTokens = (newTokensAmount) => {
         $('.backfeed-stat-tokens-value').each((i, el) => {
-            $(el).text(newTokensAmount.toFixed());
+            $(el).text(10 * newTokensAmount.toFixed());
         });
     };
 
@@ -41,18 +42,28 @@ jQuery($ => {
         });
     };
 
-    let updateUiEngagedReputation = newEngagedReputation => {
-        newEngagedReputation = (newEngagedReputation * 100).toFixed(2);
-        $('.post-engagedrep > .post-meta-value').text(newEngagedReputation + '%');
+    let updateUiEngagedReputation = (votedUpReputation, votedDownReputation) => {
+        votedUpReputation = (votedUpReputation * 100).toFixed(0);
+        votedDownReputation = (votedDownReputation * 100).toFixed(0);
+
+        var $upvotesMeterFilled = $upvotesMeter.find('.backfeed-meter-filled');
+        $upvotesMeterFilled.css('flex-basis', votedUpReputation + '%');
+
+        var $downvotesMeterFilled = $downvotesMeter.find('.backfeed-meter-filled');
+        $downvotesMeterFilled.css('flex-basis', votedDownReputation + '%');
+
+        votedUpReputation < 50 ? $upvotesMeter.find('label').text(votedUpReputation + '%') : $upvotesMeterFilled[0].dataset.reputation = votedUpReputation + '%';
+        votedDownReputation < 50 ? $downvotesMeter.find('label').text(votedDownReputation + '%') : $downvotesMeterFilled[0].dataset.reputation = votedDownReputation + '%';
+
+        $('.post-engagedrep > .post-meta-value').text((votedUpReputation + votedDownReputation) + '%');
     };
 
     let updateUiScore = newArticleScore => {
         newArticleScore = (newArticleScore * 100).toFixed(2);
-        qualityMeterFilled.style.width = newArticleScore + '%';
         $('.post-score > .post-meta-value').text(newArticleScore + '/100');
     };
 
-    console.log(Backfeed);
+    console.log('Global State: %o', Backfeed);
 
     if (copyToClipboardButton) {
         let clipboard = new Clipboard(copyToClipboardButton, {
@@ -111,8 +122,6 @@ jQuery($ => {
     if (votingWidget) {
         if (Backfeed.currentContribution) {
             let currentAgentVote = Backfeed.currentContribution.currentAgentVote;
-            qualityMeterFilled.style.width = Backfeed.currentContribution.stats.score * 100 + '%';
-
             if (typeof currentAgentVote == 'number') {
                 if (currentAgentVote === 0) {
                     votingWidget.dataset.status = 'vote-down';
@@ -121,6 +130,13 @@ jQuery($ => {
                 }
             } else {
                 votingWidget.dataset.status = 'vote-none';
+            }
+
+            let currentEvaluations = Backfeed.currentContribution.stats.evaluations;
+            if ($.isEmptyObject(currentEvaluations)) {
+                let votedUpReputation = currentEvaluations[1].reputation;
+                let votedDownReputation = currentEvaluations[0].reputation;
+                updateUiEngagedReputation(votedUpReputation, votedDownReputation);
             }
         }
 
@@ -143,7 +159,7 @@ jQuery($ => {
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
                         updateUiScore(response.contribution.score);
-                        updateUiEngagedReputation(response.contribution.engaged_reputation);
+                        updateUiEngagedReputation(response.contribution.stats.evaluations[1].reputation, response.contribution.stats.evaluations[0].reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }
@@ -165,7 +181,7 @@ jQuery($ => {
                         updateUiReputation(response.evaluator.reputation);
                         updateUiTokens(response.evaluator.tokens);
                         updateUiScore(response.contribution.score);
-                        updateUiEngagedReputation(response.contribution.engaged_reputation);
+                        updateUiEngagedReputation(response.contribution.stats.evaluations[1].reputation, response.contribution.stats.evaluations[0].reputation);
                     } else {
                         noty({text: 'Some error happened. Please reload the page.', type: 'error', layout: 'bottomCenter'});
                     }

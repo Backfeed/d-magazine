@@ -37,10 +37,12 @@
     <?php if (is_singular('post')): ?>
         <div id="backfeed-voting" class="backfeed-voting" data-status="loading">
             <i class="backfeed-icon-vote backfeed-icon-vote-down"></i>
-            <div class="backfeed-article-score">
-                <label>Article Quality</label>
-                <div class="backfeed-meter">
-                    <div id="backfeed-meter-filled" class="backfeed-meter-filled"></div>
+            <div class="backfeed-meter">
+                <div id="backfeed-meter-downvotes" class="backfeed-meter-downvotes">
+                    <div class="backfeed-meter-filled"></div><label></label>
+                </div>
+                <div id="backfeed-meter-upvotes" class="backfeed-meter-upvotes">
+                    <div class="backfeed-meter-filled"></div><label></label>
                 </div>
             </div>
             <i class="backfeed-icon-vote backfeed-icon-vote-up"></i>
