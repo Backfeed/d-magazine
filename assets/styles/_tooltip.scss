@@ -1,3 +1,29 @@
+@mixin tooltips-down {
+  .backfeed-tooltip-content {
+    top: calc(100% + 20px);
+    bottom: auto;
+
+    &::before,
+    &::after {
+      border-width: 0 20px 20px;
+    }
+
+    &::before {
+      top: -23px;
+      bottom: auto;
+    }
+
+    &::after {
+      top: -15px;
+      bottom: auto;
+    }
+  }
+}
+
+.tooltips-inside-down {
+  @include tooltips-down;
+}
+
 .backfeed-tooltip {
   cursor: help;
   position: relative;
@@ -43,26 +69,6 @@
   &::after {
     bottom: -15px;
     border-color: white transparent;
-  }
-
-  &.down {
-    top: calc(100% + 20px);
-    bottom: auto;
-
-    &::before,
-    &::after {
-      border-width: 0 20px 20px;
-    }
-
-    &::before {
-      top: -23px;
-      bottom: auto;
-    }
-
-    &::after {
-      top: -15px;
-      bottom: auto;
-    }
   }
 
   & > p {

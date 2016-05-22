@@ -2,17 +2,24 @@
 namespace Backfeed;
 
 function front_page_query($paged = 1) {
+    if ($paged == 1) {
+        $limit = 8;
+        $offset = 0;
+    } else {
+        $limit = 8;
+        $offset = $limit * $paged - $limit - 2;
+    }
+
     $query_args = [
-        'posts_per_page'        => 8,
+        'posts_per_page'        => $limit,
         'post_type'             => 'post',
         'post_status'           => 'publish',
         'no_found_rows'         => false,
         'paged'                 => $paged
     ];
 
-    $offset = $query_args['posts_per_page'] * $paged - 8;
 
-    $contributions = Api::get_contributions(['start' => $offset]);
+    $contributions = Api::get_contributions(['start' => $offset, 'limit' => $limit]);
 
     if (is_array($contributions->items)) {
         $contribution_ids = array_column($contributions->items, 'id');
