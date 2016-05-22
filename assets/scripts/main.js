@@ -21,6 +21,10 @@ jQuery($ => {
         close: 'animated fadeOut'
     };
 
+    api.getAllContributions().then(res => {
+        console.log('All Contributions: %o', res);
+    });
+
     let avatar = document.getElementById('backfeed-avatar'),
         votingWidget = document.getElementById('backfeed-voting'),
         $upvotesMeter = $('#backfeed-meter-upvotes'),
@@ -153,7 +157,7 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                api.evaluate(0, response => {
+                api.evaluate(0).then(response => {
                     if (typeof response == "object") {
                         noty({text: 'Downvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-down';
@@ -175,7 +179,7 @@ jQuery($ => {
 
                 votingWidget.dataset.status = "loading";
 
-                api.evaluate(1, response => {
+                api.evaluate(1).then(response => {
                     if (typeof response == "object") {
                         noty({text: 'Upvote registered, thank you.', type: 'success', layout: 'bottomCenter'});
                         votingWidget.dataset.status = 'vote-up';

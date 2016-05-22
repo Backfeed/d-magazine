@@ -24,6 +24,8 @@ function init_config() {
 	global $backfeed_config;
 	$backfeed_config = [];
 
+	if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'http://localhost:8888/dmag/');
+
 	$backfeed_config['ajaxUrl'] = admin_url('admin-ajax.php');
 
 	$currentAgentId = get_user_meta(get_current_user_id(), 'backfeed_agent_id', true);

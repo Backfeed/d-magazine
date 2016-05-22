@@ -1,8 +1,6 @@
 <?php
 namespace Backfeed;
 
-if (!defined('BACKFEED_API_URL')) define('BACKFEED_API_URL', 'http://localhost:8888/dmag/');
-
 class Api {
     private static function request($method = 'GET', $endpoint, $data = [], $headers = []) {
         $default_headers = [];
@@ -57,11 +55,11 @@ class Api {
         ]);
     }
 
-    public static function get_contributions($params) {
-        return self::request('GET', 'contributions', [
-            "start" => intval($params["start"]),
-            "limit" => intval($params["limit"])
-        ]);
+    public static function get_contributions($start = null, $limit = null) {
+        $data = [];
+        if (!empty($start)) $data['start'] = intval($start);
+        if (!empty($limit)) $data['limit'] = intval($limit);
+        return self::request('GET', 'contributions', $data);
     }
 
     public static function get_contribution($contribution_id, $field = '') {

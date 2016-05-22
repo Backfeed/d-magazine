@@ -8,15 +8,14 @@
 }
 
 .backfeed-tooltip-content {
+  position: absolute;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 310px;
   opacity: 0;
   transition: opacity .5s linear;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 310px;
-  transform: translateX(-50%);
   padding: 15px;
-  margin: 1em 0 3em;
   color: black;
   background: white;
   border: 5px solid #333436;
@@ -27,8 +26,6 @@
 
   &::before,
   &::after {
-    bottom: -10px;
-    border-color: black transparent;
     content: "";
     position: absolute;
     left: calc(50% - 20px);
@@ -46,6 +43,26 @@
   &::after {
     bottom: -15px;
     border-color: white transparent;
+  }
+
+  &.down {
+    top: calc(100% + 20px);
+    bottom: auto;
+
+    &::before,
+    &::after {
+      border-width: 0 20px 20px;
+    }
+
+    &::before {
+      top: -23px;
+      bottom: auto;
+    }
+
+    &::after {
+      top: -15px;
+      bottom: auto;
+    }
   }
 
   & > p {
