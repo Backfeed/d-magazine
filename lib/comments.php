@@ -25,6 +25,7 @@ function comments_cb( $comment, $args, $depth ) {
                 <a href="<?=esc_url( get_comment_link( $comment->comment_ID, $args ) )?>"><?=esc_html( get_comment_date() )?></a>
             </time>
             <?php edit_comment_link( esc_html__( 'Edit', 'barcelona' ), '  ', '' ); ?>
+            <!--<div class="comment-badge">Tokens Awarded</div>-->
         </div><!-- .comment-author -->
 
         <div class="comment-content">
@@ -37,16 +38,12 @@ function comments_cb( $comment, $args, $depth ) {
         </div><!-- .comment-content -->
 
         <div class="comment-meta">
-            <ul class="clearfix">
+            <ul class="comment-votes clearfix" data-status="loading">
 
                 <?php foreach (['down', 'up'] as $k): ?>
-                    <li class="comment-vote<?php if ( $barcelona_voted = barcelona_is_voted_comment() ) { echo ' comment-vote-disabled'; } ?>">
-                        <button class="btn-vote btn-vote-<?=sanitize_html_class( $k ) . ( $barcelona_voted == $k ? ' btn-voted' : '' )?>"
-                                data-nonce="<?=wp_create_nonce( 'barcelona-comment-vote' )?>"
-                                data-type="<?=esc_attr( $k )?>"
-                                data-vote-type="comment"
-                                data-vote-id="<?=esc_attr($comment->comment_ID) .'_'. esc_attr($post->ID)?>">
-                            <span class="fa fa-thumbs-<?=sanitize_html_class( $k )?>"></span>
+                    <li class="comment-vote comment-vote-disabled">
+                        <button class="btn-vote btn-vote-<?=sanitize_html_class($k)?>">
+                            <span class="fa fa-thumbs-<?=sanitize_html_class($k)?>"></span>
                         </button>
                     </li>
                 <?php endforeach; ?>

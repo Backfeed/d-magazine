@@ -4,10 +4,10 @@ namespace Backfeed;
 function front_page_query($paged = 1) {
     if ($paged == 1) {
         $limit = 8;
-        $offset = 0;
+        $start = 0;
     } else {
         $limit = 8;
-        $offset = $limit * $paged - $limit - 2;
+        $start = $limit * $paged - $limit;
     }
 
     $query_args = [
@@ -19,7 +19,7 @@ function front_page_query($paged = 1) {
     ];
 
 
-    $contributions = Api::get_contributions(['start' => $offset, 'limit' => $limit]);
+    $contributions = Api::get_contributions('article', $start, $limit);
 
     if (is_array($contributions->items)) {
         $contribution_ids = array_column($contributions->items, 'id');

@@ -17,7 +17,7 @@ add_action('wp_ajax_submit_evaluation', __NAMESPACE__.'\\ajax_submit_evaluation'
 
 function ajax_get_contributions() {
     if (isset($_GET)) {}
-    $response = Api::get_contributions();
+    $response = Api::get_contributions('article');
     print_r(json_encode($response));
     wp_die();
 }

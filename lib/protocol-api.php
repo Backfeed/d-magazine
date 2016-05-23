@@ -27,27 +27,25 @@ class Api {
     }
 
     public static function create_agent($referrer_id = null, $reputation = null, $tokens = null) {
-        $request_parameters = [];
-        if (!is_null($referrer_id)) $request_parameters['referrer_id'] = (int) $referrer_id;
-        if (!is_null($reputation)) $request_parameters['reputation'] = (float) $reputation;
-        if (!is_null($tokens)) $request_parameters['tokens'] = (float) $tokens;
-        return self::request('POST', 'users', $request_parameters);
+        $data = [];
+        if (!is_null($referrer_id)) $data['referrer_id'] = (int) $referrer_id;
+        if (!is_null($reputation)) $data['reputation'] = (float) $reputation;
+        if (!is_null($tokens)) $data['tokens'] = (float) $tokens;
+        return self::request('POST', 'users', $data);
     }
 
     public static function get_agent($agent_id) {
         return self::request('GET', 'users/'.$agent_id);
     }
 
-    public static function create_contribution($agent_id) {
+    public static function create_contribution($agent_id, $type = 'article') {
         return self::request('POST', 'contributions', [
-            "contributor_id" => (int) $agent_id
+            "contributor_id" => (int) $agent_id,
+            "type" => $type
         ]);
     }
 
     public static function create_evaluation($vote, $contribution_id, $agent_id) {
-        //if (!$contribution_id) get_config('currentContribution')->id;
-        //if (!$agent_id) get_config('currentAgent')->id;
-
         return self::request('POST', 'evaluations', [
             "evaluator_id" => intval($agent_id),
             "contribution_id" => intval($contribution_id),
@@ -55,10 +53,10 @@ class Api {
         ]);
     }
 
-    public static function get_contributions($start = null, $limit = null) {
-        $data = [];
-        if (!empty($start)) $data['start'] = intval($start);
-        if (!empty($limit)) $data['limit'] = intval($limit);
+    public static function get_contributions($type, $start = null, $limit = null) {
+        $data = ['type' => $type];
+        if (!is_null($start)) $data['start'] = intval($start);
+        if (!is_null($limit)) $data['limit'] = intval($limit);
         return self::request('GET', 'contributions', $data);
     }
 
@@ -69,8 +67,8 @@ class Api {
 
     public static function get_evaluations($contribution_id = null, $evaluator_id = null) {
         $data = [];
-        if (!empty($contribution_id)) $data['contribution_id'] = (int) $contribution_id;
-        if (!empty($evaluator_id)) $data['evaluator_id'] = (int) $evaluator_id;
+        if (!is_null($contribution_id)) $data['contribution_id'] = (int) $contribution_id;
+        if (!is_null($evaluator_id)) $data['evaluator_id'] = (int) $evaluator_id;
         return self::request('GET', 'evaluations', $data);
     }
 }

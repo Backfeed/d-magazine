@@ -104,63 +104,62 @@ register_activation_hook(__FILE__, function() {
 
 	// transform all magazine articles into contributions
 	foreach (get_posts(["posts_per_page" => -1]) as $post) {
-		make_contribution($post->ID);
+		make_article_contribution($post->ID, $post);
 	}
 
 	// transform all magazine comments into contributions
-	/*foreach (get_comments(["post_type" => "post"]) as $comment) {
-		//Register user for comment author, if we have their email and if they're not registered already
-		if ($comment->user_id == 0 && $comment->comment_author_email) {
-			$user = get_user_by('email', $comment->comment_author_email);
-
-			if ($user) {
-				$user_id = $user->ID;
-			} else {
-				$user_id = wp_insert_user([
-					'user_email' => $comment->comment_author_email,
-					'user_login' => $comment->comment_author_email,
-					'display_name' => $comment->comment_author
-				]);
-				// TODO: send custom email
-			}
-
-			wp_update_comment([
-				'comment_ID' => $comment->comment_ID,
-				'user_id' => $user_id
-			]);
-		}
-
-		//Save comment as contribution
-		make_contribution($comment->comment_ID);
-	}*/
+	foreach (get_comments(["post_type" => "post"]) as $comment) {
+		make_comment_contribution($comment->comment_ID, $comment);
+	}
 });
 
 register_deactivation_hook(__FILE__, function() {});
 
-function make_contribution($ID) {
-	$post = get_post($ID);
-	$comment = get_comment($ID);
+function make_comment_contribution($ID, $comment) {
+	//Register user for comment author, if we have their email and if they're not registered already
+	if ($comment->comment_author_email && $comment->user_id == 0) {
+		$user = get_user_by('email', $comment->comment_author_email);
 
-	// it is a post of post_type="post" that just got "publish"ed and doesn't have a contribution_id associated with it
-	if ($post && $post->post_type == 'post' && !get_post_meta($ID, 'backfeed_contribution_id', true)) {
-		$agent_id = get_user_meta($post->post_author, 'backfeed_agent_id', true);
+		if ($user) {
+			$user_id = $user->ID;
+		} else {
+			$user_id = wp_insert_user([
+				'user_email' => $comment->comment_author_email,
+				'user_login' => $comment->comment_author_email,
+				'display_name' => $comment->comment_author
+			]);
+			// TODO: send custom email
+		}
 
-		$contribution = Api::create_contribution($agent_id);
-
-		if ($contribution && isset($contribution->id))
-			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
+		wp_update_comment([
+			'comment_ID' => $comment->comment_ID,
+			'user_id' => $user_id
+		]);
+	}
 
 	// it is a top-level comment by a registered user that doesn't have a contribution_id associated with it
-	}/* else if ($comment && !get_comment_meta($ID, 'backfeed_contribution_id', true) && !$comment->comment_parent) {
+	if ($comment && !get_comment_meta($ID, 'backfeed_contribution_id', true) && !$comment->comment_parent) {
 		$agent_id = get_user_meta($comment->user_id, 'backfeed_agent_id', true);
 
 		if ($agent_id) {
-			$contribution = Api::create_contribution($agent_id);
+			$contribution = Api::create_contribution($agent_id, 'comment');
 
 			if ($contribution && $contribution->id)
 				add_comment_meta($ID, 'backfeed_contribution_id', $contribution->id);
 		}
-	}*/
+	}
+}
+
+function make_article_contribution($ID, $post) {
+	// it is a post of post_type="post" that just got "publish"ed and doesn't have a contribution_id associated with it
+	if ($post && $post->post_type == 'post' && !get_post_meta($ID, 'backfeed_contribution_id', true)) {
+		$agent_id = get_user_meta($post->post_author, 'backfeed_agent_id', true);
+
+		$contribution = Api::create_contribution($agent_id, 'article');
+
+		if ($contribution && isset($contribution->id))
+			add_post_meta($ID, 'backfeed_contribution_id', $contribution->id);
+	}
 }
 
 function make_agent($user_id) {
@@ -213,6 +212,6 @@ function make_agent($user_id) {
 	}
 }
 
-add_action('wp_insert_post', __NAMESPACE__.'\\make_contribution');
 add_action('user_register', __NAMESPACE__.'\\make_agent');
-add_action('wp_insert_comment', __NAMESPACE__.'\\make_contribution');
+add_action('wp_insert_post', __NAMESPACE__.'\\make_article_contribution', 10, 2);
+add_action('wp_insert_comment', __NAMESPACE__.'\\make_comment_contribution', 10, 2);
