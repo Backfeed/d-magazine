@@ -33,13 +33,13 @@ export default {
             }
         });
     },
-    evaluate(value) {
+    evaluate(value, contributionId = Backfeed.currentContribution.id) {
         return request({
             method: 'POST',
             body: {
                 action: 'submit_evaluation',
                 value: parseInt(value),
-                contribution_id: Backfeed.currentContribution.id,
+                contribution_id: contributionId,
                 evaluator_id: Backfeed.currentAgent.id
             }
         });

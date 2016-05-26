@@ -2,13 +2,8 @@
 namespace Backfeed;
 
 function front_page_query($paged = 1) {
-    if ($paged == 1) {
-        $limit = 8;
-        $start = 0;
-    } else {
-        $limit = 8;
-        $start = $limit * $paged - $limit;
-    }
+    $limit = 8;
+    $start = $limit * $paged - $limit;
 
     $query_args = [
         'posts_per_page'        => $limit,
@@ -17,7 +12,6 @@ function front_page_query($paged = 1) {
         'no_found_rows'         => false,
         'paged'                 => $paged
     ];
-
 
     $contributions = Api::get_contributions('article', $start, $limit);
 

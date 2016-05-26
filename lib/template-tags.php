@@ -12,10 +12,6 @@ function collabar_class() {
     return $class;
 }
 
-function get_comment_contribution_id($comment_id) {
-    return get_comment_meta($comment_id, 'backfeed_contribution_id', true);
-}
-
 function get_contribution($post_id) {
     $contribution_id = get_post_meta($post_id, 'backfeed_contribution_id', true);
     $contribution = Api::get_contribution($contribution_id);

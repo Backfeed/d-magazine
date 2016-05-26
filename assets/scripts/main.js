@@ -30,7 +30,7 @@ jQuery($ => {
         $upvotesMeter = $('#backfeed-meter-upvotes'),
         $downvotesMeter = $('#backfeed-meter-downvotes'),
         copyToClipboardButton = document.getElementById('copy-to-clipboard'),
-        comments = document.getElementById('comments'),
+        commentsSection = document.getElementById('comments'),
         sharingWidget = document.getElementById('backfeed-sharing'),
         explainerBar = document.getElementById('backfeed-explainer-bar');
 
@@ -104,17 +104,6 @@ jQuery($ => {
         });
     }
 
-    if (comments) {
-        $(comments).on("click", ".btn-vote", e => {
-            e.preventDefault();
-            if (this.classList.contains('btn-vote-up')) {
-                api.evaluate(1);
-            } else if (this.classList.contains('btn-vote-down')) {
-                api.evaluate(0);
-            }
-        });
-    }
-
     if (avatar) {
         avatar.addEventListener('click', e => {
             let chevron = e.currentTarget.querySelector('i');
@@ -122,6 +111,25 @@ jQuery($ => {
             chevron.classList.toggle('bf-fa-chevron-up');
             document.getElementById('backfeed-avatar-menu').classList.toggle('open');
         }, false);
+    }
+
+    if (commentsSection) {
+        let comments = Array.from(document.getElementsByClassName('comment-body'));
+        comments.forEach(comment => {
+            comment.addEventListener("click", e => {
+                let contributionId = e.currentTarget.dataset.contributionId;
+
+                if (e.target.classList.toString().endsWith('-up')) {
+                    api.evaluate(1, contributionId).then(response => {
+                        return false;
+                    });
+                } else if (e.target.classList.toString().endsWith('-down')) {
+                    api.evaluate(0, contributionId).then(response => {
+                        return false;
+                    });
+                }
+            });
+        });
     }
 
     if (votingWidget) {

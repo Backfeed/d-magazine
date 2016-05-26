@@ -28,17 +28,17 @@ function init_config() {
 
 	$backfeed_config['ajaxUrl'] = admin_url('admin-ajax.php');
 
-	$currentAgentId = get_user_meta(get_current_user_id(), 'backfeed_agent_id', true);
-	$backfeed_config['currentAgent'] = Api::get_agent($currentAgentId);
+	$current_agent_id = get_user_meta(get_current_user_id(), 'backfeed_agent_id', true);
+	$backfeed_config['currentAgent'] = Api::get_agent($current_agent_id);
 
 	if (is_singular('post')) {
-		$currentContributionId = get_post_meta(get_queried_object_id(), 'backfeed_contribution_id', true);
-		$backfeed_config['currentContribution'] = Api::get_contribution($currentContributionId);
+		$current_contribution_id = get_post_meta(get_queried_object_id(), 'backfeed_contribution_id', true);
+		$backfeed_config['currentContribution'] = Api::get_contribution($current_contribution_id);
 
-		$evaluationByCurrentAgent = Api::get_evaluations($currentContributionId, $currentAgentId);
+		$evaluation_by_current_agent = Api::get_evaluations($current_contribution_id, $current_agent_id);
 
-		if ($evaluationByCurrentAgent->count > 0) {
-			$backfeed_config['currentContribution']->currentAgentVote = $evaluationByCurrentAgent->items[0]->value;
+		if ($evaluation_by_current_agent->count > 0) {
+			$backfeed_config['currentContribution']->currentAgentVote = $evaluation_by_current_agent->items[0]->value;
 		}
 	}
 
