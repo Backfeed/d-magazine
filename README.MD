@@ -73,7 +73,7 @@ After this, we don't need this file anymore: `rm info.php`.
 * `apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8`
 * `add-apt-repository 'deb [arch=amd64,i386] http://mariadb.nethub.com.hk/repo/10.1/ubuntu xenial main'`
 * `apt-get update`
-* `apt-get install mariadb-server`
+* `apt-get install mariadb-server php-mysql`
 * `mysql_secure_installation` and press Y on every question asked
 * `service mysql start`
 
