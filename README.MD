@@ -36,7 +36,6 @@ See [INSTALL.MD](INSTALL.MD)
     * /backend - is only the Requests library that helps with HTTP message passing
     * /bower_components - created by `bower install`
     * /frontend - is only the font-awesome library which is a collection of icons
-
 ## Usage Details
 Run `gulp watch` in the background when editing *.scss and *.js files to automatically compile them.
 
