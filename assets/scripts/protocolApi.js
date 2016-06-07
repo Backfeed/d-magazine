@@ -17,7 +17,7 @@ let request = (options) => {
 
     return jQuery.ajax(Backfeed.ajaxUrl, ajaxSettings)
         .then(status)
-        .done(data => data)
+        .done(response => response)
         .fail((response, textStatus, errorThrown) => {
             console.log(textStatus, errorThrown);
             return new Error(textStatus);
